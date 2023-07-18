@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `profiles` (
-  `id` BIGINT NOT NULL,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `created_at` DATETIME NULL,
   `update_at` DATETIME NULL,

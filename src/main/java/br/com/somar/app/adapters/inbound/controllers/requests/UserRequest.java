@@ -1,0 +1,22 @@
+package br.com.somar.app.adapters.inbound.controllers.requests;
+
+import br.com.somar.app.application.domain.Profile;
+import br.com.somar.app.application.domain.User;
+import lombok.Data;
+
+import java.util.HashSet;
+import java.util.Set;
+@Data
+public class UserRequest {
+    private String name;
+    private String email;
+    private String password;
+    private Set<Profile> profiles;
+
+    public User toUserDomain() {
+
+        Set<Profile> profilesList = new HashSet<>();
+        profilesList.addAll(profiles);
+        return new User(name, email, password, profilesList);
+    }
+}
