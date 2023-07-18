@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` BIGINT NOT NULL,
+  `name` VARCHAR(100) NULL,
+  `email` VARCHAR(50) NULL,
+  `password` VARCHAR(255) NULL,
+  `created_at` DATETIME NULL,
+  `update_at` DATETIME NULL,
+  `deleted_at` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `idx_email_unique` (`email` ASC) VISIBLE)
+ENGINE = InnoDB
