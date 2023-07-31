@@ -1,20 +1,22 @@
 package br.com.somar.app.common.config;
 
 import br.com.somar.app.adapters.outbound.jwt.JwtAdapter;
-import br.com.somar.app.application.ports.out.users.FindUserAdapterPort;
+import br.com.somar.app.application.ports.out.auth.AuthenticationAdapterPort;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
+
     @Autowired
-    private FindUserAdapterPort findUserAdapterPort;
+    private AuthenticationAdapterPort authenticationAdapterPort;
     @Autowired
     private JwtAdapter jwtAdapter;
 
@@ -24,7 +26,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (token != null) {
             var login = jwtAdapter.validateToken(token);
             System.out.println(login);
-            // UserDetails userDetails = findUserAdapterPort.findByEmail(login);
+            UserDetails userDetails = authenticationAdapterPort.loadUserByUsername(login);
         }
         filterChain.doFilter(request, response);
     }

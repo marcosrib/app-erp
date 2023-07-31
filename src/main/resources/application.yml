@@ -1,7 +1,9 @@
+server:
+  port : 8081
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3308/app}
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3309/app}
     username: ${DATABASE_USERNAME:app}
     password: ${DATABASE_PASSWORD:root}
   jpa:

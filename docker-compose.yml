@@ -9,7 +9,7 @@ services:
       MYSQL_DATABASE: 'app'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      - '3308:3306'
+      - '3309:3306'
     volumes:
       - ../app-database:/var/lib/mysql
     networks:

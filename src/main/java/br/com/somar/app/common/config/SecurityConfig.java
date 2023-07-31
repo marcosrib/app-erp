@@ -1,5 +1,7 @@
 package br.com.somar.app.common.config;
 
+import br.com.somar.app.adapters.outbound.jwt.JwtAdapter;
+import br.com.somar.app.application.ports.out.auth.AuthenticationAdapterPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +16,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
-    private SecurityFilter securityFilter;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -36,13 +38,13 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login/").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/user/").permitAll()
-                        //.requestMatchers(HttpMethod.GET, "/api/user/").hasRole("USER").anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/user/").hasRole("USER").anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                //.addFilterBefore(new SecurityFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
