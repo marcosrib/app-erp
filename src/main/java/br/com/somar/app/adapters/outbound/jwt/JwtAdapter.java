@@ -17,16 +17,25 @@ import java.time.ZoneOffset;
 public class JwtAdapter {
     @Value("${spring.security.jwt.secret}")
     private String secret;
-
+    @Value("${spring.security.jwt.token-expiration}")
+    private Integer tokenExpiration;
+    @Value("${spring.security.jwt.refresh-token-expiration}")
+    private Integer refreshTokenExpiration;
     private final String ISSUER = "app";
 
-    public String generateToken(Auth auth) {
+    public String generateAccessToken(Auth auth) {
+        return createToken(auth, tokenExpiration);
+    }
+    public String generateRefreshToken(Auth auth) {
+        return createToken(auth, refreshTokenExpiration);
+    }
+    private String createToken(Auth auth,Integer expirationToken) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC512(secret);
             return JWT.create()
                     .withIssuer(ISSUER)
                     .withSubject(auth.getEmail())
-                    .withExpiresAt(genExpirationDate())
+                    .withExpiresAt(genExpirationDate(expirationToken))
                     .sign(algorithm);
         } catch (JWTCreationException ex) {
             throw new RuntimeException("error while generatong token", ex);
@@ -46,7 +55,7 @@ public class JwtAdapter {
         }
     }
 
-    private Instant genExpirationDate() {
-        return LocalDateTime.now().plusMinutes(15).toInstant(ZoneOffset.of("-03:00"));
+    private Instant genExpirationDate(Integer minute) {
+        return LocalDateTime.now().plusMinutes(minute).toInstant(ZoneOffset.of("-03:00"));
     }
 }

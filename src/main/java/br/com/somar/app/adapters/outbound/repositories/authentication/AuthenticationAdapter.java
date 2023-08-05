@@ -28,11 +28,14 @@ public class AuthenticationAdapter implements AuthenticationAdapterPort {
     }
 
     @Override
-    public String authenticate(Auth auth) {
+    public Auth authenticate(Auth auth) {
         UserDetails userDetails = loadUserByUsername(auth.getEmail());
         boolean isPasswordMatch = passwordEncoder.matches(auth.getPassword(), userDetails.getPassword());
         if(isPasswordMatch) {
-            return jwtAdapter.generateToken(auth);
+            return Auth
+                .builder()
+                .accessToken(jwtAdapter.generateAccessToken(auth))
+                .refreshToken(jwtAdapter.generateRefreshToken(auth));
         }
         return null;
     }

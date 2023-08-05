@@ -15,12 +15,11 @@ public class AuthenticationUseCase implements AuthenticationUseCasePort {
     }
 
     @Override
-    public String auth(Auth auth) {
-        System.out.println("dsnlvknkkl");
-        String token = authenticationAdapterPort.authenticate(auth);
-        if(token == null) {
+    public Auth auth(Auth auth) {
+        Auth authRes = authenticationAdapterPort.authenticate(auth);
+        if(authRes == null) {
             throw new PasswordInvalidException("Senha invalida");
         }
-        return token;
+        return authRes;
     }
 }
