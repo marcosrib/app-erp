@@ -21,7 +21,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -32,19 +31,23 @@ public class SecurityConfig {
             throws Exception {
         return config.getAuthenticationManager();
     }
-
+    @Bean
+    public OncePerRequestFilter jwtFilter() {
+        return new SecurityFilter();
+    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login/").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/user/").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/user/").hasRole("USER").anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/user/").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/user/").hasRole("USER")
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //.addFilterBefore(new SecurityFilter(), UsernamePasswordAuthenticationFilter.class)
+               .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }

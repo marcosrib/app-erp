@@ -13,7 +13,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-@Component
+@Service
 public class JwtAdapter {
     @Value("${spring.security.jwt.secret}")
     private String secret;
@@ -44,7 +44,7 @@ public class JwtAdapter {
 
     public String validateToken(String token) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC512(secret);
             return JWT.require(algorithm)
                     .withIssuer(ISSUER)
                     .build()
