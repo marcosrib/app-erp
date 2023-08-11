@@ -31,6 +31,13 @@ public class SecurityConfig {
             throws Exception {
         return config.getAuthenticationManager();
     }
+
+    private static final String[] AUTH_WHITE_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/v2/api-docs/**",
+            "/swagger-resources/**"
+    };
     @Bean
     public OncePerRequestFilter jwtFilter() {
         return new SecurityFilter();
@@ -40,6 +47,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(AUTH_WHITE_LIST).permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login/").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/user/").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/api/user/").hasRole("USER")
