@@ -20,13 +20,8 @@ public class CreateUserAdapter  implements CreateUserAdapterPort {
 
     @Override
     public User create(User user) {
-        var existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser.isPresent()) {
-            throw new ResourceAlreadyExistsException("Email já existe");
-        }
-
         UserEntity resUserEntity = userRepository.save(convertUserToEntity(user));
-      return User.convertUserEntitytoUser(resUserEntity);
+        return User.convertUserEntitytoUser(resUserEntity);
     }
     private  UserEntity convertUserToEntity(User user) {
         Set<ProfileEntity> profiles = new HashSet<>();

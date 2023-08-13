@@ -10,8 +10,13 @@ spring:
     properties:
       hibernate:
         show_sql: ${SHOW_SQL:false}
+
   security:
     jwt:
       secret: ${JWT_SECRET:bWFyY29zcmliZWlyb2Rlc291c2E=}
-      refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:15}
+      refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:100}
       token-expiration: ${JWT_TOKEN_EXPIRATION:15}
+
+
+
+

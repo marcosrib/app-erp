@@ -1,7 +1,5 @@
 package br.com.somar.app.common.config;
 
-import br.com.somar.app.adapters.outbound.jwt.JwtAdapter;
-import br.com.somar.app.application.ports.out.auth.AuthenticationAdapterPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +19,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Autowired
+    private AuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    @Autowired
+    private AccessDeniedHandler restAccessDeniedHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -32,16 +35,19 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
+
     private static final String[] AUTH_WHITE_LIST = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/v2/api-docs/**",
             "/swagger-resources/**"
     };
+
     @Bean
     public OncePerRequestFilter jwtFilter() {
         return new SecurityFilter();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -53,9 +59,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/user/").hasRole("USER")
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        .accessDeniedHandler(restAccessDeniedHandler)
+                )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-               .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }

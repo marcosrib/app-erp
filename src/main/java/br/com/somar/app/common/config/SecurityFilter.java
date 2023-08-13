@@ -12,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -21,22 +20,25 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     private AuthenticationAdapterPort authenticationAdapterPort;
+
     @Autowired
     private JwtAdapter jwtAdapter;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-      var token = this.recoverToken(request);
-        if (token != null) {
-            var login = jwtAdapter.validateToken(token);
-            if(StringUtils.isNotEmpty(login)) {
-                UserDetails userDetails = authenticationAdapterPort.loadUserByUsername(login);
-                UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails,
-                        null, userDetails.getAuthorities());
-                user.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(user);
+
+            var token = this.recoverToken(request);
+            if (token != null) {
+                var login = jwtAdapter.validateToken(token);
+                if (StringUtils.isNotEmpty(login)) {
+                    UserDetails userDetails = authenticationAdapterPort.loadUserByUsername(login);
+                    UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails,
+                            null, userDetails.getAuthorities());
+                    user.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(user);
+                }
             }
-        }
-        filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request) {
