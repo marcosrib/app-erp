@@ -10,9 +10,12 @@ public class Profile {
     private Long id;
     private String name;
 
+    private Set<Ability> abilities;
     public Profile() {
     }
-
+    public Profile(String name) {
+        this.name = name;
+    }
     public Profile(Long id, String name) {
         this.id = id;
         this.name = name;
@@ -30,12 +33,18 @@ public class Profile {
         return name;
     }
 
+    public Set<Ability> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(Set<Ability> abilities) {
+        this.abilities = abilities;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
-    public static Set<Profile> convertProfileEntityToProfile(Set<ProfileEntity> profilesEntity) {
-        return profilesEntity.stream()
-                .map(profile -> new Profile(profile.getId(), profile.getName()))
-                .collect(Collectors.toSet());
+    public static Profile convertProfileEntityToProfile(ProfileEntity profilesEntity) {
+        return new Profile(profilesEntity.getId(), profilesEntity.getName());
     }
 }

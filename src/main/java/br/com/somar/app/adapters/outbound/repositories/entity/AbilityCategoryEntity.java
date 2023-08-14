@@ -4,21 +4,19 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "profiles")
-public class ProfileEntity {
+@Table(name = "ability_categories")
+public class AbilityCategoryEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String code;
     private String name;
 
     @Column(name = "created_at")
@@ -26,13 +24,4 @@ public class ProfileEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @ManyToMany(mappedBy = "profiles")
-    private List<UserEntity> users;
-
-    @ManyToMany
-    @JoinTable(name = "profile_abilities",
-            joinColumns = @JoinColumn(name = "profile_id"),
-            inverseJoinColumns = @JoinColumn(name = "ability_id"))
-    private Set<AbilityEntity> abilities;
 }

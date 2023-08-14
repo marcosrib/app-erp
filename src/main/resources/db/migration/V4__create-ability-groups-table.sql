@@ -1,6 +1,7 @@
-CREATE TABLE IF NOT EXISTS permission_groups (
+CREATE TABLE IF NOT EXISTS ability_groups (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    code VARCHAR(100) NOT NULL,
     created_at DATETIME NULL,
     updated_at DATETIME NULL
 )

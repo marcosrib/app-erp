@@ -17,7 +17,6 @@ public class CreateUserAdapter  implements CreateUserAdapterPort {
     public CreateUserAdapter(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
     @Override
     public User create(User user) {
         UserEntity resUserEntity = userRepository.save(convertUserToEntity(user));
