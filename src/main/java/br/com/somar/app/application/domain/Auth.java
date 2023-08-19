@@ -1,10 +1,18 @@
 package br.com.somar.app.application.domain;
 
+import br.com.somar.app.adapters.outbound.repositories.entity.ProfileEntity;
+import br.com.somar.app.adapters.outbound.repositories.entity.UserEntity;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class Auth {
     private String email;
     private String password;
     private String accessToken;
     private String refreshToken;
+
+    private Set<Authority> authorities;
 
     public Auth() {
     }
@@ -14,6 +22,10 @@ public class Auth {
 
     public String getEmail() {
         return email;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
     }
 
     public void setEmail(String email) {
@@ -27,7 +39,6 @@ public class Auth {
     public String getRefreshToken() {
         return refreshToken;
     }
-
 
     public static Auth builder() {
         return new Auth();
@@ -47,5 +58,31 @@ public class Auth {
     public Auth refreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
         return this;
+    }
+    public Auth authorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+        return this;
+    }
+
+    public static Auth convertUserEntityToAuth(UserEntity userEntity, String accessToken, String refreshToken) {
+        var authorities =  convertAbilityToAuthorities(userEntity.getProfiles());
+        return Auth.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .authorities(authorities );
+    }
+    public static Auth convertUserEntityToAuth(UserEntity userEntity) {
+        var authorities =  convertAbilityToAuthorities(userEntity.getProfiles());
+        return Auth.builder()
+                .email(userEntity.getEmail())
+                .password(userEntity.getPassword())
+                .authorities(authorities );
+    }
+
+    private static Set<Authority> convertAbilityToAuthorities(Set<ProfileEntity> profiles) {
+        return profiles.stream()
+                .flatMap(profile -> profile.getAbilities().stream())
+                .map(ability -> new Authority(ability.getAbilityGroup().getCode(), ability.getAbilityCategory().getCode()))
+                .collect(Collectors.toSet());
     }
 }

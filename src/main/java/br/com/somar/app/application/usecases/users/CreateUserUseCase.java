@@ -5,7 +5,9 @@ import br.com.somar.app.application.ports.in.users.CreateUserUseCasePort;
 import br.com.somar.app.application.ports.out.users.CreateUserAdapterPort;
 import br.com.somar.app.application.ports.out.users.FindUserAdapterPort;
 import br.com.somar.app.exceptions.ResourceAlreadyExistsException;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 
 public class CreateUserUseCase implements CreateUserUseCasePort {
 
@@ -24,7 +26,7 @@ public class CreateUserUseCase implements CreateUserUseCasePort {
     @Override
     public User create(User user) {
         var existingUser = findUserAdapterPort.findByEmail(user.getEmail());
-        if (existingUser.isPresent()) {
+        if (ObjectUtils.isNotEmpty(existingUser )) {
             throw new ResourceAlreadyExistsException("email.already.exists");
         }
         String encryptPassword = encoder.encode(user.getPassword());

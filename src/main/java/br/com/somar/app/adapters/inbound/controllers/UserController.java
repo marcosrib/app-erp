@@ -4,6 +4,7 @@ import br.com.somar.app.adapters.inbound.controllers.requests.UserRequest;
 import br.com.somar.app.adapters.inbound.controllers.responses.UserResponse;
 import br.com.somar.app.application.ports.in.users.CreateUserUseCasePort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,7 @@ public class UserController {
 
     }
 
+    @PreAuthorize("hasAuthority('FINANCEIRO_CREATE')")
     @GetMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public String index() {

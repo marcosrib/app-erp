@@ -17,6 +17,10 @@ public class UserRequest {
 
         Set<Profile> profilesList = new HashSet<>();
         profilesList.addAll(profiles);
-        return new User(name, email, password, profilesList);
+        return User.builder()
+                .name(name)
+                .email(email)
+                .password(password)
+                .profiles(profilesList);
     }
 }

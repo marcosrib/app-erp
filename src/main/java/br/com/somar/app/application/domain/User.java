@@ -1,81 +1,91 @@
 package br.com.somar.app.application.domain;
 
-import br.com.somar.app.adapters.outbound.repositories.entity.ProfileEntity;
 import br.com.somar.app.adapters.outbound.repositories.entity.UserEntity;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class User {
-        private Long id;
-        private String name;
-        private String email;
-        private String password;
-        private Set<Profile> profiles;
 
-        public User() {
-        }
 
-        public User(String name, String email, String password, Set<Profile> profiles) {
-            this.name = name;
-            this.email = email;
-            this.password = password;
-            this.profiles = profiles;
-        }
+    private Long id;
 
-        public User(Long id, String name, String email, String password, Set<Profile> profiles) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.password = password;
-            this.profiles = profiles;
-        }
+    private String name;
 
-        public Long getId() {
-            return id;
-        }
+    private String email;
+    private String password;
+    private Set<Profile> profiles;
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public User() {
+    }
 
-        public String getEmail() {
-            return email;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getPassword() {
+        return password;
+    }
 
-        public String getPassword() {
-            return password;
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getEmail() {
+        return email;
+    }
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
+    public void setEmail(String name) {
+        this.email = email;
+    }
 
-        public Set<Profile> getProfiles() {
-            return profiles;
-        }
+    public void setProfiles(Set<Profile> profiles) {
+        this.profiles = profiles;
+    }
+    public Set<Profile> getProfiles() {
+        return profiles;
+    }
+    public static User builder() {
+        return new User();
+    }
 
-        public void setProfiles(Set<Profile> profiles) {
-            this.profiles = profiles;
-        }
+    public User id(Long id) {
+        this.id = id;
+        return this;
+    }
+    public User email(String email) {
+        this.email = email;
+        return this;
+    }
+    public User password(String password) {
+        this.password = password;
+        return this;
+    }
 
-        public static User convertUserEntitytoUser(UserEntity userEntity) {
-            Set<Profile> profileEntities = userEntity.getProfiles().stream()
-                    .map(profileEntity -> new Profile(profileEntity.getId(), profileEntity.getName())).collect(
-                            Collectors.toSet());
-            return new User(userEntity.getId(), userEntity.getName(), userEntity.getEmail(),
-                    userEntity.getPassword(), profileEntities);
-        }
+    public User name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public User profiles(Set<Profile> profiles) {
+        this.profiles = profiles;
+        return this;
+    }
+
+    public static User convertUserEntitytoUser(UserEntity userEntity) {
+        return User.builder()
+                .id(userEntity.getId())
+                .name(userEntity.getName())
+                .email(userEntity.getEmail());
+    }
+
 }

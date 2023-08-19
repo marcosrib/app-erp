@@ -9,12 +9,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SecurityFilter extends OncePerRequestFilter {
 
@@ -27,18 +32,19 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-            var token = this.recoverToken(request);
-            if (token != null) {
-                var login = jwtAdapter.validateToken(token);
-                if (StringUtils.isNotEmpty(login)) {
-                    UserDetails userDetails = authenticationAdapterPort.loadUserByUsername(login);
-                    UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails,
-                            null, userDetails.getAuthorities());
-                    user.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(user);
-                }
+        var token = this.recoverToken(request);
+        if (token != null) {
+            var login = jwtAdapter.validateToken(token);
+            if (StringUtils.isNotEmpty(login)) {
+
+                UserDetails userDetails = findUserByEmail(login);
+                UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails,
+                        null, userDetails.getAuthorities());
+                user.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(user);
             }
-            filterChain.doFilter(request, response);
+        }
+        filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request) {
@@ -47,5 +53,18 @@ public class SecurityFilter extends OncePerRequestFilter {
         return authHeader.replace("Bearer", "").trim();
     }
 
+    private UserDetails findUserByEmail(String email) {
+        var user = authenticationAdapterPort.findUserWithProfileAndAuthoritiesByEmail(email);
+        List<GrantedAuthority> authorities = user.getAuthorities().stream()
+                .map(authority -> authority.getGroup() + "_" + authority.getAbility())
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+
+        return User.builder()
+                .username(user.getEmail())
+                .password(user.getPassword())
+                .authorities(authorities)
+                .build();
+    }
 
 }

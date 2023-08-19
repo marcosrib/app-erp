@@ -1,12 +1,15 @@
 package br.com.somar.app.exceptions.handler;
 
 import br.com.somar.app.exceptions.ResourceAlreadyExistsException;
+import br.com.somar.app.exceptions.ResourceNotFoundException;
+import br.com.somar.app.exceptions.UnauthorizedException;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -25,8 +28,8 @@ public class ExceptionHandlerController {
 
 
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, WebRequest request) {
+    @ExceptionHandler(java.lang.Exception.class)
+    public ResponseEntity<ErrorResponse> handleGlobalException(java.lang.Exception ex, WebRequest request) {
         int status = HttpStatus.INTERNAL_SERVER_ERROR.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message("Internal server error")
@@ -36,24 +39,47 @@ public class ExceptionHandlerController {
 
         return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));
     }
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ErrorResponse> unauthorizedException(Exception ex, WebRequest request) {
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponse> unauthorizedException(java.lang.Exception ex, WebRequest request) {
         int status = HttpStatus.UNAUTHORIZED.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .message("Internal server error")
+                .message(message(ex.getLocalizedMessage()))
                 .status(status)
-                .error_code("INTERNAL_ERROR")
+                .error_code("UNAUTHORIZED")
                 .timestamp(LocalDateTime.now());
 
         return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));
     }
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> accessDeniedException(java.lang.Exception ex, WebRequest request) {
+        int status = HttpStatus.UNAUTHORIZED.value();
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .message("Não Autorizado")
+                .status(status)
+                .error_code("UNAUTHORIZED")
+                .timestamp(LocalDateTime.now());
+
+        return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));
+    }
+
     @ExceptionHandler(ResourceAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> resourceAlreadyExists(Exception ex) {
+    public ResponseEntity<ErrorResponse> resourceAlreadyExists(java.lang.Exception ex) {
         int status = HttpStatus.CONFLICT.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(message(ex.getLocalizedMessage()))
                 .status(status)
                 .error_code("CONFLICT")
+                .timestamp(LocalDateTime.now());
+
+        return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));
+    }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> resourceNotFound(java.lang.Exception ex) {
+        int status = HttpStatus.NOT_FOUND.value();
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .message(message(ex.getLocalizedMessage()))
+                .status(status)
+                .error_code("NOT_FOUND")
                 .timestamp(LocalDateTime.now());
 
         return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));

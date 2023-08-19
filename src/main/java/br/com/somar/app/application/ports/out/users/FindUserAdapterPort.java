@@ -4,6 +4,6 @@ import br.com.somar.app.application.domain.User;
 
 import java.util.Optional;
 public interface FindUserAdapterPort {
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
 
 }
