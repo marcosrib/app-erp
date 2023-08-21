@@ -1,22 +1,14 @@
 package br.com.somar.app.adapters.outbound.repositories.authentication;
 
 import br.com.somar.app.adapters.outbound.jwt.JwtAdapter;
-import br.com.somar.app.adapters.outbound.repositories.entity.AbilityEntity;
-import br.com.somar.app.adapters.outbound.repositories.entity.ProfileEntity;
 import br.com.somar.app.adapters.outbound.repositories.entity.UserEntity;
 import br.com.somar.app.adapters.outbound.repositories.users.UserRepository;
 import br.com.somar.app.application.domain.Auth;
-import br.com.somar.app.application.domain.User;
 import br.com.somar.app.application.ports.out.auth.AuthenticationAdapterPort;
-import br.com.somar.app.exceptions.UnauthorizedException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import br.com.somar.app.common.exceptions.UnauthorizedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class AuthenticationAdapter implements AuthenticationAdapterPort {

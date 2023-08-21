@@ -1,9 +1,8 @@
-package br.com.somar.app.exceptions.handler;
+package br.com.somar.app.common.exceptions.handler;
 
-import br.com.somar.app.exceptions.ResourceAlreadyExistsException;
-import br.com.somar.app.exceptions.ResourceNotFoundException;
-import br.com.somar.app.exceptions.UnauthorizedException;
-import org.apache.tomcat.websocket.AuthenticationException;
+import br.com.somar.app.common.exceptions.ResourceNotFoundException;
+import br.com.somar.app.common.exceptions.UnauthorizedException;
+import br.com.somar.app.common.exceptions.ResourceAlreadyExistsException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;

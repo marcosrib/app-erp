@@ -1,6 +1,6 @@
 package br.com.somar.app.common.config;
 
-import br.com.somar.app.exceptions.handler.ErrorResponse;
+import br.com.somar.app.common.exceptions.handler.ErrorResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;

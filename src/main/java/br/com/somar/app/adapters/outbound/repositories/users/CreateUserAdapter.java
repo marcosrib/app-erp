@@ -4,7 +4,6 @@ import br.com.somar.app.adapters.outbound.repositories.entity.ProfileEntity;
 import br.com.somar.app.adapters.outbound.repositories.entity.UserEntity;
 import br.com.somar.app.application.domain.User;
 import br.com.somar.app.application.ports.out.users.CreateUserAdapterPort;
-import br.com.somar.app.exceptions.ResourceAlreadyExistsException;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;

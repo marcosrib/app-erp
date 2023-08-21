@@ -1,4 +1,4 @@
-package br.com.somar.app.exceptions.handler;
+package br.com.somar.app.common.exceptions.handler;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

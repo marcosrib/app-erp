@@ -2,22 +2,29 @@ package br.com.somar.app.adapters.inbound.controllers;
 
 import br.com.somar.app.adapters.inbound.controllers.requests.CreateProfileRequest;
 import br.com.somar.app.adapters.inbound.controllers.responses.profiles.ProfileResponse;
-import br.com.somar.app.adapters.outbound.repositories.entity.ProfileEntity;
-import br.com.somar.app.adapters.outbound.repositories.entity.UserEntity;
+import br.com.somar.app.adapters.outbound.repositories.abilities.AbilityRepository;
+import br.com.somar.app.application.domain.Ability;
+import br.com.somar.app.application.domain.GroupAbility;
+import br.com.somar.app.adapters.outbound.repositories.entity.AbilityEntity;
 import br.com.somar.app.adapters.outbound.repositories.profiles.ProfileRepository;
-import br.com.somar.app.adapters.outbound.repositories.users.UserRepository;
 import br.com.somar.app.application.ports.in.profiles.CreateProfileUseCasePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/profile")
 public class ProfileController {
     @Autowired
-    private UserRepository profileRepository;
+    private AbilityRepository abilityRepository;
+
+    @Autowired
+    private ProfileRepository profileRepository;
     private final CreateProfileUseCasePort createProfileUseCasePort;
 
     public ProfileController(CreateProfileUseCasePort createProfileUseCasePort) {
@@ -32,8 +39,11 @@ public class ProfileController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserEntity> get() {
+    public List<GroupAbility> show() {
+     return null;
 
-        return profileRepository.findAll();
+
     }
+
+
 }

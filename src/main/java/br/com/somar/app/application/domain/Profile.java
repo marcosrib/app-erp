@@ -16,9 +16,10 @@ public class Profile {
     public Profile(String name) {
         this.name = name;
     }
-    public Profile(Long id, String name) {
+    public Profile(Long id, String name, Set<Ability> abilities) {
         this.id = id;
         this.name = name;
+        this.abilities = abilities;
     }
 
     public Long getId() {
@@ -45,6 +46,12 @@ public class Profile {
         this.name = name;
     }
     public static Profile convertProfileEntityToProfile(ProfileEntity profilesEntity) {
-        return new Profile(profilesEntity.getId(), profilesEntity.getName());
+        var abilities =  profilesEntity.getAbilities().stream()
+                .map(ability -> new Ability(ability.getId(),
+                        ability.getAbilityCategory().getName(),
+                        ability.getAbilityGroup().getName(),
+                        true))
+                .collect(Collectors.toSet());
+        return new Profile(profilesEntity.getId(), profilesEntity.getName(), abilities);
     }
 }

@@ -1,5 +1,5 @@
 server:
-  port : 8081
+  port : 8082
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -9,14 +9,13 @@ spring:
   jpa:
     properties:
       hibernate:
-        show_sql: ${SHOW_SQL:false}
+        show_sql: ${SHOW_SQL:true}
 
   security:
     jwt:
       secret: ${JWT_SECRET:bWFyY29zcmliZWlyb2Rlc291c2E=}
       refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:100}
       token-expiration: ${JWT_TOKEN_EXPIRATION:15}
-
 
 
 

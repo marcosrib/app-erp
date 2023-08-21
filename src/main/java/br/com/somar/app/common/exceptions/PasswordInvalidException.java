@@ -1,4 +1,4 @@
-package br.com.somar.app.exceptions;
+package br.com.somar.app.common.exceptions;
 
 import org.springframework.http.HttpStatus;
 
