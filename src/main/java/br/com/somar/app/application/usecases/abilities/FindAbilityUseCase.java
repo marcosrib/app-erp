@@ -25,10 +25,15 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
     @Override
     public List<GroupAbility> findAbilityByProfileId(Long profileId) {
         var abilities = profileAdapterPort.findProfileBydId(profileId).getAbilities();
+        if (abilities.isEmpty()) {
+            var allAbilities = findAbilityAdapterPort.findAllAbilities();
+            abilities.addAll(allAbilities);
+        } else {
+            var ids = abilities.stream().map(Ability::getId).collect(Collectors.toList());
+            var abilitiesWithoutProfile = findAbilityAdapterPort.findAbilityNotInIds(ids);
+            abilities.addAll(abilitiesWithoutProfile);
+        }
 
-        var ids = abilities.stream().map(Ability::getId).collect(Collectors.toList());
-        var abilitiesWithoutProfile = findAbilityAdapterPort.findAbilityNotInIds(ids);
-        abilities.addAll(abilitiesWithoutProfile);
 
         return covertAbility(abilities);
     }

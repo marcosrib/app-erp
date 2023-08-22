@@ -17,4 +17,9 @@ public class FindAbilityAdapter implements FindAbilityAdapterPort {
     public Set<Ability>  findAbilityNotInIds(List<Long> ids) {
         return Ability.convertListAbilityEntityToListAbility(abilityRepository.findByIdNotIn(ids));
     }
+
+    @Override
+    public Set<Ability> findAllAbilities() {
+        return  Ability.convertListAbilityEntityToListAbility(Set.copyOf(abilityRepository.findAll()));
+    }
 }

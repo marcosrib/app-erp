@@ -73,7 +73,7 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));
     }
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> resourceNotFound(java.lang.Exception ex) {
+    public ResponseEntity<ErrorResponse> resourceNotFound(Exception ex) {
         int status = HttpStatus.NOT_FOUND.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(message(ex.getLocalizedMessage()))

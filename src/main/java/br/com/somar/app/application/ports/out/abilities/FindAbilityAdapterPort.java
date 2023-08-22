@@ -7,4 +7,6 @@ import java.util.Set;
 
 public interface FindAbilityAdapterPort {
     Set<Ability> findAbilityNotInIds(List<Long> ids);
+
+    Set<Ability> findAllAbilities();
 }
