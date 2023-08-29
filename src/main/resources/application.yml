@@ -1,5 +1,5 @@
 server:
-  port : 8082
+  port : 8081
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -16,10 +16,3 @@ spring:
       secret: ${JWT_SECRET:bWFyY29zcmliZWlyb2Rlc291c2E=}
       refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:100}
       token-expiration: ${JWT_TOKEN_EXPIRATION:15}
-
-  logging:
-    level:
-      org.springframework.security: DEBUG
-      org.springframework.web.cors: DEBUG
-
-
