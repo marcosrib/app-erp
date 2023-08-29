@@ -17,5 +17,9 @@ spring:
       refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:100}
       token-expiration: ${JWT_TOKEN_EXPIRATION:15}
 
+  logging:
+    level:
+      org.springframework.security: DEBUG
+      org.springframework.web.cors: DEBUG
 
 

@@ -16,6 +16,7 @@ public class AuthenticationController implements AuthenticationApi {
     }
 
     @PostMapping("/login/")
+    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseStatus(HttpStatus.OK)
     public AuthenticationResponse login(@RequestBody AuthenticationRequest data) {
         return AuthenticationResponse.fromDomain(authenticationUseCasePort.auth(data.toAuthDomain()));
