@@ -34,6 +34,7 @@ public class AuthenticationAdapter implements AuthenticationAdapterPort {
         if (!isPasswordMatch) {
             throw new UnauthorizedException("user.unauthorized");
         }
+        auth.name(userEntity.getName());
         return Auth.convertUserEntityToAuth(userEntity, jwtAdapter.generateAccessToken(auth), jwtAdapter.generateRefreshToken(auth));
     }
 

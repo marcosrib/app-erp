@@ -35,6 +35,8 @@ public class JwtAdapter {
                     .withIssuer(ISSUER)
                     .withSubject(auth.getEmail())
                     .withExpiresAt(genExpirationDate(expirationToken))
+                    .withClaim("name", auth.getName())
+                    .withClaim("email", auth.getEmail())
                     .sign(algorithm);
         } catch (JWTCreationException ex) {
             throw new RuntimeException("error while generatong token", ex);

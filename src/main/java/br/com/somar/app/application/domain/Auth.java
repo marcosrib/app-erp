@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class Auth {
     private String email;
+
+    private String name;
+
     private String password;
     private String accessToken;
     private String refreshToken;
@@ -22,6 +25,10 @@ public class Auth {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Set<Authority> getAuthorities() {
@@ -47,6 +54,10 @@ public class Auth {
         this.email = email;
         return this;
     }
+    public Auth name(String name) {
+        this.name = name;
+        return this;
+    }
     public Auth password(String password) {
         this.password = password;
         return this;
@@ -67,6 +78,7 @@ public class Auth {
     public static Auth convertUserEntityToAuth(UserEntity userEntity, String accessToken, String refreshToken) {
         var authorities =  convertAbilityToAuthorities(userEntity.getProfiles());
         return Auth.builder()
+                .name(userEntity.getName())
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .authorities(authorities );
