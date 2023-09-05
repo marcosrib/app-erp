@@ -90,6 +90,11 @@ public class Auth {
                 .password(userEntity.getPassword())
                 .authorities(authorities );
     }
+    public static Auth convertUserEntityToAuth(User user) {
+        return Auth.builder()
+                .email(user.getEmail())
+                .name(user.getName());
+    }
 
     private static Set<Authority> convertAbilityToAuthorities(Set<ProfileEntity> profiles) {
         return profiles.stream()

@@ -1,4 +1,4 @@
-package br.com.somar.app.application.ports.in;
+package br.com.somar.app.application.ports.in.authentication;
 
 import br.com.somar.app.application.domain.Auth;
 public interface AuthenticationUseCasePort {

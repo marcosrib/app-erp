@@ -17,10 +17,10 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String email;
     private String password;
+    private Boolean status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

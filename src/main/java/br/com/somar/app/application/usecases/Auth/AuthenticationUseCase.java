@@ -1,7 +1,7 @@
 package br.com.somar.app.application.usecases.Auth;
 
 import br.com.somar.app.application.domain.Auth;
-import br.com.somar.app.application.ports.in.AuthenticationUseCasePort;
+import br.com.somar.app.application.ports.in.authentication.AuthenticationUseCasePort;
 import br.com.somar.app.application.ports.out.auth.AuthenticationAdapterPort;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +15,5 @@ public class AuthenticationUseCase implements AuthenticationUseCasePort {
     public Auth auth(Auth auth) {
         return authenticationAdapterPort.authenticate(auth);
     }
+
 }

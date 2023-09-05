@@ -6,13 +6,11 @@ import java.util.Set;
 
 public class User {
 
-
     private Long id;
-
     private String name;
-
     private String email;
     private String password;
+    private Boolean status;
     private Set<Profile> profiles;
 
     public User() {
@@ -48,6 +46,10 @@ public class User {
         this.email = email;
     }
 
+    public Boolean isStatus() {
+        return status;
+    }
+
     public void setProfiles(Set<Profile> profiles) {
         this.profiles = profiles;
     }
@@ -80,11 +82,16 @@ public class User {
         this.profiles = profiles;
         return this;
     }
+    public User status(Boolean status) {
+        this.status = status;
+        return this;
+    }
 
     public static User convertUserEntitytoUser(UserEntity userEntity) {
         return User.builder()
                 .id(userEntity.getId())
                 .name(userEntity.getName())
+                .status(userEntity.getStatus())
                 .email(userEntity.getEmail());
     }
 

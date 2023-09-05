@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -35,7 +36,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         var token = this.recoverToken(request);
         if (token != null) {
             var login = jwtAdapter.validateToken(token);
-            if (StringUtils.isNotEmpty(login)) {
+            var claims = jwtAdapter.getClaimsFromToken(token);
+
+            if (!ObjectUtils.isEmpty(login) && !ObjectUtils.isEmpty(claims.get("name"))) {
 
                 UserDetails userDetails = findUserByEmail(login);
                 UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails,
