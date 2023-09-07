@@ -27,6 +27,7 @@ public class JwtAdapter {
     private final String ISSUER = "app";
 
     public String generateAccessToken(Auth auth) {
+        System.out.println(genExpirationDate(tokenExpiration));
         try {
             Algorithm algorithm = Algorithm.HMAC512(secret);
             return JWT.create()
@@ -41,7 +42,6 @@ public class JwtAdapter {
         }
     }
     public String generateRefreshToken(Auth auth) {
-        System.out.println(genExpirationDate(refreshTokenExpiration));
         try {
             Algorithm algorithm = Algorithm.HMAC512(secret);
             return JWT.create()
@@ -62,7 +62,6 @@ public class JwtAdapter {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException ex) {
-            System.out.println(ex);
          return "";
         }
     }
