@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -40,15 +41,16 @@ public class JwtAdapter {
         }
     }
     public String generateRefreshToken(Auth auth) {
+        System.out.println(genExpirationDate(refreshTokenExpiration));
         try {
             Algorithm algorithm = Algorithm.HMAC512(secret);
             return JWT.create()
-                    .withSubject(auth.getEmail())
                     .withIssuer(ISSUER)
+                    .withSubject(auth.getEmail())
                     .withExpiresAt(genExpirationDate(refreshTokenExpiration))
                     .sign(algorithm);
         } catch (JWTCreationException ex) {
-            throw new RuntimeException("error while generating refresh token", ex);
+            throw new RuntimeException("error while generating access token", ex);
         }
     }
     public String validateToken(String token) {
@@ -60,6 +62,7 @@ public class JwtAdapter {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException ex) {
+            System.out.println(ex);
          return "";
         }
     }
@@ -68,7 +71,7 @@ public class JwtAdapter {
         DecodedJWT decodedJWT = JWT.decode(token);
         return decodedJWT.getClaims();
     }
-    private Instant genExpirationDate(Integer minute) {
-        return LocalDateTime.now().plusMinutes(minute).toInstant(ZoneOffset.of("-03:00"));
+    private Date genExpirationDate(Integer minute) {
+        return Date.from(LocalDateTime.now().plusMinutes(minute).toInstant(ZoneOffset.of("-03:00")));
     }
 }
