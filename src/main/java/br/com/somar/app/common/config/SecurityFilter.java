@@ -1,12 +1,11 @@
 package br.com.somar.app.common.config;
 
-import br.com.somar.app.adapters.outbound.jwt.JwtAdapter;
-import br.com.somar.app.application.ports.out.auth.AuthenticationAdapterPort;
+import br.com.somar.app.users.adapters.outbound.jwt.JwtAdapter;
+import br.com.somar.app.users.application.ports.out.auth.AuthenticationAdapterPort;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
