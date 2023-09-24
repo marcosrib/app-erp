@@ -1,4 +1,4 @@
-package br.com.somar.app.users.adapters.inbound.controllers.responses;
+package br.com.somar.app.users.adapters.inbound.controllers.responses.users;
 
 import br.com.somar.app.users.application.core.domain.Profile;
 import br.com.somar.app.users.application.core.domain.User;

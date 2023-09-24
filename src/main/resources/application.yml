@@ -14,5 +14,10 @@ spring:
   security:
     jwt:
       secret: ${JWT_SECRET:bWFyY29zcmliZWlyb2Rlc291c2E=}
-      refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:10}
-      token-expiration: ${JWT_TOKEN_EXPIRATION:5}
+      refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:200}
+      token-expiration: ${JWT_TOKEN_EXPIRATION:100}
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+        max-page-size: ${MAX_PAGE_SIZE:50}

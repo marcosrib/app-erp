@@ -1,8 +1,11 @@
 package br.com.somar.app.users.application.core.domain;
 
 import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
+import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class User {
 
@@ -93,6 +96,17 @@ public class User {
                 .name(userEntity.getName())
                 .status(userEntity.getStatus())
                 .email(userEntity.getEmail());
+    }
+
+    public static Page<User> convertPageUserEntityToPAgeUser(Page<UserEntity> userEntityPage) {
+        return userEntityPage.map(userEntity -> {
+                    User user = User.convertUserEntitytoUser(userEntity);
+                    Set<Profile> profiles = userEntity.getProfiles().stream()
+                            .map(Profile::new)
+                            .collect(Collectors.toSet());
+                    user.setProfiles(profiles);
+                    return user;
+                });
     }
 
 }

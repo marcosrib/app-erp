@@ -21,6 +21,10 @@ public class Profile {
         this.name = name;
         this.abilities = abilities;
     }
+    public Profile(ProfileEntity profileEntity) {
+        this.id = profileEntity.getId();
+        this.name = profileEntity.getName();
+    }
 
     public Long getId() {
         return id;
