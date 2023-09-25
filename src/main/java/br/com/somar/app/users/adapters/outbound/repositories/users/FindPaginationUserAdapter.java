@@ -1,5 +1,6 @@
 package br.com.somar.app.users.adapters.outbound.repositories.users;
 
+import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
 import br.com.somar.app.users.application.core.domain.User;
 import br.com.somar.app.users.application.ports.out.users.FindPaginationUserAdapterPort;
 import org.springframework.data.domain.Page;
@@ -7,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.stream.Collectors;
 
 @Service
 public class FindPaginationUserAdapter implements FindPaginationUserAdapterPort {
@@ -26,6 +29,8 @@ public class FindPaginationUserAdapter implements FindPaginationUserAdapterPort 
             spec = spec.and((root, query, builder) ->
                     builder.like(root.get("email"), "%" + filter.getEmail() + "%"));
         }
-        return User.convertPageUserEntityToPAgeUser(userRepository.findAllWithProfiles(spec, pageable));
+        Page<UserEntity> userEntityPage =  userRepository.findAll(spec, pageable);
+        userRepository.findUserWithProfilesByIn(userEntityPage.stream().collect(Collectors.toList()));
+        return User.convertPageUserEntityToPageUser(userEntityPage);
     }
 }

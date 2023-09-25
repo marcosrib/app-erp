@@ -98,7 +98,7 @@ public class User {
                 .email(userEntity.getEmail());
     }
 
-    public static Page<User> convertPageUserEntityToPAgeUser(Page<UserEntity> userEntityPage) {
+    public static Page<User> convertPageUserEntityToPageUser(Page<UserEntity> userEntityPage) {
         return userEntityPage.map(userEntity -> {
                     User user = User.convertUserEntitytoUser(userEntity);
                     Set<Profile> profiles = userEntity.getProfiles().stream()

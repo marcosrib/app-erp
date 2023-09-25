@@ -24,6 +24,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 
     @Query("SELECT u FROM UserEntity u " +
-            "JOIN FETCH u.profiles p")
-    Page<UserEntity> findAllWithProfiles(Specification<User> spec, Pageable pageable);
+            "LEFT JOIN FETCH u.profiles p WHERE u IN :users ")
+    List<UserEntity> findUserWithProfilesByIn(List<UserEntity> users);
+
+    Page<UserEntity> findAll(Specification<User> spec, Pageable pageable);
 }

@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
-public record PageResponse<User>(
-        List<User> data,
+public record PageResponse<T>(
+        List<T> data,
         int totalPages,
         long totalElements
 ) {

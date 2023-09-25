@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -33,6 +35,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public PageResponse index(UserFilterRequest filter, Pageable pageable) {
         Page<User> userPage = findPaginationUserUseCasePort.getUsersWithPaginationAndFilter(filter.toUserDomain(), pageable);
-        return new PageResponse(userPage.getContent(), userPage.getTotalPages(), userPage.getTotalElements());
+        return new PageResponse(userPage.map(UserResponse::fromDomain).stream().collect(Collectors.toList()), userPage.getTotalPages(), userPage.getTotalElements());
     }
 }
