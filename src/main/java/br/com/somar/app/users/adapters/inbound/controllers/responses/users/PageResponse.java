@@ -1,13 +1,18 @@
 package br.com.somar.app.users.adapters.inbound.controllers.responses.users;
 
-import br.com.somar.app.users.application.core.domain.User;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 import java.util.List;
 
-public record PageResponse<T>(
-        List<T> data,
-        int totalPages,
-        long totalElements
-) {
+@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PageResponse<T> {
+    private List<T> data;
+    private int totalPages;
+    private long totalElements;
+    private int nextPage;
+    private int previousPage;
+    private int currentPage;
 }

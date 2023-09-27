@@ -98,15 +98,15 @@ public class User {
                 .email(userEntity.getEmail());
     }
 
-    public static Page<User> convertPageUserEntityToPageUser(Page<UserEntity> userEntityPage) {
-        return userEntityPage.map(userEntity -> {
+    public static List<User> convertPageUserEntityToPageUser(Page<UserEntity> userEntityPage) {
+        return userEntityPage.getContent().stream().map(userEntity -> {
                     User user = User.convertUserEntitytoUser(userEntity);
                     Set<Profile> profiles = userEntity.getProfiles().stream()
                             .map(Profile::new)
                             .collect(Collectors.toSet());
                     user.setProfiles(profiles);
                     return user;
-                });
+                }).collect(Collectors.toList());
     }
 
 }

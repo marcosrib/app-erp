@@ -1,7 +1,7 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
 import br.com.somar.app.users.adapters.inbound.controllers.requests.CreateProfileRequest;
-import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileResponse;
+import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileAbilitiesResponse;
 import br.com.somar.app.users.adapters.outbound.repositories.abilities.AbilityRepository;
 import br.com.somar.app.users.application.core.domain.GroupAbility;
 import br.com.somar.app.users.adapters.outbound.repositories.profiles.ProfileRepository;
@@ -28,8 +28,8 @@ public class ProfileController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProfileResponse create(@RequestBody CreateProfileRequest createProfileRequest) {
-        return ProfileResponse.fromDomain(createProfileUseCasePort.create(createProfileRequest.toProfileDomain()));
+    public ProfileAbilitiesResponse create(@RequestBody CreateProfileRequest createProfileRequest) {
+        return ProfileAbilitiesResponse.fromDomain(createProfileUseCasePort.create(createProfileRequest.toProfileDomain()));
     }
 
     @GetMapping("/")
