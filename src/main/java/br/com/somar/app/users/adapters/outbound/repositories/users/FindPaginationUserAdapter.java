@@ -35,7 +35,7 @@ public class FindPaginationUserAdapter implements FindPaginationUserAdapterPort 
 
         Page<UserEntity> userEntityPage = userRepository.findAll(spec, PageRequest.of(pageable.page(),pageable.size()));
         userRepository.findUserWithProfilesByIn(userEntityPage.stream().collect(Collectors.toList()));
-        List<User> users = User.convertPageUserEntityToPageUser(userEntityPage);
+        List<User> users = User.convertPageUserEntityToListUser(userEntityPage);
         return PageDomain.builder()
                 .data(users)
                 .totalPages(userEntityPage.getTotalPages())

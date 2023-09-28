@@ -4,14 +4,12 @@ import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.Pr
 import br.com.somar.app.users.application.core.domain.User;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
-@Setter
 @Builder
 public class UserResponse {
 

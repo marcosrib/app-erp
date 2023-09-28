@@ -4,6 +4,7 @@ import br.com.somar.app.users.adapters.inbound.controllers.requests.UserFilterRe
 import br.com.somar.app.users.adapters.inbound.controllers.requests.UserRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.users.PageResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.users.UserResponse;
+import br.com.somar.app.users.adapters.inbound.controllers.swagger.api.UserApi;
 import br.com.somar.app.users.application.core.domain.PageDomain;
 import br.com.somar.app.users.application.core.domain.PageableRequestDomain;
 import br.com.somar.app.users.application.core.domain.User;
@@ -14,11 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class UserController implements UserApi {
     private final CreateUserUseCasePort createUserUseCasePort;
 
     private final FindPaginationUserUseCasePort findPaginationUserUseCasePort;
@@ -34,17 +35,17 @@ public class UserController {
     @PreAuthorize("hasAuthority('FINANCEIRO_CREATE')")
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public PageResponse index(UserFilterRequest filter, Pageable pageable) {
+    public PageResponse<UserResponse> index(UserFilterRequest filter, Pageable pageable) {
         var pageableRequestDomain = new PageableRequestDomain(pageable.getPageNumber(),pageable.getPageSize());
         PageDomain<User> userPage = findPaginationUserUseCasePort.getUsersWithPaginationAndFilter(filter.toUserDomain(), pageableRequestDomain);
-        var userResponses = UserResponse.fromDomainToList(userPage.getData());
-        return PageResponse.builder()
-                .data(Collections.singletonList(userResponses))
+        List<UserResponse> userResponses = UserResponse.fromDomainToList(userPage.getData());
+
+      return PageResponse.builder()
+                .data(userResponses)
                 .previousPage(userPage.getPreviousPage())
                 .totalElements(userPage.getTotalElements())
                 .totalPages(userPage.getTotalPages())
                 .nextPage(userPage.getNextPage())
-                .currentPage(userPage.getCurrentPage())
-                .build();
+                .currentPage(userPage.getCurrentPage());
     }
 }
