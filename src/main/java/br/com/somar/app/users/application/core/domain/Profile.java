@@ -2,6 +2,7 @@ package br.com.somar.app.users.application.core.domain;
 
 import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,5 +58,9 @@ public class Profile {
                         true))
                 .collect(Collectors.toSet());
         return new Profile(profilesEntity.getId(), profilesEntity.getName(), abilities);
+    }
+
+    public static List<Profile> convertListProfileEntityIntoListProfile(List<ProfileEntity> profileEntities) {
+        return profileEntities.stream().map(Profile::new).collect(Collectors.toList());
     }
 }
