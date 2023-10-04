@@ -30,6 +30,7 @@ public class UserController implements UserApi {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse create(@RequestBody UserRequest userRequest) {
+
         return UserResponse.fromDomain(createUserUseCasePort.create(userRequest.toUserDomain()));
     }
     @PreAuthorize("hasAuthority('FINANCEIRO_CREATE')")

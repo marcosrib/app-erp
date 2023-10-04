@@ -7,6 +7,7 @@ import br.com.somar.app.users.application.core.domain.User;
 import br.com.somar.app.users.application.ports.out.users.FindPaginationUserAdapterPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -33,7 +34,7 @@ public class FindPaginationUserAdapter implements FindPaginationUserAdapterPort 
                     builder.like(root.get("email"), "%" + filter.getEmail() + "%"));
         }
 
-        Page<UserEntity> userEntityPage = userRepository.findAll(spec, PageRequest.of(pageable.page(),pageable.size()));
+        Page<UserEntity> userEntityPage = userRepository.findAll(spec, PageRequest.of(pageable.page(),pageable.size(), Sort.by(Sort.Direction.DESC, "id")));
         userRepository.findUserWithProfilesByIn(userEntityPage.stream().collect(Collectors.toList()));
         List<User> users = User.convertPageUserEntityToListUser(userEntityPage);
         return PageDomain.builder()

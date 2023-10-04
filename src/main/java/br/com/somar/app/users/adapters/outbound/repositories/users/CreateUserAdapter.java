@@ -34,6 +34,7 @@ public class CreateUserAdapter  implements CreateUserAdapterPort {
                 .builder()
                 .name(user.getName())
                 .email(user.getEmail())
+                .status(user.isStatus())
                 .password(user.getPassword())
                 .profiles(profiles)
                 .build();

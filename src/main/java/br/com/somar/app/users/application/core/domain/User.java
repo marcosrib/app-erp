@@ -13,7 +13,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Boolean status;
+    private boolean status;
     private Set<Profile> profiles;
 
     public User() {
@@ -49,7 +49,7 @@ public class User {
         this.email = email;
     }
 
-    public Boolean isStatus() {
+    public boolean isStatus() {
         return status;
     }
 
@@ -91,22 +91,20 @@ public class User {
     }
 
     public static User convertUserEntitytoUser(UserEntity userEntity) {
+        Set<Profile> profiles = userEntity.getProfiles().stream()
+                .map(profileEntity -> new Profile(profileEntity.getId(),profileEntity.getName()))
+                .collect(Collectors.toSet());
         return User.builder()
                 .id(userEntity.getId())
                 .name(userEntity.getName())
                 .status(userEntity.getStatus())
-                .email(userEntity.getEmail());
+                .email(userEntity.getEmail())
+                .profiles(profiles);
     }
 
     public static List<User> convertPageUserEntityToListUser(Page<UserEntity> userEntityPage) {
-        return userEntityPage.getContent().stream().map(userEntity -> {
-                    User user = User.convertUserEntitytoUser(userEntity);
-                    Set<Profile> profiles = userEntity.getProfiles().stream()
-                            .map(Profile::new)
-                            .collect(Collectors.toSet());
-                    user.setProfiles(profiles);
-                    return user;
-                }).collect(Collectors.toList());
+        return userEntityPage.getContent().stream().map(userEntity -> User.convertUserEntitytoUser(userEntity))
+                .collect(Collectors.toList());
     }
 
 }

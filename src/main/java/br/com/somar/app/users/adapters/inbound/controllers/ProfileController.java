@@ -20,18 +20,15 @@ public class ProfileController {
         this.createProfileUseCasePort = createProfileUseCasePort;
         this.findAllProfileUseCasePort = findAllProfileUseCasePort;
     }
-
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfileAbilitiesResponse create(@RequestBody CreateProfileRequest createProfileRequest) {
         return ProfileAbilitiesResponse.fromDomain(createProfileUseCasePort.create(createProfileRequest.toProfileDomain()));
     }
-
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public List<ProfileResponse> show() {
      return ProfileResponse.fromDomainToList(findAllProfileUseCasePort.getAllProfiles());
     }
-
 
 }

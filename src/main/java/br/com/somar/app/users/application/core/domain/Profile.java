@@ -17,6 +17,10 @@ public class Profile {
     public Profile(String name) {
         this.name = name;
     }
+    public Profile(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     public Profile(Long id, String name, Set<Ability> abilities) {
         this.id = id;
         this.name = name;
