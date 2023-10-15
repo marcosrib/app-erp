@@ -8,19 +8,26 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
 public class CreateUserRequest {
+
     @NotEmpty(message = "{name.not.empty}")
     @NotNull(message = "{name.not.empty}")
     private String name;
+
     @Email(message = "{email.invalid}")
     private String email;
+
     @NotEmpty(message = "{password.not.empty}")
     @NotNull(message = "{password.not.empty}")
     private String password;
+
+    private Boolean status;
+
     @NotNull(message = "{profile.not.empty}")
     @NotEmpty(message = "{profile.not.empty}")
     @Valid
@@ -35,6 +42,7 @@ public class CreateUserRequest {
         return User.builder()
                 .name(name)
                 .email(email)
+                .status(status)
                 .password(password)
                 .profiles(profiles);
     }
