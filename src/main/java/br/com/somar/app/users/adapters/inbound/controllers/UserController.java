@@ -1,7 +1,8 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
+import br.com.somar.app.users.adapters.inbound.controllers.requests.CreateUserRequest;
+import br.com.somar.app.users.adapters.inbound.controllers.requests.UpdateUserRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.requests.UserFilterRequest;
-import br.com.somar.app.users.adapters.inbound.controllers.requests.UserRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.users.PageResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.users.UserResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.swagger.api.UserApi;
@@ -10,11 +11,11 @@ import br.com.somar.app.users.application.core.domain.PageableRequestDomain;
 import br.com.somar.app.users.application.core.domain.User;
 import br.com.somar.app.users.application.ports.in.users.CreateUserUseCasePort;
 import br.com.somar.app.users.application.ports.in.users.FindPaginationUserUseCasePort;
+import br.com.somar.app.users.application.ports.out.users.UpdateUserAdapterPort;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,16 +24,21 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController implements UserApi {
     private final CreateUserUseCasePort createUserUseCasePort;
-
+    private final UpdateUserAdapterPort updateUserUseCasePort;
     private final FindPaginationUserUseCasePort findPaginationUserUseCasePort;
-    public UserController(CreateUserUseCasePort createUserUseCasePort, FindPaginationUserUseCasePort findPaginationUserUseCasePort) {
+    public UserController(CreateUserUseCasePort createUserUseCasePort, UpdateUserAdapterPort updateUserUseCasePort, FindPaginationUserUseCasePort findPaginationUserUseCasePort) {
         this.createUserUseCasePort = createUserUseCasePort;
+        this.updateUserUseCasePort = updateUserUseCasePort;
         this.findPaginationUserUseCasePort = findPaginationUserUseCasePort;
     }
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse create(@Valid @RequestBody UserRequest userRequest) {
-        System.out.println(userRequest);
+    public UserResponse create(@Valid @RequestBody CreateUserRequest userRequest) {
+        return UserResponse.fromDomain(createUserUseCasePort.create(userRequest.toUserDomain()));
+    }
+    @PutMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserResponse update(@Valid @RequestBody UpdateUserRequest userRequest) {
         return UserResponse.fromDomain(createUserUseCasePort.create(userRequest.toUserDomain()));
     }
     @PreAuthorize("hasAuthority('FINANCEIRO_CREATE')")

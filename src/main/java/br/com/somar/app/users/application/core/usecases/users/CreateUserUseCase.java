@@ -25,7 +25,7 @@ public class CreateUserUseCase implements CreateUserUseCasePort {
     @Override
     public User create(User user) {
         var existingUser = findUserAdapterPort.findByEmail(user.getEmail());
-        if (ObjectUtils.isNotEmpty(existingUser )) {
+        if (ObjectUtils.isNotEmpty(existingUser)) {
             throw new ResourceAlreadyExistsException("email.already.exists");
         }
         String encryptPassword = encoder.encode(user.getPassword());

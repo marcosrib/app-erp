@@ -23,4 +23,13 @@ public class FindUserAdapter implements FindUserAdapterPort {
         return User.convertUserEntitytoUser(userEntity);
     }
 
+    @Override
+    public User findById(Long id) {
+        var userEntity = userRepository.findById(id);
+        if(userEntity.isEmpty()) {
+            return null;
+        }
+        return User.convertUserEntitytoUser(userEntity.get());
+    }
+
 }

@@ -1,9 +1,8 @@
 package br.com.somar.app.common.exceptions.handler;
 
+import br.com.somar.app.common.exceptions.ResourceAlreadyExistsException;
 import br.com.somar.app.common.exceptions.ResourceNotFoundException;
 import br.com.somar.app.common.exceptions.UnauthorizedException;
-import br.com.somar.app.common.exceptions.ResourceAlreadyExistsException;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -28,8 +27,6 @@ public class ExceptionHandlerController {
     public ExceptionHandlerController(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
-
-
 
     @ExceptionHandler(java.lang.Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(java.lang.Exception ex, WebRequest request) {
@@ -66,7 +63,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> resourceAlreadyExists(java.lang.Exception ex) {
+    public ResponseEntity<ErrorResponse> resourceAlreadyExists(Exception ex) {
         int status = HttpStatus.CONFLICT.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(message(ex.getLocalizedMessage()))
