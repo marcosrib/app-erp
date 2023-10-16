@@ -26,7 +26,7 @@ public class CreateUserRequest {
     @NotNull(message = "{password.not.empty}")
     private String password;
 
-    private Boolean status;
+    private boolean status;
 
     @NotNull(message = "{profile.not.empty}")
     @NotEmpty(message = "{profile.not.empty}")

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class CreateUserAdapter  implements CreateUserAdapterPort {
 
@@ -18,25 +20,7 @@ public class CreateUserAdapter  implements CreateUserAdapterPort {
     }
     @Override
     public User create(User user) {
-        UserEntity resUserEntity = userRepository.save(convertUserToEntity(user));
+        UserEntity resUserEntity = userRepository.save(UserEntityMapper.convertUserToEntity(user));
         return User.convertUserEntitytoUser(resUserEntity);
-    }
-    private  UserEntity convertUserToEntity(User user) {
-        Set<ProfileEntity> profiles = new HashSet<>();
-        user.getProfiles().forEach(p -> {
-            ProfileEntity profileEntity = new ProfileEntity();
-            profileEntity.setId(p.getId());
-            profileEntity.setName(p.getName());
-            profiles.add(profileEntity);
-        });
-
-       return UserEntity
-                .builder()
-                .name(user.getName())
-                .email(user.getEmail())
-                .status(user.isStatus())
-                .password(user.getPassword())
-                .profiles(profiles)
-                .build();
     }
 }

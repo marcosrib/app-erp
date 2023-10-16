@@ -26,10 +26,8 @@ public class UserConfig {
     }
     @Bean
     public UpdateUserUseCasePort updateUserUseCasePort(
-            UpdateUserAdapterPort updateUserAdapterPort,
-            PasswordEncoder encoder,
-            FindUserAdapterPort findUserAdapterPort) {
-        return new UpdateUserUseCase(updateUserAdapterPort,findUserAdapterPort, encoder);
+            UpdateUserAdapterPort updateUserAdapterPort) {
+        return new UpdateUserUseCase(updateUserAdapterPort);
     }
     @Bean
     public FindPaginationUserUseCasePort findPaginationUserUseCasePort(FindPaginationUserAdapterPort findPaginationUserAdapterPort) {

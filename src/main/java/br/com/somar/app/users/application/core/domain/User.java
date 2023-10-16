@@ -3,6 +3,7 @@ package br.com.somar.app.users.application.core.domain;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
 import org.springframework.data.domain.Page;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ public class User {
     private String email;
     private String password;
     private boolean status;
+    private LocalDateTime createdAt;
     private Set<Profile> profiles;
 
     public User() {
@@ -34,6 +36,7 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getPassword() {
         return password;
     }
@@ -41,8 +44,17 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public void setEmail(String name) {
@@ -56,9 +68,11 @@ public class User {
     public void setProfiles(Set<Profile> profiles) {
         this.profiles = profiles;
     }
+
     public Set<Profile> getProfiles() {
         return profiles;
     }
+
     public static User builder() {
         return new User();
     }
@@ -67,10 +81,12 @@ public class User {
         this.id = id;
         return this;
     }
+
     public User email(String email) {
         this.email = email;
         return this;
     }
+
     public User password(String password) {
         this.password = password;
         return this;
@@ -85,14 +101,20 @@ public class User {
         this.profiles = profiles;
         return this;
     }
+
     public User status(Boolean status) {
         this.status = status;
         return this;
     }
 
+    public User createdAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
     public static User convertUserEntitytoUser(UserEntity userEntity) {
         Set<Profile> profiles = userEntity.getProfiles().stream()
-                .map(profileEntity -> new Profile(profileEntity.getId(),profileEntity.getName()))
+                .map(profileEntity -> new Profile(profileEntity.getId(), profileEntity.getName()))
                 .collect(Collectors.toSet());
         return User.builder()
                 .id(userEntity.getId())
