@@ -44,6 +44,7 @@ public class CreateUserRequest {
                 .email(email)
                 .status(status)
                 .password(password)
-                .profiles(profiles);
+                .profiles(profiles)
+                .build();
     }
 }

@@ -4,6 +4,6 @@ import br.com.somar.app.users.application.core.domain.User;
 
 public record UserFilterRequest(String email) {
     public User toUserDomain() {
-        return User.builder().email(email);
+        return User.builder().email(email).build();
     }
 }

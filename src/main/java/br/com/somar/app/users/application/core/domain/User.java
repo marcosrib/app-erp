@@ -37,6 +37,14 @@ public class User {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -45,83 +53,48 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setEmail(String name) {
-        this.email = email;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setProfiles(Set<Profile> profiles) {
-        this.profiles = profiles;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Set<Profile> getProfiles() {
         return profiles;
     }
 
-    public static User builder() {
-        return new User();
-    }
-
-    public User id(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public User email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public User password(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public User name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public User profiles(Set<Profile> profiles) {
+    public void setProfiles(Set<Profile> profiles) {
         this.profiles = profiles;
-        return this;
     }
 
-    public User status(Boolean status) {
-        this.status = status;
-        return this;
-    }
-
-    public User createdAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-        return this;
+    public static UserBuilder builder() {
+        return new UserBuilder();
     }
 
     public static User convertUserEntitytoUser(UserEntity userEntity) {
         Set<Profile> profiles = userEntity.getProfiles().stream()
                 .map(profileEntity -> new Profile(profileEntity.getId(), profileEntity.getName()))
                 .collect(Collectors.toSet());
+
         return User.builder()
                 .id(userEntity.getId())
                 .name(userEntity.getName())
                 .status(userEntity.getStatus())
+                .password(userEntity.getPassword())
                 .email(userEntity.getEmail())
-                .profiles(profiles);
+                .createdAt(userEntity.getCreatedAt())
+                .profiles(profiles)
+                .build();
     }
 
     public static List<User> convertPageUserEntityToListUser(Page<UserEntity> userEntityPage) {

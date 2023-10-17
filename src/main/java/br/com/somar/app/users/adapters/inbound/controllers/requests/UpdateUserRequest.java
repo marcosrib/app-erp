@@ -34,11 +34,13 @@ public class UpdateUserRequest {
                 .stream()
                 .map(profileRequest -> new Profile(profileRequest.id(), profileRequest.name()))
                 .collect(Collectors.toSet());
-        return User.builder()
+       User user = User.builder()
                 .name(name)
                 .email(email)
                 .status(status)
                 .password(password)
-                .profiles(profiles);
+                .profiles(profiles)
+                .build();
+        return user;
     }
 }

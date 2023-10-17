@@ -7,6 +7,8 @@ import br.com.somar.app.common.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FindProfileAdapter implements FindProfileAdapterPort {
     @Autowired
@@ -18,5 +20,9 @@ public class FindProfileAdapter implements FindProfileAdapterPort {
                 .orElseThrow(() -> new ResourceNotFoundException("profile.not.found"));
 
         return Profile.convertProfileEntityToProfile(profileEntity);
+    }
+    @Override
+    public List<Profile> getAllProfiles() {
+        return  Profile.convertListProfileEntityIntoListProfile(profileRepository.findAll());
     }
 }

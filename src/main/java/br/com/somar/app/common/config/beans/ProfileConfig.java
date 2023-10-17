@@ -5,6 +5,7 @@ import br.com.somar.app.users.application.ports.in.profiles.CreateProfileUseCase
 import br.com.somar.app.users.application.ports.out.profiles.CreateProfileAdapterPort;
 import br.com.somar.app.users.application.core.usecases.profiles.CreateProfileUseCase;
 import br.com.somar.app.users.application.ports.out.profiles.FindAllProfileAdapterPort;
+import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 @Configuration
@@ -17,7 +18,7 @@ public class ProfileConfig {
 
     @Bean
     public FindAllProfileUseCase findAllProfileUseCase(
-            FindAllProfileAdapterPort findAllProfileAdapterPort) {
-        return new FindAllProfileUseCase(findAllProfileAdapterPort);
+            FindProfileAdapterPort findProfileAdapterPort) {
+        return new FindAllProfileUseCase(findProfileAdapterPort);
     }
 }
