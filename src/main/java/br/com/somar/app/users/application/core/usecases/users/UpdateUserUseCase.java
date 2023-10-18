@@ -1,7 +1,5 @@
 package br.com.somar.app.users.application.core.usecases.users;
 
-import br.com.somar.app.common.exceptions.ResourceNotFoundException;
-import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
 import br.com.somar.app.users.application.core.domain.Profile;
 import br.com.somar.app.users.application.core.domain.User;
 import br.com.somar.app.users.application.ports.in.users.UpdateUserUseCasePort;
@@ -13,7 +11,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
+
 
 public class UpdateUserUseCase implements UpdateUserUseCasePort {
     private final UpdateUserAdapterPort updateUserAdapterPort;
