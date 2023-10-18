@@ -1,26 +1,25 @@
 package br.com.somar.app.unit.users.adpters.outbound.repositories.users;
 
-import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
+import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
+import br.com.somar.app.unit.users.builders.repositories.entities.UserFakeEntityBuilder;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
-import br.com.somar.app.users.adapters.outbound.repositories.profiles.ProfileRepository;
 import br.com.somar.app.users.adapters.outbound.repositories.users.UpdateUserAdapter;
 import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
-import br.com.somar.app.users.application.core.domain.Profile;
 import br.com.somar.app.users.application.core.domain.User;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+@ExtendWith(SpringExtension.class)
 public class UpdateUserAdapterTest {
 
     @InjectMocks
@@ -29,53 +28,18 @@ public class UpdateUserAdapterTest {
     @Mock
     private UserRepository userRepository;
 
-    @Mock
-    private PasswordEncoder passwordEncoder;
-
-    @Mock
-    private ProfileRepository profileRepository;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
+    @DisplayName("should successfully update user")
     public void testShouldUpdateUser() {
-        Long userId = 1L;
-        UserEntity existingUser = new UserEntity();
-        existingUser.setId(userId);
-        existingUser.setEmail("existing@example.com");
-        existingUser.setProfiles(new HashSet<>());
+         var userFakeEntity = new UserFakeEntityBuilder().getFake();
+         var userFake = new UserFakeBuilder().getFake();
 
-        Long profileId = 1L;
-        ProfileEntity existingProfile = new ProfileEntity();
-        existingProfile.setId(profileId);
+        when(userRepository.save(any(UserEntity.class))).thenReturn(userFakeEntity);
 
-        // Simule o comportamento dos repositórios
-        Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
+        User updatedUser = updateUserAdapter.update(userFake);
+        verify(userRepository, Mockito.times(1)).save(any(UserEntity.class));
+        assertNotNull(updatedUser);
 
-        Mockito.when(profileRepository.findById(profileId)).thenReturn(Optional.of(existingProfile));
-
-        // Simule a senha codificada
-        String encodedPassword = "encodedPassword";
-        Mockito.when(passwordEncoder.encode("newPassword")).thenReturn(encodedPassword);
-
-        // Crie um objeto User para atualização
-        User userToUpdate = new User();
-        userToUpdate.setPassword("newPassword");
-        userToUpdate.setProfiles(new HashSet<>());
-        userToUpdate.getProfiles().add(new Profile(profileId, "New Profile"));
-       // Mockito.when(userRepository.save(existingUser)).thenReturn(Optional.of(existingUser));
-        // Chame o método de atualização
-     //   User updatedUser = updateUserAdapter.update(userToUpdate, userId);
-
-        // Verifique se o usuário foi atualizado corretamente
-       /* assertAll(
-                () -> assertEquals(userId, updatedUser.getId()),
-                () -> assertEquals("existing@example.com", updatedUser.getEmail()),
-                () -> assertEquals(encodedPassword, updatedUser.getPassword()),
-                () -> assertEquals(1, updatedUser.getProfiles().size())
-        );*/
     }
 }

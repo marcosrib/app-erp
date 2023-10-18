@@ -1,17 +1,16 @@
-package br.com.somar.app.unit.users.builders.domain;
+package br.com.somar.app.unit.users.builders.repositories.entities;
 
-import br.com.somar.app.users.application.core.domain.User;
+import br.com.somar.app.common.fakerutils.FakerBuilderSet;
+import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
 import net.datafaker.Faker;
 
 import java.util.Locale;
 
-public class UserFakeBuilder {
-
-
-    public User getFake() {
+public class UserFakeEntityBuilder  {
+    public UserEntity getFake() {
         Faker faker = new Faker(new Locale("pt-BR"));
-        var profileFaker = new ProfileFakeBuilder();
-        return User
+        var profileFaker = new ProfileFakeEntityBuilder();
+        return UserEntity
                 .builder()
                 .id(faker.number().randomNumber())
                 .name(faker.artist().name())
@@ -20,5 +19,4 @@ public class UserFakeBuilder {
                 .profiles(profileFaker.getFake(1))
                 .build();
     }
-
 }

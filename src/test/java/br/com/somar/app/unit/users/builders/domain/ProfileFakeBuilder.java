@@ -8,8 +8,7 @@ import java.util.Locale;
 
 public class ProfileFakeBuilder extends FakerBuilderSet<Profile> {
 
-    @Override
-    public Profile getFake() {
+    public  Profile getFake() {
         Faker faker = new Faker(new Locale("pt-BR"));
         return new Profile(faker.number().randomNumber(), faker.name().title());
     }

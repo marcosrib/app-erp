@@ -41,7 +41,7 @@ public class UpdateUserUseCaseTest {
     @DisplayName("should successfully update user with password")
     @Test
     void updateUserWithPassword(){
-        var user =  UserFakeBuilder.getFake();
+        var user =  new UserFakeBuilder().getFake();
         var profile = new ProfileFakeBuilder();
         user.setPassword(PASSWORD);
         when(updateUserAdapter.update(user))
@@ -65,7 +65,7 @@ public class UpdateUserUseCaseTest {
     @Test
     @DisplayName("should successfully update user is null password")
     void updateUserIsNullPassword(){
-        var user =  UserFakeBuilder.getFake();
+        var user =  new UserFakeBuilder().getFake();
         var profile = new ProfileFakeBuilder();
         when(updateUserAdapter.update(user))
                 .thenReturn(user);
