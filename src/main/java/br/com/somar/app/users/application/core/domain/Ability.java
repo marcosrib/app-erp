@@ -12,6 +12,9 @@ public class Ability {
 
     private boolean hasAbilityProfile;
 
+    public Ability(Long id) {
+        this.id = id;
+    }
     public Ability(Long id, String name, String groupName, boolean hasAbilityProfile) {
         this.id = id;
         this.name = name;

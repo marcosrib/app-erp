@@ -10,8 +10,7 @@ public class CreateProfileUseCase implements CreateProfileUseCasePort {
         this.createProfileAdapterPort = createProfileAdapterPort;
     }
     @Override
-    public Profile create(Profile profile) {
-
-        return this.createProfileAdapterPort.create(profile);
+    public void create(Profile profile) {
+        createProfileAdapterPort.create(profile);
     }
 }

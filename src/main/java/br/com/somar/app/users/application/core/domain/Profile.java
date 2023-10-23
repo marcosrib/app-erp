@@ -54,6 +54,10 @@ public class Profile {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static ProfileBuilder builder() {
+        return new ProfileBuilder();
+    }
     public static Profile convertProfileEntityToProfile(ProfileEntity profilesEntity) {
         var abilities =  profilesEntity.getAbilities().stream()
                 .map(ability -> new Ability(ability.getId(),

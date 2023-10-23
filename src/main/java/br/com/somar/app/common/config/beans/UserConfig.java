@@ -18,7 +18,7 @@ public class UserConfig {
     @Bean
     public CreateUserUseCasePort createUserUseCasePort(
             CreateUserAdapterPort createUserAdapterPort,
-            PasswordEncoder encoder,
+            PasswordEncoderAdapterPort encoder,
             FindUserAdapterPort findUserAdapterPort) {
         return new CreateUserUseCase(createUserAdapterPort, encoder, findUserAdapterPort);
     }

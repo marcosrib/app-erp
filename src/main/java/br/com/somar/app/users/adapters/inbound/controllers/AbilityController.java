@@ -13,10 +13,10 @@ import java.util.List;
 public class AbilityController {
     @Autowired
     private FindAbilityUseCasePort findAbilityUseCasePort;
-    @GetMapping("/{id}/profile")
+    @GetMapping("/{profileId}/profile")
     @ResponseStatus(HttpStatus.OK)
-    public List<GroupAbilityResponse> show(@PathVariable Long id) {
-        var group = GroupAbilityResponse.fromDomain(findAbilityUseCasePort.findAbilityByProfileId(id));
+    public List<GroupAbilityResponse> show(@PathVariable Long profileId) {
+        var group = GroupAbilityResponse.fromDomain(findAbilityUseCasePort.findAbilityByProfileId(profileId));
         return group;
     }
 }

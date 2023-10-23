@@ -1,10 +1,9 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
-import br.com.somar.app.users.adapters.inbound.controllers.requests.CreateProfileRequest;
-import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileAbilitiesResponse;
+import br.com.somar.app.users.adapters.inbound.controllers.requests.ProfileRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileResponse;
 import br.com.somar.app.users.application.ports.in.profiles.CreateProfileUseCasePort;
-import br.com.somar.app.users.application.ports.in.profiles.FindAllProfileUseCasePort;
+import br.com.somar.app.users.application.ports.in.profiles.UpdateProfileUseCasePort;
 import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +15,25 @@ import java.util.List;
 public class ProfileController {
     private final CreateProfileUseCasePort createProfileUseCasePort;
     private final FindProfileAdapterPort findProfileAdapterPort;
-    public ProfileController(CreateProfileUseCasePort createProfileUseCasePort, FindAllProfileUseCasePort findAllProfileUseCasePort, FindProfileAdapterPort findProfileAdapterPort) {
+
+    private  final UpdateProfileUseCasePort updateProfileUseCasePort;
+
+    public ProfileController(CreateProfileUseCasePort createProfileUseCasePort,
+                             FindProfileAdapterPort findProfileAdapterPort,
+                             UpdateProfileUseCasePort updateProfileUseCasePort) {
         this.createProfileUseCasePort = createProfileUseCasePort;
         this.findProfileAdapterPort = findProfileAdapterPort;
+        this.updateProfileUseCasePort = updateProfileUseCasePort;
     }
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProfileAbilitiesResponse create(@RequestBody CreateProfileRequest createProfileRequest) {
-        return ProfileAbilitiesResponse.fromDomain(createProfileUseCasePort.create(createProfileRequest.toProfileDomain()));
+    public void create(@RequestBody ProfileRequest profileRequest) {
+        createProfileUseCasePort.create(profileRequest.toProfileDomain());
+    }
+    @PutMapping("/{profileId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody ProfileRequest profileRequest, @PathVariable Long profileId) {
+        updateProfileUseCasePort.update(profileRequest.toProfileDomain(), profileId);
     }
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)

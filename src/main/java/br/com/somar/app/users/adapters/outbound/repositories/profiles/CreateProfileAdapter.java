@@ -13,12 +13,8 @@ public class CreateProfileAdapter implements CreateProfileAdapterPort {
         this.profileRepository = profileRepository;
     }
     @Override
-    public Profile create(Profile profile) {
-        ProfileEntity profileEntity = ProfileEntity
-                .builder()
-                .name(profile.getName())
-                .build();
-         profileRepository.save(profileEntity);
-        return Profile.convertProfileEntityToProfile(profileRepository.save(profileEntity));
+    public void create(Profile profile) {
+        ProfileEntity profileEntity = ProfileEntityMapper.convertProfileToEntityWithAbilities(profile);
+        profileRepository.save(profileEntity);
     }
 }

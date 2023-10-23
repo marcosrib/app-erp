@@ -1,5 +1,6 @@
 package br.com.somar.app.users.adapters.outbound.repositories.profiles;
 
+import br.com.somar.app.users.adapters.outbound.repositories.abilities.AbilityEntityMapper;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
 import br.com.somar.app.users.application.core.domain.Profile;
 
@@ -16,5 +17,12 @@ public class ProfileEntityMapper {
                         .build()
                 ).collect(Collectors.toSet());
     }
-
+    public static ProfileEntity convertProfileToEntityWithAbilities(Profile profile) {
+        return ProfileEntity.
+                        builder()
+                        .id(profile.getId())
+                        .name(profile.getName())
+                        .abilities(AbilityEntityMapper.convertAbilitiesIntoAbilitiesEntity(profile.getAbilities()))
+                        .build();
+    }
 }
