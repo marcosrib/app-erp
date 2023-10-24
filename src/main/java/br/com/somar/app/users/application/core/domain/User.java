@@ -1,6 +1,7 @@
 package br.com.somar.app.users.application.core.domain;
 
 import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
+import br.com.somar.app.users.application.core.domain.builders.UserBuilder;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;

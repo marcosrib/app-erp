@@ -1,4 +1,7 @@
-package br.com.somar.app.users.application.core.domain;
+package br.com.somar.app.users.application.core.domain.builders;
+
+import br.com.somar.app.users.application.core.domain.Ability;
+import br.com.somar.app.users.application.core.domain.Profile;
 
 import java.util.Set;
 

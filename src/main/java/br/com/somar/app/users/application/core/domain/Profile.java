@@ -1,6 +1,7 @@
 package br.com.somar.app.users.application.core.domain;
 
 import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
+import br.com.somar.app.users.application.core.domain.builders.ProfileBuilder;
 
 import java.util.List;
 import java.util.Set;

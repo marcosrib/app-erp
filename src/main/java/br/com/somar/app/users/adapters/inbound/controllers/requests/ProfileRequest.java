@@ -16,7 +16,7 @@ public record ProfileRequest(Long id, String name, Set<AbilityRequest> abilities
                 .abilities(abilities
                         .stream()
                         .map(abilityRequest ->
-                                new Ability(abilityRequest.id())).collect(Collectors.toSet())
+                                Ability.builder().id(abilityRequest.id()).build()).collect(Collectors.toSet())
                 )
                 .build();
     }
