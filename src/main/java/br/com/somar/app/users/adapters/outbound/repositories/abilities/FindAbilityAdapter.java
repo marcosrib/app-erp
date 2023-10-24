@@ -22,4 +22,5 @@ public class FindAbilityAdapter implements FindAbilityAdapterPort {
     public Set<Ability> findAllAbilities() {
         return  Ability.convertListAbilityEntityToListAbility(Set.copyOf(abilityRepository.findAll()));
     }
+
 }

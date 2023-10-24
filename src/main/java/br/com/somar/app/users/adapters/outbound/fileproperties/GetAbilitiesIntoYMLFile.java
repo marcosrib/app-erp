@@ -12,14 +12,15 @@ import java.util.List;
 @PropertySource("classpath:abilities.properties")
 public class GetAbilitiesIntoYMLFile {
 
-    private List<Group> groups = new ArrayList<>();
-    public List<Group> getGroups() {
-        return groups;
-    }
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    private List<GroupFileProperties> abilityGroups = new ArrayList<>();
+
+    public List<GroupFileProperties> getAbilityGroups() {
+        return abilityGroups;
     }
 
+    public void setAbilityGroups(List<GroupFileProperties> abilityGroups) {
+        this.abilityGroups = abilityGroups;
+    }
 }
 
 

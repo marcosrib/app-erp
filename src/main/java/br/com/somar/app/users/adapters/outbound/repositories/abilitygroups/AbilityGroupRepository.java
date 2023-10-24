@@ -4,4 +4,5 @@ import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityGroup
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AbilityGroupRepository  extends JpaRepository<AbilityGroupEntity, Long> {
+    AbilityGroupEntity findByCode(String code);
 }

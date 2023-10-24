@@ -6,6 +6,10 @@ import br.com.somar.app.users.application.ports.in.abilities.FindAbilityUseCaseP
 import br.com.somar.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
 import br.com.somar.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
 import br.com.somar.app.users.adapters.outbound.fileproperties.GetAbilitiesIntoYMLFile;
+import br.com.somar.app.users.application.ports.out.abilitycategories.CreateAbilityCategoryAdapterPort;
+import br.com.somar.app.users.application.ports.out.abilitycategories.FindAbilityCategoryAdapterPort;
+import br.com.somar.app.users.application.ports.out.abilitygroups.CreateAbilityGroupAdapterPort;
+import br.com.somar.app.users.application.ports.out.abilitygroups.FindAbilityGroupAdapterPort;
 import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
 import br.com.somar.app.users.application.core.usecases.abilities.FindAbilityUseCase;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +23,12 @@ public class AbilityBeanConfig {
     }
 
     @Bean
-    public CreateAbilityUseCasePort createAbilityUseCasePort(CreateAbilityAdapterPort createAbilityAdapterPort, GetAbilitiesIntoYMLFile getAbilitiesIntoYMLFile) {
-        return new CreateAbilityUseCase(createAbilityAdapterPort, getAbilitiesIntoYMLFile);
+    public CreateAbilityUseCasePort createAbilityUseCasePort(CreateAbilityAdapterPort createAbilityAdapterPort,
+                                                             GetAbilitiesIntoYMLFile getAbilitiesIntoYMLFile,
+                                                             FindAbilityGroupAdapterPort findAbilityGroupAdapterPort,
+                                                             CreateAbilityGroupAdapterPort createAbilityGroupAdapterPort,
+                                                             FindAbilityCategoryAdapterPort findAbilityCategoryAdapterPort,
+                                                             CreateAbilityCategoryAdapterPort createAbilityCategoryAdapterPort) {
+        return new CreateAbilityUseCase(createAbilityAdapterPort, getAbilitiesIntoYMLFile, findAbilityGroupAdapterPort, createAbilityGroupAdapterPort, findAbilityCategoryAdapterPort, createAbilityCategoryAdapterPort);
     }
 }

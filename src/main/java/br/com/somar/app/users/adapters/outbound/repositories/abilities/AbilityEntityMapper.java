@@ -14,8 +14,18 @@ public class AbilityEntityMapper {
         return abilities.stream().map(ability -> AbilityEntity
                 .builder()
                 .id(ability.getId())
-                        .abilityCategory(AbilityCategoryEntity.builder().id(ability.getCategoryAbilityId()).build())
-                        .abilityGroup(AbilityGroupEntity.builder().id(ability.getCategoryAbilityId()).build())
+                        .abilityCategory(AbilityCategoryEntity
+                                .builder()
+                                .id(ability.getAbilityCategory().getId())
+                                .name(ability.getAbilityCategory().getName())
+                                .code(ability.getAbilityCategory().getCode())
+                                .build())
+                        .abilityGroup(AbilityGroupEntity
+                                .builder()
+                                .id(ability.getAbilityGroup().getId())
+                                .name(ability.getAbilityGroup().getName())
+                                .code(ability.getAbilityGroup().getCode())
+                                .build())
                         .build())
                 .collect(Collectors.toSet());
     }

@@ -1,7 +1,7 @@
 package br.com.somar.app.users.application.core.usecases.abilities;
 
 import br.com.somar.app.users.application.core.domain.Ability;
-import br.com.somar.app.users.application.core.domain.GroupAbility;
+import br.com.somar.app.users.application.core.domain.AbilityGroup;
 import br.com.somar.app.users.application.ports.in.abilities.FindAbilityUseCasePort;
 import br.com.somar.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
 import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
@@ -23,7 +23,7 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
     }
 
     @Override
-    public List<GroupAbility> findAbilityByProfileId(Long profileId) {
+    public List<AbilityGroup> findAbilityByProfileId(Long profileId) {
         var abilities = profileAdapterPort.findProfileBydId(profileId).getAbilities();
         if (abilities.isEmpty()) {
             var allAbilities = findAbilityAdapterPort.findAllAbilities();
@@ -38,16 +38,16 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
         return covertAbility(abilities);
     }
 
-    private List<GroupAbility> covertAbility(Set<Ability> abilities) {
-        var groups = new ArrayList<GroupAbility>();
-        var groupMap = new HashMap<String, GroupAbility>();
-        GroupAbility currentGroup = null;
+    private List<AbilityGroup> covertAbility(Set<Ability> abilities) {
+        var groups = new ArrayList<AbilityGroup>();
+        var groupMap = new HashMap<String, AbilityGroup>();
+        AbilityGroup currentGroup = null;
 
         for (var ability : abilities) {
             var groupName = ability.getGroupName();
 
             if (!groupMap.containsKey(groupName)) {
-                currentGroup = new GroupAbility(groupName, new ArrayList<>());
+                currentGroup = new AbilityGroup(groupName, new ArrayList<>());
                 groupMap.put(groupName, currentGroup);
                 groups.add(currentGroup);
             } else {

@@ -1,5 +1,6 @@
 package br.com.somar.app.users.application.core.domain;
 
+import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityCategoryEntity;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityEntity;
 import br.com.somar.app.users.application.core.domain.builders.AbilityBuilder;
 
@@ -10,8 +11,8 @@ public class Ability {
     private Long id;
     private String name;
     private String groupName;
-    private Long groupAbilityId;
-    private Long categoryAbilityId;
+    private AbilityGroup abilityGroup;
+    private AbilityCategory abilityCategory;
 
     private boolean hasAbilityProfile;
 
@@ -61,20 +62,20 @@ public class Ability {
         return hasAbilityProfile;
     }
 
-    public Long getGroupAbilityId() {
-        return groupAbilityId;
+    public AbilityGroup getAbilityGroup() {
+        return abilityGroup;
     }
 
-    public void setGroupAbilityId(Long groupAbilityId) {
-        this.groupAbilityId = groupAbilityId;
+    public void setAbilityGroup(AbilityGroup abilityGroup) {
+        this.abilityGroup = abilityGroup;
     }
 
-    public Long getCategoryAbilityId() {
-        return categoryAbilityId;
+    public AbilityCategory getAbilityCategory() {
+        return abilityCategory;
     }
 
-    public void setCategoryAbilityId(Long categoryAbilityId) {
-        this.categoryAbilityId = categoryAbilityId;
+    public void setAbilityCategory(AbilityCategory abilityCategory) {
+        this.abilityCategory = abilityCategory;
     }
 
     public void setHasAbilityProfile(boolean hasAbilityProfile) {

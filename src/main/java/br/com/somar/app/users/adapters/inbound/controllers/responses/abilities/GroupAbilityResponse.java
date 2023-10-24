@@ -1,6 +1,6 @@
 package br.com.somar.app.users.adapters.inbound.controllers.responses.abilities;
 
-import br.com.somar.app.users.application.core.domain.GroupAbility;
+import br.com.somar.app.users.application.core.domain.AbilityGroup;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class GroupAbilityResponse {
         return abilities;
     }
 
-    public static List<GroupAbilityResponse> fromDomain(List<GroupAbility> abilities) {
+    public static List<GroupAbilityResponse> fromDomain(List<AbilityGroup> abilities) {
         return abilities.stream()
                 .map(group -> new GroupAbilityResponse(
                         group.getName(),
