@@ -28,7 +28,8 @@ public class AbilityBeanConfig {
                                                              FindAbilityGroupAdapterPort findAbilityGroupAdapterPort,
                                                              CreateAbilityGroupAdapterPort createAbilityGroupAdapterPort,
                                                              FindAbilityCategoryAdapterPort findAbilityCategoryAdapterPort,
-                                                             CreateAbilityCategoryAdapterPort createAbilityCategoryAdapterPort) {
-        return new CreateAbilityUseCase(createAbilityAdapterPort, getAbilitiesIntoYMLFile, findAbilityGroupAdapterPort, createAbilityGroupAdapterPort, findAbilityCategoryAdapterPort, createAbilityCategoryAdapterPort);
+                                                             CreateAbilityCategoryAdapterPort createAbilityCategoryAdapterPort,
+                                                             FindAbilityAdapterPort findAbilityAdapterPort) {
+        return new CreateAbilityUseCase(createAbilityAdapterPort, getAbilitiesIntoYMLFile, findAbilityGroupAdapterPort, createAbilityGroupAdapterPort, findAbilityCategoryAdapterPort, createAbilityCategoryAdapterPort, findAbilityAdapterPort);
     }
 }

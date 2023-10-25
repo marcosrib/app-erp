@@ -16,11 +16,11 @@ public class AbilityEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ability_category_id")
     private AbilityCategoryEntity abilityCategory;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ability_group_id")
     private AbilityGroupEntity abilityGroup;
 }

@@ -10,5 +10,6 @@ import java.util.Set;
 @Repository
 public interface AbilityRepository extends JpaRepository<AbilityEntity, Long> {
     Set<AbilityEntity> findByIdNotIn(List<Long> ids);
+    Set<AbilityEntity> findByAbilityGroupId(Long id);
 }
 

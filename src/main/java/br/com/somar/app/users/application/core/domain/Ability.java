@@ -4,6 +4,7 @@ import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityCateg
 import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityEntity;
 import br.com.somar.app.users.application.core.domain.builders.AbilityBuilder;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,8 +19,6 @@ public class Ability {
 
     public Ability() {
     }
-
-
 
     public Ability(Long id, String name, String groupName, boolean hasAbilityProfile) {
         this.id = id;
@@ -87,12 +86,18 @@ public class Ability {
     }
 
     public static Set<Ability> convertListAbilityEntityToListAbility(Set<AbilityEntity> abilities) {
+        if(abilities.isEmpty()) Collections.emptySet();
         return abilities.stream()
                 .map(abilityEntity -> Ability
                         .builder()
                         .id(abilityEntity.getId())
                         .name(abilityEntity.getAbilityCategory().getName())
                         .groupName(abilityEntity.getAbilityGroup().getName())
+                        .abilityCategory(new AbilityCategory(
+                                abilityEntity.getAbilityCategory().getId(),
+                                abilityEntity.getAbilityCategory().getName(),
+                                abilityEntity.getAbilityCategory().getCode())
+                        )
                         .hasAbilityProfile(false)
                         .build())
                 .collect(Collectors.toSet());

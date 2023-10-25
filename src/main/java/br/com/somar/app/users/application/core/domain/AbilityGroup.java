@@ -14,7 +14,13 @@ public class AbilityGroup {
 
     public AbilityGroup() {
     }
-
+    public AbilityGroup(Long id) {
+        this.id = id;
+    }
+    public AbilityGroup(String name, String code) {
+        this.name = name;
+        this.code = code;
+    }
     public AbilityGroup(Long id, String name, String code) {
         this.id = id;
         this.name = name;

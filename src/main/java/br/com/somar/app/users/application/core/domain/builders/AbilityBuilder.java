@@ -27,12 +27,12 @@ public class AbilityBuilder {
         return this;
     }
 
-    public AbilityBuilder groupAbilityId(AbilityGroup abilityGroup) {
+    public AbilityBuilder abilityGroup(AbilityGroup abilityGroup) {
         this.abilityGroup = abilityGroup;
         return this;
     }
 
-    public AbilityBuilder categoryAbilityId(AbilityCategory abilityCategory) {
+    public AbilityBuilder abilityCategory(AbilityCategory abilityCategory) {
         this.abilityCategory = abilityCategory;
         return this;
     }

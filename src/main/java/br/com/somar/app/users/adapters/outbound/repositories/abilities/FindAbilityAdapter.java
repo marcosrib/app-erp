@@ -19,6 +19,11 @@ public class FindAbilityAdapter implements FindAbilityAdapterPort {
     }
 
     @Override
+    public Set<Ability> findAbilityByGroupId(Long id) {
+        return Ability.convertListAbilityEntityToListAbility(abilityRepository.findByAbilityGroupId(id));
+    }
+
+    @Override
     public Set<Ability> findAllAbilities() {
         return  Ability.convertListAbilityEntityToListAbility(Set.copyOf(abilityRepository.findAll()));
     }
