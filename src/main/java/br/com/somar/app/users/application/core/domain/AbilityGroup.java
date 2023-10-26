@@ -1,5 +1,6 @@
 package br.com.somar.app.users.application.core.domain;
 
+import br.com.somar.app.users.adapters.outbound.fileproperties.GroupFileProperties;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityGroupEntity;
 
 import java.util.List;
@@ -62,6 +63,11 @@ public class AbilityGroup {
 
     public static AbilityGroup convertAbilityGroupEntityIntoAbilityGroup(AbilityGroupEntity abilityGroupEntity) {
         return new AbilityGroup(abilityGroupEntity.getId(), abilityGroupEntity.getName(), abilityGroupEntity.getCode());
+    }
+
+    public static List<AbilityGroup> convertListGroupFilePropertiesIntoListAbilityGroup(List<GroupFileProperties> groupFileProperties) {
+        //return groupFileProperties.stream().map(groupFileProperty -> new Ability(groupFileProperty))
+        return null;
     }
 }
 

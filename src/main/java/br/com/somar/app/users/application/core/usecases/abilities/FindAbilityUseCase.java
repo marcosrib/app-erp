@@ -25,10 +25,8 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
     @Override
     public List<AbilityGroup> findAbilityByProfileId(Long profileId) {
         var abilities = profileAdapterPort.findProfileBydId(profileId).getAbilities();
-        if (abilities.isEmpty()) {
-            var allAbilities = findAbilityAdapterPort.findAllAbilities();
-            abilities.addAll(allAbilities);
-        } else {
+        if (abilities.isEmpty()) abilities.addAll(findAbilityAdapterPort.findAllAbilities());
+        else {
             var ids = abilities.stream().map(Ability::getId).collect(Collectors.toList());
             var abilitiesWithoutProfile = findAbilityAdapterPort.findAbilityNotInIds(ids);
             abilities.addAll(abilitiesWithoutProfile);
@@ -41,10 +39,11 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
     private List<AbilityGroup> covertAbility(Set<Ability> abilities) {
         var groups = new ArrayList<AbilityGroup>();
         var groupMap = new HashMap<String, AbilityGroup>();
-        AbilityGroup currentGroup = null;
+
 
         for (var ability : abilities) {
-            var groupName = ability.getGroupName();
+            AbilityGroup currentGroup;
+            var groupName = ability.getAbilityGroup().getName();
 
             if (!groupMap.containsKey(groupName)) {
                 currentGroup = new AbilityGroup(groupName, new ArrayList<>());
@@ -53,7 +52,7 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
             } else {
                 currentGroup = groupMap.get(groupName);
             }
-            currentGroup.getAbilities().add(new Ability(ability.getId(), ability.getName(), ability.isHasAbilityProfile()));
+            currentGroup.getAbilities().add(new Ability(ability.getId(), ability.getAbilityCategory().getName(), ability.isHasAbilityProfile()));
 
         }
         return groups;

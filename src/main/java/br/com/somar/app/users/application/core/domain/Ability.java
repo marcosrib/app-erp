@@ -11,20 +11,11 @@ import java.util.stream.Collectors;
 public class Ability {
     private Long id;
     private String name;
-    private String groupName;
     private AbilityGroup abilityGroup;
     private AbilityCategory abilityCategory;
-
     private boolean hasAbilityProfile;
 
     public Ability() {
-    }
-
-    public Ability(Long id, String name, String groupName, boolean hasAbilityProfile) {
-        this.id = id;
-        this.name = name;
-        this.groupName = groupName;
-        this.hasAbilityProfile = hasAbilityProfile;
     }
 
     public Ability(Long id, String name, boolean hasAbilityProfile) {
@@ -49,14 +40,6 @@ public class Ability {
         this.name = name;
     }
 
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
     public boolean isHasAbilityProfile() {
         return hasAbilityProfile;
     }
@@ -77,9 +60,6 @@ public class Ability {
         this.abilityCategory = abilityCategory;
     }
 
-    public void setHasAbilityProfile(boolean hasAbilityProfile) {
-        this.hasAbilityProfile = hasAbilityProfile;
-    }
 
     public static AbilityBuilder builder() {
         return new AbilityBuilder();
@@ -98,6 +78,11 @@ public class Ability {
                                 abilityEntity.getAbilityCategory().getName(),
                                 abilityEntity.getAbilityCategory().getCode())
                         )
+                        .abilityGroup(new AbilityGroup(
+                                abilityEntity.getAbilityGroup().getId(),
+                                abilityEntity.getAbilityGroup().getName(),
+                                abilityEntity.getAbilityGroup().getCode())
+                                )
                         .hasAbilityProfile(false)
                         .build())
                 .collect(Collectors.toSet());

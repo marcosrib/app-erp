@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix ="permissions")
 @PropertySource("classpath:abilities.properties")
-public class GetAbilitiesIntoYMLFile {
+public class GetAbilitiesIntoPropertiesFile {
 
     private List<GroupFileProperties> abilityGroups = new ArrayList<>();
 

@@ -61,14 +61,22 @@ public class Profile {
     }
     public static Profile convertProfileEntityToProfile(ProfileEntity profilesEntity) {
         var abilities =  profilesEntity.getAbilities().stream()
-                .map(ability -> new Ability(ability.getId(),
-                        ability.getAbilityCategory().getName(),
-                        ability.getAbilityGroup().getName(),
-                        true))
+                .map(ability -> Ability
+                        .builder()
+                        .id(ability.getId())
+                        .abilityCategory(new AbilityCategory(
+                                ability.getAbilityCategory().getId(),
+                                ability.getAbilityCategory().getName(),
+                                ability.getAbilityCategory().getCode()))
+                        .abilityGroup(new AbilityGroup(
+                                ability.getAbilityGroup().getId(),
+                                ability.getAbilityGroup().getName(),
+                                ability.getAbilityGroup().getCode()))
+                        .hasAbilityProfile(true)
+                        .build())
                 .collect(Collectors.toSet());
         return new Profile(profilesEntity.getId(), profilesEntity.getName(), abilities);
     }
-
     public static List<Profile> convertListProfileEntityIntoListProfile(List<ProfileEntity> profileEntities) {
         return profileEntities.stream().map(Profile::new).collect(Collectors.toList());
     }
