@@ -8,9 +8,7 @@ import br.com.somar.app.users.application.ports.out.abilitygroups.FindAbilityGro
 import org.apache.commons.lang3.ObjectUtils;
 
 public class CreateAbilityGroupUseCase implements CreateAbilityGroupUseCasePort {
-
     private final FindAbilityGroupAdapterPort findAbilityGroupAdapterPort;
-
     private final CreateAbilityGroupAdapterPort createAbilityGroupAdapterPort;
 
     public CreateAbilityGroupUseCase(FindAbilityGroupAdapterPort findAbilityGroupAdapterPort, CreateAbilityGroupAdapterPort createAbilityGroupAdapterPort) {
@@ -25,10 +23,6 @@ public class CreateAbilityGroupUseCase implements CreateAbilityGroupUseCasePort 
             return abilityGroup;
         }
         return createAbilityGroupAdapterPort.create(new AbilityGroup(groupFileProperties.getName(), groupFileProperties.getCode()));
-
     }
-
-
-
 
 }

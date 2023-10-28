@@ -3,6 +3,7 @@ package br.com.somar.app.common.config.beans;
 import br.com.somar.app.users.application.core.usecases.abilities.CreateAbilityUseCase;
 import br.com.somar.app.users.application.ports.in.abilities.CreateAbilityUseCasePort;
 import br.com.somar.app.users.application.ports.in.abilities.FindAbilityUseCasePort;
+import br.com.somar.app.users.application.ports.in.abilitycategories.CreateAbilityCategoryUseCasePort;
 import br.com.somar.app.users.application.ports.in.abilitygroups.CreateAbilityGroupUseCasePort;
 import br.com.somar.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
 import br.com.somar.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
@@ -22,12 +23,21 @@ public class AbilityBeanConfig {
     }
 
     @Bean
-    public CreateAbilityUseCasePort createAbilityUseCasePort(CreateAbilityAdapterPort createAbilityAdapterPort,
-                                                             GetAbilitiesIntoPropertiesFile getAbilitiesIntoPropertiesFile,
-                                                             FindAbilityCategoryAdapterPort findAbilityCategoryAdapterPort,
-                                                             CreateAbilityCategoryAdapterPort createAbilityCategoryAdapterPort,
-                                                             FindAbilityAdapterPort findAbilityAdapterPort,
-                                                             CreateAbilityGroupUseCasePort createAbilityGroupUseCasePort) {
-        return new CreateAbilityUseCase(createAbilityAdapterPort, getAbilitiesIntoPropertiesFile, findAbilityCategoryAdapterPort, createAbilityCategoryAdapterPort, findAbilityAdapterPort, createAbilityGroupUseCasePort);
+    public CreateAbilityUseCasePort createAbilityUseCasePort(
+            CreateAbilityAdapterPort createAbilityAdapterPort,
+            GetAbilitiesIntoPropertiesFile getAbilitiesIntoPropertiesFile,
+            FindAbilityCategoryAdapterPort findAbilityCategoryAdapterPort,
+            CreateAbilityCategoryAdapterPort createAbilityCategoryAdapterPort,
+            FindAbilityAdapterPort findAbilityAdapterPort,
+            CreateAbilityGroupUseCasePort createAbilityGroupUseCasePort,
+            CreateAbilityCategoryUseCasePort createAbilityCategoryUseCasePort
+    ) {
+        return new CreateAbilityUseCase(
+                createAbilityAdapterPort,
+                getAbilitiesIntoPropertiesFile,
+                findAbilityAdapterPort,
+                createAbilityGroupUseCasePort,
+                createAbilityCategoryUseCasePort
+        );
     }
 }
