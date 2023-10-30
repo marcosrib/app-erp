@@ -1,5 +1,6 @@
 package br.com.somar.app.users.application.core.usecases.abilities;
 
+import br.com.somar.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
 import br.com.somar.app.users.adapters.outbound.fileproperties.GetAbilitiesIntoPropertiesFile;
 import br.com.somar.app.users.adapters.outbound.fileproperties.GroupFileProperties;
 import br.com.somar.app.users.application.core.domain.Ability;
@@ -8,7 +9,6 @@ import br.com.somar.app.users.application.core.domain.AbilityGroup;
 import br.com.somar.app.users.application.ports.in.abilities.CreateAbilityUseCasePort;
 import br.com.somar.app.users.application.ports.in.abilitycategories.CreateAbilityCategoryUseCasePort;
 import br.com.somar.app.users.application.ports.in.abilitygroups.CreateAbilityGroupUseCasePort;
-import br.com.somar.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
 import br.com.somar.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
 
 import java.util.Set;

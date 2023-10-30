@@ -1,10 +1,10 @@
 package br.com.somar.app.users.application.core.usecases.abilitygroups;
 
+import br.com.somar.app.users.application.ports.out.abilitygroups.FindAbilityGroupAdapterPort;
 import br.com.somar.app.users.adapters.outbound.fileproperties.GroupFileProperties;
 import br.com.somar.app.users.application.core.domain.AbilityGroup;
 import br.com.somar.app.users.application.ports.in.abilitygroups.CreateAbilityGroupUseCasePort;
 import br.com.somar.app.users.application.ports.out.abilitygroups.CreateAbilityGroupAdapterPort;
-import br.com.somar.app.users.application.ports.out.abilitygroups.FindAbilityGroupAdapterPort;
 import org.apache.commons.lang3.ObjectUtils;
 
 public class CreateAbilityGroupUseCase implements CreateAbilityGroupUseCasePort {

@@ -1,9 +1,9 @@
 package br.com.somar.app.users.adapters.outbound.repositories.authentication;
 
-import br.com.somar.app.users.adapters.outbound.jwt.JwtAdapter;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
-import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
 import br.com.somar.app.users.application.core.domain.Auth;
+import br.com.somar.app.users.adapters.outbound.jwt.JwtAdapter;
+import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
 import br.com.somar.app.users.application.ports.out.auth.AuthenticationAdapterPort;
 import br.com.somar.app.common.exceptions.UnauthorizedException;
 import org.springframework.security.crypto.password.PasswordEncoder;

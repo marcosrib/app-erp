@@ -1,8 +1,8 @@
 package br.com.somar.app.users.adapters.outbound.repositories.profiles;
 
-import br.com.somar.app.users.adapters.outbound.repositories.abilities.AbilityEntityMapper;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
 import br.com.somar.app.users.application.core.domain.Profile;
+import br.com.somar.app.users.adapters.outbound.repositories.abilities.AbilityEntityMapper;
 
 import java.util.Set;
 import java.util.stream.Collectors;

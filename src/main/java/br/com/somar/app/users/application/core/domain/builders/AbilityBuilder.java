@@ -1,7 +1,7 @@
 package br.com.somar.app.users.application.core.domain.builders;
 
-import br.com.somar.app.users.application.core.domain.Ability;
 import br.com.somar.app.users.application.core.domain.AbilityCategory;
+import br.com.somar.app.users.application.core.domain.Ability;
 import br.com.somar.app.users.application.core.domain.AbilityGroup;
 
 public class AbilityBuilder {

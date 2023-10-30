@@ -1,18 +1,16 @@
 package br.com.somar.app.unit.users.application.core.usecases.abilities;
 
-import br.com.somar.app.unit.users.builders.domain.AbilityCategoryFakeBuilder;
-import br.com.somar.app.unit.users.builders.domain.AbilityFakeBuilder;
 import br.com.somar.app.unit.users.builders.domain.AbilityGroupFakeBuilder;
-import br.com.somar.app.unit.users.builders.fileproperties.AbilityFilePropertiesFakeBuilder;
-import br.com.somar.app.unit.users.builders.fileproperties.GroupFilePropertiesFakeBuilder;
-import br.com.somar.app.users.adapters.outbound.fileproperties.AbilityFileProperties;
 import br.com.somar.app.users.adapters.outbound.fileproperties.GetAbilitiesIntoPropertiesFile;
-import br.com.somar.app.users.adapters.outbound.fileproperties.GroupFileProperties;
 import br.com.somar.app.users.application.core.usecases.abilities.CreateAbilityUseCase;
-import br.com.somar.app.users.application.ports.in.abilitycategories.CreateAbilityCategoryUseCasePort;
 import br.com.somar.app.users.application.ports.in.abilitygroups.CreateAbilityGroupUseCasePort;
 import br.com.somar.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
 import br.com.somar.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
+import br.com.somar.app.unit.users.builders.domain.AbilityCategoryFakeBuilder;
+import br.com.somar.app.unit.users.builders.domain.AbilityFakeBuilder;
+import br.com.somar.app.unit.users.builders.fileproperties.AbilityFilePropertiesFakeBuilder;
+import br.com.somar.app.unit.users.builders.fileproperties.GroupFilePropertiesFakeBuilder;
+import br.com.somar.app.users.application.ports.in.abilitycategories.CreateAbilityCategoryUseCasePort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +18,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -41,8 +41,6 @@ public class CreateAbilityUseCaseTest {
     @InjectMocks
     private CreateAbilityUseCase createAbilityUseCase;
 
-    private static String ABILITY_CODE = "ABILITY";
-    private static String ABILITY_NAME = "ability";
     @DisplayName("should successfully create ability is ability not existing")
     @Test
     void createAbilityInNotExisting() {

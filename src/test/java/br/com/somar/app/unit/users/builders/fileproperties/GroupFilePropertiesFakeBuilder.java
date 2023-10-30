@@ -1,9 +1,7 @@
 package br.com.somar.app.unit.users.builders.fileproperties;
 
 import br.com.somar.app.common.fakerutils.FakerBuilderList;
-import br.com.somar.app.unit.users.builders.domain.ProfileFakeBuilder;
 import br.com.somar.app.users.adapters.outbound.fileproperties.GroupFileProperties;
-import br.com.somar.app.users.application.core.domain.User;
 import net.datafaker.Faker;
 
 import java.util.Locale;

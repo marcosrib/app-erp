@@ -1,12 +1,12 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
-import br.com.somar.app.users.adapters.inbound.controllers.requests.AuthenticationRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.requests.RefreshTokenRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.authentication.AuthenticationResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.authentication.RefreshTokenResponse;
-import br.com.somar.app.users.adapters.inbound.controllers.swagger.api.AuthenticationApi;
 import br.com.somar.app.users.application.ports.in.authentication.AuthenticationUseCasePort;
 import br.com.somar.app.users.application.ports.in.authentication.RefreshTokenUseCasePort;
+import br.com.somar.app.users.adapters.inbound.controllers.requests.AuthenticationRequest;
+import br.com.somar.app.users.adapters.inbound.controllers.swagger.api.AuthenticationApi;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,18 +1,17 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
 import br.com.somar.app.users.adapters.inbound.controllers.requests.CreateUserRequest;
-import br.com.somar.app.users.adapters.inbound.controllers.requests.UpdateUserRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.requests.UserFilterRequest;
-import br.com.somar.app.users.adapters.inbound.controllers.responses.users.PageResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.users.UserResponse;
+import br.com.somar.app.users.application.core.domain.User;
+import br.com.somar.app.users.application.ports.in.users.CreateUserUseCasePort;
+import br.com.somar.app.users.adapters.inbound.controllers.requests.UpdateUserRequest;
+import br.com.somar.app.users.adapters.inbound.controllers.responses.users.PageResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.swagger.api.UserApi;
 import br.com.somar.app.users.application.core.domain.PageDomain;
 import br.com.somar.app.users.application.core.domain.PageableRequestDomain;
-import br.com.somar.app.users.application.core.domain.User;
-import br.com.somar.app.users.application.ports.in.users.CreateUserUseCasePort;
 import br.com.somar.app.users.application.ports.in.users.FindPaginationUserUseCasePort;
 import br.com.somar.app.users.application.ports.in.users.UpdateUserUseCasePort;
-import br.com.somar.app.users.application.ports.out.users.UpdateUserAdapterPort;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

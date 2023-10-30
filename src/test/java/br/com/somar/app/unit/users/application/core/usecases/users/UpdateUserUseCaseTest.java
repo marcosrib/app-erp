@@ -1,12 +1,12 @@
 package br.com.somar.app.unit.users.application.core.usecases.users;
 
-import br.com.somar.app.unit.users.builders.domain.ProfileFakeBuilder;
 import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
 import br.com.somar.app.users.application.core.domain.User;
-import br.com.somar.app.users.application.core.usecases.users.UpdateUserUseCase;
 import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
-import br.com.somar.app.users.application.ports.out.users.FindUserAdapterPort;
 import br.com.somar.app.users.application.ports.out.users.PasswordEncoderAdapterPort;
+import br.com.somar.app.unit.users.builders.domain.ProfileFakeBuilder;
+import br.com.somar.app.users.application.core.usecases.users.UpdateUserUseCase;
+import br.com.somar.app.users.application.ports.out.users.FindUserAdapterPort;
 import br.com.somar.app.users.application.ports.out.users.UpdateUserAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

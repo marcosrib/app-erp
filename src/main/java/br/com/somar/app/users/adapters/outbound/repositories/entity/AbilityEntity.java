@@ -2,7 +2,6 @@ package br.com.somar.app.users.adapters.outbound.repositories.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.engine.internal.Cascade;
 
 @Builder
 @AllArgsConstructor

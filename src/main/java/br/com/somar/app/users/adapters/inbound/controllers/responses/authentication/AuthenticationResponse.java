@@ -1,7 +1,7 @@
 package br.com.somar.app.users.adapters.inbound.controllers.responses.authentication;
 
-import br.com.somar.app.users.adapters.inbound.controllers.responses.abilities.AuthorityResponse;
 import br.com.somar.app.users.application.core.domain.Auth;
+import br.com.somar.app.users.adapters.inbound.controllers.responses.abilities.AuthorityResponse;
 import lombok.Builder;
 import lombok.Data;
 

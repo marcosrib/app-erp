@@ -1,8 +1,8 @@
 package br.com.somar.app.users.adapters.outbound.repositories.abilitycategories;
 
-import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityCategoryEntity;
 import br.com.somar.app.users.application.core.domain.AbilityCategory;
 import br.com.somar.app.users.application.ports.out.abilitycategories.CreateAbilityCategoryAdapterPort;
+import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityCategoryEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

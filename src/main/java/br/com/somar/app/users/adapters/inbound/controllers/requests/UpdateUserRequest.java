@@ -2,7 +2,6 @@ package br.com.somar.app.users.adapters.inbound.controllers.requests;
 
 import br.com.somar.app.users.application.core.domain.Profile;
 import br.com.somar.app.users.application.core.domain.User;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

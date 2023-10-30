@@ -5,10 +5,8 @@ import br.com.somar.app.users.application.core.domain.User;
 import br.com.somar.app.users.application.ports.in.users.CreateUserUseCasePort;
 import br.com.somar.app.users.application.ports.out.users.CreateUserAdapterPort;
 import br.com.somar.app.users.application.ports.out.users.FindUserAdapterPort;
-import br.com.somar.app.common.exceptions.ResourceAlreadyExistsException;
 import br.com.somar.app.users.application.ports.out.users.PasswordEncoderAdapterPort;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class CreateUserUseCase implements CreateUserUseCasePort {
 

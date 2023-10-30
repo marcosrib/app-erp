@@ -1,8 +1,6 @@
 package br.com.somar.app.users.adapters.inbound.controllers.responses.profiles;
 
-import br.com.somar.app.users.adapters.inbound.controllers.responses.users.UserResponse;
 import br.com.somar.app.users.application.core.domain.Profile;
-import br.com.somar.app.users.application.core.domain.User;
 import lombok.Getter;
 
 import java.util.List;

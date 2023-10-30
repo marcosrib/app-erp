@@ -1,7 +1,7 @@
 package br.com.somar.app.unit.users.builders.domain;
 
-import br.com.somar.app.common.fakerutils.FakerBuilderSet;
 import br.com.somar.app.users.application.core.domain.AbilityCategory;
+import br.com.somar.app.common.fakerutils.FakerBuilderSet;
 import net.datafaker.Faker;
 
 import java.util.Locale;

@@ -2,8 +2,8 @@ package br.com.somar.app.users.adapters.inbound.controllers.swagger.api;
 
 import br.com.somar.app.common.exceptions.handler.ErrorResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.requests.UserFilterRequest;
-import br.com.somar.app.users.adapters.inbound.controllers.responses.users.PageResponse;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.users.UserResponse;
+import br.com.somar.app.users.adapters.inbound.controllers.responses.users.PageResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;

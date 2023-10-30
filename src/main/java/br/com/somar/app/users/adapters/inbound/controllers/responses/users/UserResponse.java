@@ -1,7 +1,7 @@
 package br.com.somar.app.users.adapters.inbound.controllers.responses.users;
 
-import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileResponse;
 import br.com.somar.app.users.application.core.domain.User;
+import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileResponse;
 import lombok.Builder;
 import lombok.Getter;
 

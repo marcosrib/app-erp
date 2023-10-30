@@ -1,10 +1,10 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
+import br.com.somar.app.users.application.ports.in.profiles.CreateProfileUseCasePort;
+import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
 import br.com.somar.app.users.adapters.inbound.controllers.requests.ProfileRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileResponse;
-import br.com.somar.app.users.application.ports.in.profiles.CreateProfileUseCasePort;
 import br.com.somar.app.users.application.ports.in.profiles.UpdateProfileUseCasePort;
-import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

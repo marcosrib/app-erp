@@ -1,7 +1,7 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
-import br.com.somar.app.users.adapters.inbound.controllers.responses.abilities.GroupAbilityResponse;
 import br.com.somar.app.users.application.ports.in.abilities.CreateAbilityUseCasePort;
+import br.com.somar.app.users.adapters.inbound.controllers.responses.abilities.GroupAbilityResponse;
 import br.com.somar.app.users.application.ports.in.abilities.FindAbilityUseCasePort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

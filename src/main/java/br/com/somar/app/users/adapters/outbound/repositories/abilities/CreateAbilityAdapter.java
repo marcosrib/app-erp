@@ -1,7 +1,7 @@
 package br.com.somar.app.users.adapters.outbound.repositories.abilities;
 
-import br.com.somar.app.users.application.core.domain.Ability;
 import br.com.somar.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
+import br.com.somar.app.users.application.core.domain.Ability;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

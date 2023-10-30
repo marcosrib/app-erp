@@ -1,6 +1,5 @@
 package br.com.somar.app.unit.users.builders.repositories.entities;
 
-import br.com.somar.app.common.fakerutils.FakerBuilderSet;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
 import net.datafaker.Faker;
 

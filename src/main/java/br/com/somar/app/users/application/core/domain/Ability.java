@@ -1,8 +1,7 @@
 package br.com.somar.app.users.application.core.domain;
 
-import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityCategoryEntity;
-import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityEntity;
 import br.com.somar.app.users.application.core.domain.builders.AbilityBuilder;
+import br.com.somar.app.users.adapters.outbound.repositories.entity.AbilityEntity;
 
 import java.util.Collections;
 import java.util.Set;
