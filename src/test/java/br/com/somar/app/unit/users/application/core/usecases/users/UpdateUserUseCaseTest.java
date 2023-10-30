@@ -1,4 +1,4 @@
-package br.com.somar.app.unit.users.application.core.usecases;
+package br.com.somar.app.unit.users.application.core.usecases.users;
 
 import br.com.somar.app.unit.users.builders.domain.ProfileFakeBuilder;
 import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
