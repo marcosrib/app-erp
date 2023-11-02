@@ -32,7 +32,7 @@ public class UserEntity {
     private LocalDateTime deletedAt;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_profiles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "profile_id"))
     private Set<ProfileEntity> profiles;
 

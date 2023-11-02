@@ -2,6 +2,8 @@ package br.com.somar.app.users.application.core.domain;
 
 import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
 import br.com.somar.app.users.application.core.domain.builders.ProfileBuilder;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -59,7 +61,12 @@ public class Profile {
     public static ProfileBuilder builder() {
         return new ProfileBuilder();
     }
+
     public static Profile convertProfileEntityToProfile(ProfileEntity profilesEntity) {
+        if(ObjectUtils.isEmpty(profilesEntity)) return null;
+        return new Profile(profilesEntity.getId(), profilesEntity.getName());
+    }
+    public static Profile convertProfileEntityToProfileWithAbilities(ProfileEntity profilesEntity) {
         var abilities =  profilesEntity.getAbilities().stream()
                 .map(ability -> Ability
                         .builder()

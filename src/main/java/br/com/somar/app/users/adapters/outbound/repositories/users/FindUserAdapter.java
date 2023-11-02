@@ -19,7 +19,7 @@ public class FindUserAdapter implements FindUserAdapterPort {
     public User findByEmail(String email) {
         var userEntity = userRepository.findByEmail(email);
         if (ObjectUtils.isNotEmpty(userEntity)) {
-            User.convertUserEntitytoUser(userEntity);
+            return User.convertUserEntitytoUser(userEntity);
         }
         return null;
     }

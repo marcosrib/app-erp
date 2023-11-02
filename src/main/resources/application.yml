@@ -21,3 +21,8 @@ spring:
       pageable:
         one-indexed-parameters: true
         max-page-size: ${MAX_PAGE_SIZE:50}
+
+  user:
+    admin:
+      email: ${EMAIL:admin@gmail.com}
+      password: ${PASSWORD:123456}
