@@ -2,7 +2,7 @@ package br.com.somar.app.users.adapters.inbound.controllers;
 
 import br.com.somar.app.users.application.ports.in.profiles.CreateProfileUseCasePort;
 import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
-import br.com.somar.app.users.adapters.inbound.controllers.requests.ProfileRequest;
+import br.com.somar.app.users.adapters.inbound.controllers.requests.ProfileWithAbilitiesRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileResponse;
 import br.com.somar.app.users.application.ports.in.profiles.UpdateProfileUseCasePort;
 import org.springframework.http.HttpStatus;
@@ -27,12 +27,12 @@ public class ProfileController {
     }
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody ProfileRequest profileRequest) {
+    public void create(@RequestBody ProfileWithAbilitiesRequest profileRequest) {
         createProfileUseCasePort.create(profileRequest.toProfileDomain());
     }
     @PutMapping("/{profileId}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody ProfileRequest profileRequest, @PathVariable Long profileId) {
+    public void update(@RequestBody ProfileWithAbilitiesRequest profileRequest, @PathVariable Long profileId) {
         updateProfileUseCasePort.update(profileRequest.toProfileDomain(), profileId);
     }
     @GetMapping("/")
