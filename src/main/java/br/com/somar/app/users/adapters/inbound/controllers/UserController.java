@@ -1,6 +1,7 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
 import br.com.somar.app.users.adapters.inbound.controllers.requests.CreateUserRequest;
+import br.com.somar.app.users.adapters.inbound.controllers.requests.UpdateUserStatusRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.requests.UserFilterRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.users.UserResponse;
 import br.com.somar.app.users.application.core.domain.User;
@@ -11,6 +12,7 @@ import br.com.somar.app.users.adapters.inbound.controllers.swagger.api.UserApi;
 import br.com.somar.app.users.application.core.domain.PageDomain;
 import br.com.somar.app.users.application.core.domain.PageableRequestDomain;
 import br.com.somar.app.users.application.ports.in.users.FindPaginationUserUseCasePort;
+import br.com.somar.app.users.application.ports.in.users.UpdateUserStatusUseCasePort;
 import br.com.somar.app.users.application.ports.in.users.UpdateUserUseCasePort;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
@@ -26,22 +28,24 @@ public class UserController implements UserApi {
     private final CreateUserUseCasePort createUserUseCasePort;
     private final UpdateUserUseCasePort updateUserUseCasePort;
     private final FindPaginationUserUseCasePort findPaginationUserUseCasePort;
-    public UserController(CreateUserUseCasePort createUserUseCasePort, UpdateUserUseCasePort updateUserUseCasePort, FindPaginationUserUseCasePort findPaginationUserUseCasePort) {
+    private final UpdateUserStatusUseCasePort updateUserStatusUseCasePort;
+    public UserController(CreateUserUseCasePort createUserUseCasePort, UpdateUserUseCasePort updateUserUseCasePort, FindPaginationUserUseCasePort findPaginationUserUseCasePort, UpdateUserStatusUseCasePort updateUserStatusUseCasePort) {
         this.createUserUseCasePort = createUserUseCasePort;
         this.updateUserUseCasePort = updateUserUseCasePort;
         this.findPaginationUserUseCasePort = findPaginationUserUseCasePort;
+        this.updateUserStatusUseCasePort = updateUserStatusUseCasePort;
     }
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse create(@Valid @RequestBody CreateUserRequest userRequest) {
-        return UserResponse.fromDomain(createUserUseCasePort.create(userRequest.toUserDomain()));
+    public void create(@Valid @RequestBody CreateUserRequest userRequest) {
+        createUserUseCasePort.create(userRequest.toUserDomain());
     }
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserResponse update(@Valid @RequestBody UpdateUserRequest userRequest, @PathVariable Long id) {
-        return UserResponse.fromDomain(updateUserUseCasePort.update(id, userRequest.toUserDomain()));
+    public void update(@Valid @RequestBody UpdateUserRequest userRequest, @PathVariable Long id) {
+        updateUserUseCasePort.update(id, userRequest.toUserDomain());
     }
-    @PreAuthorize("hasAuthority('FINANCEIRO_READ')")
+
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public PageResponse<UserResponse> index(UserFilterRequest filter, Pageable pageable) {
@@ -58,10 +62,9 @@ public class UserController implements UserApi {
                 .currentPage(userPage.getCurrentPage());
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse updateStatus(@Valid @RequestBody UpdateUserRequest userRequest) {
-        return UserResponse.fromDomain(createUserUseCasePort.create(userRequest.toUserDomain()));
+    public void updateStatus(@RequestBody UpdateUserStatusRequest UpdateUserStatusRequest, @PathVariable Long userId) {
+        updateUserStatusUseCasePort.updateStatus(userId, UpdateUserStatusRequest.status());
     }
-
 }

@@ -29,7 +29,7 @@ public class FindPaginationUserAdapter implements FindPaginationUserAdapterPort 
 
         Specification<User> spec = Specification.where(null);
 
-        if (ObjectUtils.isEmpty(filter)) {
+        if (!ObjectUtils.isEmpty(filter.getEmail())) {
             spec = spec.and((root, query, builder) ->
                     builder.like(root.get("email"), "%" + filter.getEmail() + "%"));
         }

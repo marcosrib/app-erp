@@ -14,8 +14,8 @@ public class UpdateUserAdapter implements UpdateUserAdapterPort {
     }
 
     @Override
-    public User update(User user) {
+    public void update(User user) {
         UserEntity userEntity = UserEntityMapper.convertUserToEntity(user);
-        return User.convertUserEntitytoUser(userRepository.save(userEntity));
+        userRepository.save(userEntity);
     }
 }

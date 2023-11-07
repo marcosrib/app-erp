@@ -1,6 +1,6 @@
 package br.com.somar.app.users.application.core.usecases.users;
 
-import br.com.somar.app.common.exceptions.ResourceNotFoundException;
+import br.com.somar.app.common.exceptions.ResourceAlreadyExistsException;
 import br.com.somar.app.users.application.core.domain.User;
 import br.com.somar.app.users.application.ports.in.users.CreateUserUseCasePort;
 import br.com.somar.app.users.application.ports.out.users.CreateUserAdapterPort;
@@ -23,13 +23,13 @@ public class CreateUserUseCase implements CreateUserUseCasePort {
     }
 
     @Override
-    public User create(User user) {
+    public void create(User user) {
         User userRes = findUserAdapterPort.findByEmail(user.getEmail());
         if (ObjectUtils.isNotEmpty(userRes)) {
-            throw new ResourceNotFoundException("email.already.exists");
+            throw new ResourceAlreadyExistsException("email.already.exists");
         }
         String encryptPassword = encoder.encoderPassword(user.getPassword());
         user.setPassword(encryptPassword);
-        return createUserAdapterPort.create(user);
+        createUserAdapterPort.create(user);
     }
 }

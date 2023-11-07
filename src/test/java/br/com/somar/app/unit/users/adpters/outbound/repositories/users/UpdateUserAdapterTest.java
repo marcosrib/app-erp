@@ -37,9 +37,8 @@ public class UpdateUserAdapterTest {
 
         when(userRepository.save(any(UserEntity.class))).thenReturn(userFakeEntity);
 
-        User updatedUser = updateUserAdapter.update(userFake);
+        updateUserAdapter.update(userFake);
         verify(userRepository, Mockito.times(1)).save(any(UserEntity.class));
-        assertNotNull(updatedUser);
 
     }
 }

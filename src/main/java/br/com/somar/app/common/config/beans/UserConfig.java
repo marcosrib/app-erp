@@ -2,9 +2,11 @@ package br.com.somar.app.common.config.beans;
 
 import br.com.somar.app.users.application.core.usecases.users.CreateUserUseCase;
 import br.com.somar.app.users.application.core.usecases.users.FindPaginationUserUseCase;
+import br.com.somar.app.users.application.core.usecases.users.UpdateUserStatusUseCase;
 import br.com.somar.app.users.application.core.usecases.users.UpdateUserUseCase;
 import br.com.somar.app.users.application.ports.in.users.CreateUserUseCasePort;
 import br.com.somar.app.users.application.ports.in.users.FindPaginationUserUseCasePort;
+import br.com.somar.app.users.application.ports.in.users.UpdateUserStatusUseCasePort;
 import br.com.somar.app.users.application.ports.in.users.UpdateUserUseCasePort;
 import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
 import br.com.somar.app.users.application.ports.out.users.*;
@@ -33,5 +35,9 @@ public class UserConfig {
     @Bean
     public FindPaginationUserUseCasePort findPaginationUserUseCasePort(FindPaginationUserAdapterPort findPaginationUserAdapterPort) {
         return new FindPaginationUserUseCase(findPaginationUserAdapterPort);
+    }
+    @Bean
+    public UpdateUserStatusUseCasePort updateUserStatusUseCasePort(FindUserAdapterPort findUserAdapterPort, UpdateUserStatusAdapterPort updateUserStatusAdapterPort) {
+        return new UpdateUserStatusUseCase(findUserAdapterPort, updateUserStatusAdapterPort);
     }
 }

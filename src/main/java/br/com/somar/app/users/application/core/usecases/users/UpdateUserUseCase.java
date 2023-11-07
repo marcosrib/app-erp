@@ -28,14 +28,14 @@ public class UpdateUserUseCase implements UpdateUserUseCasePort {
         this.findUserAdapterPort = findUserAdapterPort;
     }
     @Override
-    public User update(Long id, User user) {
+    public void update(Long id, User user) {
          var existingUser = findUserAdapterPort.findById(id);
          verifyProfileExists(user, existingUser);
          verifyPasswordIsEmpty(user, existingUser);
          existingUser.setName(user.getName());
          existingUser.setEmail(user.getEmail());
 
-        return updateUserAdapterPort.update(existingUser);
+        updateUserAdapterPort.update(existingUser);
     }
     private void verifyPasswordIsEmpty(User user, User userExist) {
         if(ObjectUtils.isEmpty(user.getPassword())) {
