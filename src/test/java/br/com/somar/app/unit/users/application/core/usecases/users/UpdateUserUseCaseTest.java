@@ -11,10 +11,12 @@ import br.com.somar.app.users.application.ports.out.users.UpdateUserAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -36,24 +38,36 @@ public class UpdateUserUseCaseTest {
 
     private static final Long USER_ID = 1L;
     private static final String PASSWORD = "123456";
+
+    private static final String PASSWORD_ENCODED = "dsfjdsjkdsjgkjkl";
     @DisplayName("should successfully update user with password")
     @Test
     void updateUserWithPassword(){
-        var user =  new UserFakeBuilder().getFake();
+        var userNew =  new UserFakeBuilder().getFake();
+        var userOld =  new UserFakeBuilder().getFake();
         var profile = new ProfileFakeBuilder();
-        user.setPassword(PASSWORD);
-        doNothing().when(updateUserAdapter).update(user);
+        userNew.setPassword(PASSWORD);
+        doNothing().when(updateUserAdapter).update(userNew);
         when(findUserAdapterPort.findById(anyLong()))
-                .thenReturn(user);
+                .thenReturn(userOld);
         when(findProfileAdapterPort.findProfileBydId(anyLong()))
                 .thenReturn(profile.getFake());
-
-        updateUserUseCase.update(USER_ID, user);
+        when(passwordEncoderAdapterPort.encoderPassword(PASSWORD))
+                .thenReturn(PASSWORD_ENCODED);
+        userNew.setStatus(false);
+        updateUserUseCase.update(USER_ID, userNew);
         verify(findUserAdapterPort, times(1)).findById(1L);
         verify(findProfileAdapterPort, times(1)).findProfileBydId(anyLong());
-        verify(passwordEncoderAdapterPort, times(1)).encoderPassword(anyString());
-        verify(updateUserAdapter, times(1)).update(any(User.class));
+        verify(passwordEncoderAdapterPort, times(1)).encoderPassword(PASSWORD);
+        var captor =  ArgumentCaptor.forClass(User.class);
+        verify(updateUserAdapter, times(1)).update(captor.capture());
 
+        var userCaptured = captor.getValue();
+
+        assertEquals(userNew.getName(), userCaptured.getName());
+        assertEquals(userNew.getEmail(), userCaptured.getEmail());
+        assertEquals(PASSWORD_ENCODED, userCaptured.getPassword());
+        assertEquals(userNew.isStatus(), userCaptured.isStatus());
     }
     @Test
     @DisplayName("should successfully update user is null password")
