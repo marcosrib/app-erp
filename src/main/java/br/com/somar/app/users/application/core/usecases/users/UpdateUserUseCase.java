@@ -34,8 +34,8 @@ public class UpdateUserUseCase implements UpdateUserUseCasePort {
          verifyPasswordIsEmpty(user, existingUser);
          existingUser.setName(user.getName());
          existingUser.setEmail(user.getEmail());
-
-        updateUserAdapterPort.update(existingUser);
+         existingUser.setStatus(user.isStatus());
+         updateUserAdapterPort.update(existingUser);
     }
     private void verifyPasswordIsEmpty(User user, User userExist) {
         if(ObjectUtils.isEmpty(user.getPassword())) {
