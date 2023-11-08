@@ -15,6 +15,7 @@ public class UpdateUserStatusAdapter implements UpdateUserStatusAdapterPort {
 
     @Override
     public void updateStatus(User user) {
-    userRepository.save(UserEntityMapper.convertUserToEntity(user));
+
+        userRepository.save(UserEntityMapper.convertUserToEntity(user));
     }
 }

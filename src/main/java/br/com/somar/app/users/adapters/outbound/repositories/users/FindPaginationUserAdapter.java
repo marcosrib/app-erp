@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class FindPaginationUserAdapter implements FindPaginationUserAdapterPort {
@@ -35,7 +34,8 @@ public class FindPaginationUserAdapter implements FindPaginationUserAdapterPort 
         }
 
         Page<UserEntity> userEntityPage = userRepository.findAll(spec, PageRequest.of(pageable.page(),pageable.size(), Sort.by(Sort.Direction.DESC, "id")));
-        userRepository.findUserWithProfilesByIn(userEntityPage.stream().collect(Collectors.toList()));
+        var userEntities = userEntityPage.getContent();
+        userRepository.findUserWithProfilesByIn(userEntities);
         List<User> users = User.convertPageUserEntityToListUser(userEntityPage);
         return PageDomain.builder()
                 .data(users)

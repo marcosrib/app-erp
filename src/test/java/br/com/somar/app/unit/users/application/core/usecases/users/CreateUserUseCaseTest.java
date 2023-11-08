@@ -47,7 +47,7 @@ public class CreateUserUseCaseTest {
        var captor =  ArgumentCaptor.forClass(User.class);
        verify(createUserAdapterPort, times(1)).create(captor.capture());
        var value = captor.getValue();
-       assertEquals(value.getPassword(), PASSWORD_ENCODED);
+       assertEquals(PASSWORD_ENCODED, value.getPassword());
     }
     @DisplayName("should create user with exception")
     @Test

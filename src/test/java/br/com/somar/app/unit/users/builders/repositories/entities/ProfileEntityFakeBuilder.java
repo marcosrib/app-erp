@@ -6,7 +6,7 @@ import net.datafaker.Faker;
 
 import java.util.Locale;
 
-public class ProfileFakeEntityBuilder extends FakerBuilderSet<ProfileEntity> {
+public class ProfileEntityFakeBuilder extends FakerBuilderSet<ProfileEntity> {
     @Override
     public ProfileEntity getFake() {
         Faker faker = new Faker(new Locale("pt-BR"));

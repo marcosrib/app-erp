@@ -1,7 +1,7 @@
 package br.com.somar.app.unit.users.adpters.outbound.repositories.users;
 
 import br.com.somar.app.common.exceptions.ResourceNotFoundException;
-import br.com.somar.app.unit.users.builders.repositories.entities.UserFakeEntityBuilder;
+import br.com.somar.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
 import br.com.somar.app.users.adapters.outbound.repositories.users.FindUserAdapter;
 import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
 import br.com.somar.app.users.application.core.domain.User;
@@ -30,7 +30,7 @@ public class FindUserAdapterTest {
     @Test
     @DisplayName("should successfully find user by id")
     public void testFindUserById() {
-        var userFakeEntity = new UserFakeEntityBuilder().getFake();
+        var userFakeEntity = new UserEntityFakeBuilder().getFake();
         when(userRepository.findById(anyLong())).thenReturn(Optional.ofNullable(userFakeEntity));
 
         User user = findUserAdapter.findById(anyLong());

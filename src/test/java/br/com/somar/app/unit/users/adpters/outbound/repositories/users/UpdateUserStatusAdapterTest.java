@@ -3,7 +3,7 @@ package br.com.somar.app.unit.users.adpters.outbound.repositories.users;
 import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
 import br.com.somar.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
 import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
-import br.com.somar.app.users.adapters.outbound.repositories.users.CreateUserAdapter;
+import br.com.somar.app.users.adapters.outbound.repositories.users.UpdateUserStatusAdapter;
 import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,23 +18,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 @ExtendWith(SpringExtension.class)
-public class CreateUserAdapterTest {
-
+public class UpdateUserStatusAdapterTest {
     @InjectMocks
-    private CreateUserAdapter createUserAdapter;
-
+    private UpdateUserStatusAdapter updateUserStatusAdapter;
     @Mock
     private UserRepository userRepository;
+
     @Test
-    @DisplayName("should successfully create user")
-    public void testShouldCreateUser() {
+    @DisplayName("should successfully update user")
+    void update() {
         var userFakeEntity = new UserEntityFakeBuilder().getFake();
         var userFake = new UserFakeBuilder().getFake();
 
         when(userRepository.save(any(UserEntity.class))).thenReturn(userFakeEntity);
-        var captor =  ArgumentCaptor.forClass(UserEntity.class);
-        createUserAdapter.create(userFake);
+        var captor = ArgumentCaptor.forClass(UserEntity.class);
+        updateUserStatusAdapter.updateStatus(userFake);
         verify(userRepository, Mockito.times(1)).save(captor.capture());
 
         var userEntityCaptured = captor.getValue();
@@ -45,5 +45,6 @@ public class CreateUserAdapterTest {
         assertEquals(userFake.getPassword(), userEntityCaptured.getPassword());
         assertEquals(userFake.getCreatedAt(), userEntityCaptured.getCreatedAt());
         assertEquals(userFake.getProfiles().stream().findAny().get().getId(), userEntityCaptured.getProfiles().stream().findAny().get().getId());
+
     }
 }
