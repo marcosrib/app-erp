@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
   updated_at TIMESTAMP,
   deleted_at TIMESTAMP
 );
-CREATE INDEX idx_email_unique ON users (email);
 
 CREATE TABLE IF NOT EXISTS profiles (
    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -64,7 +63,6 @@ CREATE TABLE IF NOT EXISTS abilities (
 
 CREATE INDEX idx_ability_categories_id ON abilities (ability_category_id);
 CREATE INDEX idx_ability_group_id ON abilities (ability_group_id);
-
 
 CREATE TABLE IF NOT EXISTS profile_abilities (
   profile_id BIGINT,
