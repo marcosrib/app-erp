@@ -61,7 +61,7 @@ public interface UserApi {
 
     @Operation(summary = "Atualiza status do usuário")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "201"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class),

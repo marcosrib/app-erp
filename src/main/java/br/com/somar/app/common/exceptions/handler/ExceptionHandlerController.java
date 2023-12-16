@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionHandlerController {
@@ -28,8 +31,8 @@ public class ExceptionHandlerController {
         this.messageSource = messageSource;
     }
 
-    @ExceptionHandler(java.lang.Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalException(java.lang.Exception ex, WebRequest request) {
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, WebRequest request) {
         int status = HttpStatus.INTERNAL_SERVER_ERROR.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message("Internal server error")
@@ -40,7 +43,7 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));
     }
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<ErrorResponse> unauthorizedException(java.lang.Exception ex, WebRequest request) {
+    public ResponseEntity<ErrorResponse> unauthorizedException(Exception ex, WebRequest request) {
         int status = HttpStatus.UNAUTHORIZED.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(message(ex.getLocalizedMessage()))
@@ -51,7 +54,7 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));
     }
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<ErrorResponse> accessDeniedException(java.lang.Exception ex, WebRequest request) {
+    public ResponseEntity<ErrorResponse> accessDeniedException(Exception ex, WebRequest request) {
         int status = HttpStatus.UNAUTHORIZED.value();
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message("Não Autorizado")
@@ -86,19 +89,21 @@ public class ExceptionHandlerController {
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> methodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
-        int status = HttpStatus.BAD_REQUEST.value();
+        int status = HttpStatus.UNPROCESSABLE_ENTITY.value();
         BindingResult bindingResult = ex.getBindingResult();
 
+        List<Map<String, String>> errorList = new ArrayList<>();
 
-        HashMap<String, String> hashErrors = new HashMap<>();
-        bindingResult.getFieldErrors().forEach(error -> {
+        bindingResult.getAllErrors().forEach(error -> {
+            HashMap<String, String> hashErrors =  new HashMap<>();
             hashErrors.put("message", error.getDefaultMessage());
+           errorList.add(hashErrors);
         });
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message("Validation Error")
                 .status(status)
-                .error_code("BAD_REQUEST")
-                .errors(hashErrors)
+                .error_code("UNPROCESSABLE_ENTITY")
+                .errors(errorList)
                 .timestamp(LocalDateTime.now());
 
         return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(status));

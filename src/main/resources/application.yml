@@ -2,20 +2,21 @@ server:
   port : 8082
 spring:
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3309/app}
-    username: ${DATABASE_USERNAME:app}
+
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/erp_db}
+    username: ${DATABASE_USERNAME:root}
     password: ${DATABASE_PASSWORD:root}
   jpa:
     properties:
       hibernate:
+        ddl-auto: none
         show_sql: ${SHOW_SQL:true}
 
   security:
     jwt:
       secret: ${JWT_SECRET:bWFyY29zcmliZWlyb2Rlc291c2E=}
       refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:100}
-      token-expiration: ${JWT_TOKEN_EXPIRATION:5}
+      token-expiration: ${JWT_TOKEN_EXPIRATION:15}
   data:
     web:
       pageable:

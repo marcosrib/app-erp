@@ -1,20 +1,17 @@
 version: '3.8'
 services:
-  db:
-    image: mysql:8.0
-    container_name: erp_database
-    environment:
-      MYSQL_USER: 'app'
-      MYSQL_PASSWORD: 'root'
-      MYSQL_DATABASE: 'app'
-      MYSQL_ROOT_PASSWORD: 'root'
+  postgres:
+    image: postgres:14-alpine
     ports:
-      - '3309:3306'
+      - "5432:5432"
     volumes:
-      - ../app-database:/var/lib/mysql
+      - ~/app-database/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=erp_db
     networks:
       - my-network
 networks:
   my-network:
-
 

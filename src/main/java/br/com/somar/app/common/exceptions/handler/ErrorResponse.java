@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 
 public class ErrorResponse {
     private String message;
     private int status;
     private String error_code;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private HashMap errors;
+    private List errors;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime timestamp;
 
@@ -37,7 +38,7 @@ public class ErrorResponse {
         return timestamp;
     }
 
-    public HashMap getErrors() {
+    public List getErrors() {
         return errors;
     }
 
@@ -66,7 +67,7 @@ public class ErrorResponse {
         this.timestamp = timestamp;
         return this;
     }
-    public ErrorResponse errors(HashMap errors) {
+    public ErrorResponse errors(List errors) {
         this.errors = errors;
         return this;
     }

@@ -40,7 +40,7 @@ public class UserController implements UserApi {
         createUserUseCasePort.create(userRequest.toUserDomain());
     }
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody UpdateUserRequest userRequest, @PathVariable Long id) {
         updateUserUseCasePort.update(id, userRequest.toUserDomain());
     }
