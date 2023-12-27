@@ -48,6 +48,7 @@ public class AbilityBuilder {
         ability.setName(name);
         ability.setAbilityGroup(abilityGroup);
         ability.setAbilityCategory(abilityCategory);
+        ability.setHasAbilityProfile(hasAbilityProfile);
         return ability;
     }
 }

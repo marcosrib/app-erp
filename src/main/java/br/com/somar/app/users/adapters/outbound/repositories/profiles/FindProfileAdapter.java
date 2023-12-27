@@ -18,9 +18,16 @@ public class FindProfileAdapter implements FindProfileAdapterPort {
     public Profile findProfileBydId(Long id) {
         ProfileEntity profileEntity = profileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("profile.not.found"));
-
-        return Profile.convertProfileEntityToProfileWithAbilities(profileEntity);
+        return Profile.convertProfileEntityToProfile(profileEntity);
     }
+
+    @Override
+    public Profile findProfileBydIdWithAbilities(Long id) {
+        ProfileEntity profileEntity = profileRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("profile.not.found"));
+        return  Profile.convertProfileEntityToProfileWithAbilities(profileEntity);
+    }
+
     @Override
     public List<Profile> getAllProfiles() {
         return  Profile.convertListProfileEntityIntoListProfile(profileRepository.findAll());

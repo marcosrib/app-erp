@@ -63,7 +63,10 @@ public class Profile {
 
     public static Profile convertProfileEntityToProfile(ProfileEntity profilesEntity) {
         if(ObjectUtils.isEmpty(profilesEntity)) return null;
-        return new Profile(profilesEntity.getId(), profilesEntity.getName());
+        return Profile.builder()
+                .name(profilesEntity.getName())
+                .id(profilesEntity.getId())
+                .build();
     }
     public static Profile convertProfileEntityToProfileWithAbilities(ProfileEntity profilesEntity) {
         var abilities =  profilesEntity.getAbilities().stream()

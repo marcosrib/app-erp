@@ -5,6 +5,7 @@ import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterP
 import br.com.somar.app.users.adapters.inbound.controllers.requests.ProfileWithAbilitiesRequest;
 import br.com.somar.app.users.adapters.inbound.controllers.responses.profiles.ProfileResponse;
 import br.com.somar.app.users.application.ports.in.profiles.UpdateProfileUseCasePort;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +31,9 @@ public class ProfileController {
     public void create(@RequestBody ProfileWithAbilitiesRequest profileRequest) {
         createProfileUseCasePort.create(profileRequest.toProfileDomain());
     }
-    @PutMapping("/{profileId}")
+    @PutMapping("/{profileId}/")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody ProfileWithAbilitiesRequest profileRequest, @PathVariable Long profileId) {
+    public void update(@Valid @RequestBody ProfileWithAbilitiesRequest profileRequest, @PathVariable Long profileId) {
         updateProfileUseCasePort.update(profileRequest.toProfileDomain(), profileId);
     }
     @GetMapping("/")

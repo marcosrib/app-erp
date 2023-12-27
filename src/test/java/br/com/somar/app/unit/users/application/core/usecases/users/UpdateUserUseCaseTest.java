@@ -14,13 +14,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class UpdateUserUseCaseTest {
     @InjectMocks
     private UpdateUserUseCase updateUserUseCase;
@@ -55,7 +56,9 @@ public class UpdateUserUseCaseTest {
         when(passwordEncoderAdapterPort.encoderPassword(PASSWORD))
                 .thenReturn(PASSWORD_ENCODED);
         userNew.setStatus(false);
+
         updateUserUseCase.update(USER_ID, userNew);
+
         verify(findUserAdapterPort, times(1)).findById(1L);
         verify(findProfileAdapterPort, times(1)).findProfileBydId(anyLong());
         verify(passwordEncoderAdapterPort, times(1)).encoderPassword(PASSWORD);
@@ -79,7 +82,6 @@ public class UpdateUserUseCaseTest {
                 .thenReturn(user);
         when(findProfileAdapterPort.findProfileBydId(anyLong()))
                 .thenReturn(profile.getFake());
-
         updateUserUseCase.update(USER_ID, user);
         verify(findUserAdapterPort, times(1)).findById(1L);
         verify(findProfileAdapterPort, times(1)).findProfileBydId(anyLong());

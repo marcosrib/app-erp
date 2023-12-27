@@ -2,7 +2,6 @@ server:
   port : 8082
 spring:
   datasource:
-
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/erp_db}
     username: ${DATABASE_USERNAME:root}
     password: ${DATABASE_PASSWORD:root}
@@ -11,7 +10,6 @@ spring:
       hibernate:
         ddl-auto: none
         show_sql: ${SHOW_SQL:true}
-
   security:
     jwt:
       secret: ${JWT_SECRET:bWFyY29zcmliZWlyb2Rlc291c2E=}

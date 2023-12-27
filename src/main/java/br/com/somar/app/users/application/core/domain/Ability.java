@@ -43,6 +43,10 @@ public class Ability {
         return hasAbilityProfile;
     }
 
+    public void setHasAbilityProfile(boolean hasAbilityProfile) {
+        this.hasAbilityProfile = hasAbilityProfile;
+    }
+
     public AbilityGroup getAbilityGroup() {
         return abilityGroup;
     }

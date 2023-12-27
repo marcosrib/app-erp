@@ -24,7 +24,7 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
 
     @Override
     public List<AbilityGroup> findAbilityByProfileId(Long profileId) {
-        var abilities = profileAdapterPort.findProfileBydId(profileId).getAbilities();
+        var abilities = profileAdapterPort.findProfileBydIdWithAbilities(profileId).getAbilities();
         if (abilities.isEmpty()) abilities.addAll(findAbilityAdapterPort.findAllAbilities());
         else {
             var ids = abilities.stream().map(Ability::getId).collect(Collectors.toList());
