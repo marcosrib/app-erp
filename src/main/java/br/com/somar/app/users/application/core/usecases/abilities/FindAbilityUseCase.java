@@ -6,10 +6,7 @@ import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterP
 import br.com.somar.app.users.application.core.domain.AbilityGroup;
 import br.com.somar.app.users.application.ports.in.abilities.FindAbilityUseCasePort;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FindAbilityUseCase implements FindAbilityUseCasePort {
@@ -40,7 +37,6 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
         var groups = new ArrayList<AbilityGroup>();
         var groupMap = new HashMap<String, AbilityGroup>();
 
-
         for (var ability : abilities) {
             AbilityGroup currentGroup;
             var groupName = ability.getAbilityGroup().getName();
@@ -53,8 +49,11 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
                 currentGroup = groupMap.get(groupName);
             }
             currentGroup.getAbilities().add(new Ability(ability.getId(), ability.getAbilityCategory().getName(), ability.isHasAbilityProfile()));
-
+            currentGroup.getAbilities().sort(Comparator.comparing(Ability::getName));
         }
+
+        groups.sort(Comparator.comparing(AbilityGroup::getName, String.CASE_INSENSITIVE_ORDER));
+
         return groups;
     }
 }
