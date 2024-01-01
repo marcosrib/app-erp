@@ -32,14 +32,19 @@ public class ProfileController {
         createProfileUseCasePort.create(profileRequest.toProfileDomain());
     }
     @PutMapping("/{profileId}/")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody ProfileWithAbilitiesRequest profileRequest, @PathVariable Long profileId) {
         updateProfileUseCasePort.update(profileRequest.toProfileDomain(), profileId);
     }
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<ProfileResponse> show() {
+    public List<ProfileResponse> index() {
      return ProfileResponse.fromDomainToList(findProfileAdapterPort.getAllProfiles());
     }
 
+    @GetMapping("/{profileId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProfileResponse show(@PathVariable Long profileId) {
+        return ProfileResponse.fromDomain(findProfileAdapterPort.findProfileBydId(profileId));
+    }
 }

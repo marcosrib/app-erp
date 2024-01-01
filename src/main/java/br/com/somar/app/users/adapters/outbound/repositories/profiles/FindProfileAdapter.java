@@ -5,6 +5,7 @@ import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntit
 import br.com.somar.app.users.application.core.domain.Profile;
 import br.com.somar.app.common.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class FindProfileAdapter implements FindProfileAdapterPort {
 
     @Override
     public List<Profile> getAllProfiles() {
-        return  Profile.convertListProfileEntityIntoListProfile(profileRepository.findAll());
+        return  Profile.convertListProfileEntityIntoListProfile(profileRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
     }
 
     @Override

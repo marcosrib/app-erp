@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface ProfileRepository extends JpaRepository<ProfileEntity, Long> {
  ProfileEntity findProfileByName(String name);
+ 
 }
