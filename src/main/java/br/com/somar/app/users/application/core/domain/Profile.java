@@ -12,15 +12,11 @@ public class Profile {
 
     private Long id;
     private String name;
-
+    private  String description;
     private Set<Ability> abilities;
     public Profile() {
     }
     public Profile(String name) {
-        this.name = name;
-    }
-    public Profile(Long id, String name) {
-        this.id = id;
         this.name = name;
     }
     public Profile(Long id, String name, Set<Ability> abilities) {
@@ -57,6 +53,14 @@ public class Profile {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public static ProfileBuilder builder() {
         return new ProfileBuilder();
     }
@@ -66,6 +70,7 @@ public class Profile {
         return Profile.builder()
                 .name(profilesEntity.getName())
                 .id(profilesEntity.getId())
+                .description(profilesEntity.getDescription())
                 .build();
     }
     public static Profile convertProfileEntityToProfileWithAbilities(ProfileEntity profilesEntity) {
@@ -87,6 +92,11 @@ public class Profile {
         return new Profile(profilesEntity.getId(), profilesEntity.getName(), abilities);
     }
     public static List<Profile> convertListProfileEntityIntoListProfile(List<ProfileEntity> profileEntities) {
-        return profileEntities.stream().map(Profile::new).collect(Collectors.toList());
+        return profileEntities.stream().map(profile -> Profile
+                .builder()
+                .id(profile.getId())
+                .name(profile.getName())
+                .description(profile.getDescription())
+                .build()).collect(Collectors.toList());
     }
 }

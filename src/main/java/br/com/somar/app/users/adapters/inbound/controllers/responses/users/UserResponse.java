@@ -21,7 +21,7 @@ public class UserResponse {
 
     public static UserResponse fromDomain(User user) {
         Set<ProfileResponse> profiles = user.getProfiles().stream().map(profile ->
-                        new ProfileResponse(profile.getId(), profile.getName()))
+                        new ProfileResponse(profile.getId(), profile.getName(), profile.getDescription()))
                 .collect(Collectors.toSet());
 
         return UserResponse.builder()

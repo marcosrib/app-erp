@@ -17,6 +17,7 @@ public class UpdateProfileUseCase implements UpdateProfileUseCasePort {
         Profile existingProfile = findProfileAdapterPort.findProfileBydId(id);
         existingProfile.setName(profile.getName());
         existingProfile.setAbilities(profile.getAbilities());
+        existingProfile.setDescription(profile.getDescription());
         updateProfileAdapterPort.update(existingProfile);
     }
 }

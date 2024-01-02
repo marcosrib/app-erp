@@ -8,6 +8,8 @@ import java.util.Set;
 public class ProfileBuilder {
     private Long id;
     private String name;
+
+    private String description;
     private Set<Ability> abilities;
 
     public ProfileBuilder id(Long id) {
@@ -19,6 +21,10 @@ public class ProfileBuilder {
         this.name = name;
         return this;
     }
+    public ProfileBuilder description(String description) {
+        this.description = description;
+        return this;
+    }
 
     public ProfileBuilder abilities(Set<Ability> abilities) {
         this.abilities = abilities;
@@ -28,6 +34,7 @@ public class ProfileBuilder {
         Profile profile = new Profile();
         profile.setId(id);
         profile.setName(name);
+        profile.setDescription(description);
         profile.setAbilities(abilities);
         return profile;
     }

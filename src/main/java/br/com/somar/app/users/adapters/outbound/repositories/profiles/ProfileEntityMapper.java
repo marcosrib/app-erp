@@ -22,6 +22,7 @@ public class ProfileEntityMapper {
                         builder()
                         .id(profile.getId())
                         .name(profile.getName())
+                        .description(profile.getDescription())
                         .abilities(AbilityEntityMapper.convertAbilitiesIntoAbilitiesEntity(profile.getAbilities()))
                         .build();
     }

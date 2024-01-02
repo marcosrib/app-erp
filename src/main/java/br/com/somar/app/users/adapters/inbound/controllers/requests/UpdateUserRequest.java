@@ -31,7 +31,10 @@ public class UpdateUserRequest {
 
         Set<Profile> profiles = getProfiles()
                 .stream()
-                .map(profileRequest -> new Profile(profileRequest.id(), profileRequest.name()))
+                .map(profileRequest -> Profile
+                        .builder()
+                        .id(profileRequest.id())
+                        .build())
                 .collect(Collectors.toSet());
        User user = User.builder()
                 .name(name)

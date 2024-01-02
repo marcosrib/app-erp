@@ -84,7 +84,11 @@ public class User {
 
     public static User convertUserEntitytoUser(UserEntity userEntity) {
         Set<Profile> profiles = userEntity.getProfiles().stream()
-                .map(profileEntity -> new Profile(profileEntity.getId(), profileEntity.getName()))
+                .map(profileEntity -> Profile.builder()
+                        .id(profileEntity.getId())
+                        .name(profileEntity.getName())
+                        .description(profileEntity.getDescription())
+                        .build())
                 .collect(Collectors.toSet());
 
         return User.builder()
