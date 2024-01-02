@@ -20,6 +20,8 @@ public class ProfileEntity {
 
     private String name;
 
+    private String description;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

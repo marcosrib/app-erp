@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 @ConfigurationProperties(prefix ="permissions")
-@PropertySource("classpath:abilities.properties")
+@PropertySource(value = "classpath:abilities.properties", encoding = "UTF-8")
 public class GetAbilitiesIntoPropertiesFile {
 
     private List<GroupFileProperties> abilityGroups = new ArrayList<>();

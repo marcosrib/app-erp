@@ -15,7 +15,7 @@ public class CreateAbilityAdapter implements CreateAbilityAdapterPort {
     @Override
     public void create(Set<Ability> abilities) {
 
-        var abilitiesConverted = AbilityEntityMapper.convertAbilitiesIntoAbilitiesEntity(abilities);
+        var abilitiesConverted = AbilityEntityMapper.convertAbilitiesWithAbilityCategoryAndGroupIntoAbilitiesEntity(abilities);
         abilityRepository.saveAll(abilitiesConverted);
     }
 }
