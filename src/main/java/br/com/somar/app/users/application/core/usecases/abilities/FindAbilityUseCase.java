@@ -33,6 +33,11 @@ public class FindAbilityUseCase implements FindAbilityUseCasePort {
         return covertAbility(abilities);
     }
 
+    public List<AbilityGroup> findAllAbilities() {
+        var abilities = findAbilityAdapterPort.findAllAbilities();
+        return covertAbility(abilities);
+    }
+
     private List<AbilityGroup> covertAbility(Set<Ability> abilities) {
         var groups = new ArrayList<AbilityGroup>();
         var groupMap = new HashMap<String, AbilityGroup>();

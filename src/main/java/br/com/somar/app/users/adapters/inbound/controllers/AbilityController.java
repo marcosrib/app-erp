@@ -19,7 +19,12 @@ public class AbilityController {
         this.findAbilityUseCasePort = findAbilityUseCasePort;
         this.createAbilityUseCasePort = createAbilityUseCasePort;
     }
-
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<GroupAbilityResponse> index() {
+        var group = GroupAbilityResponse.fromDomain(findAbilityUseCasePort.findAllAbilities());
+        return group;
+    }
     @GetMapping("/{profileId}/profile")
     @ResponseStatus(HttpStatus.OK)
     public List<GroupAbilityResponse> show(@PathVariable Long profileId) {
