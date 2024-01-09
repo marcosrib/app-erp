@@ -91,12 +91,12 @@ public class Profile {
                 .collect(Collectors.toSet());
         return new Profile(profilesEntity.getId(), profilesEntity.getName(), abilities);
     }
-    public static List<Profile> convertListProfileEntityIntoListProfile(List<ProfileEntity> profileEntities) {
+    public static Set<Profile> convertListProfileEntityIntoListProfile(List<ProfileEntity> profileEntities) {
         return profileEntities.stream().map(profile -> Profile
                 .builder()
                 .id(profile.getId())
                 .name(profile.getName())
                 .description(profile.getDescription())
-                .build()).collect(Collectors.toList());
+                .build()).collect(Collectors.toSet());
     }
 }

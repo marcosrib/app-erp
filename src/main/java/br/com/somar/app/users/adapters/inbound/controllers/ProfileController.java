@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/profile")
@@ -26,7 +27,7 @@ public class ProfileController {
         this.findProfileAdapterPort = findProfileAdapterPort;
         this.updateProfileUseCasePort = updateProfileUseCasePort;
     }
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody ProfileWithAbilitiesRequest profileRequest) {
         createProfileUseCasePort.create(profileRequest.toProfileDomain());
@@ -38,7 +39,7 @@ public class ProfileController {
     }
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<ProfileResponse> index() {
+    public Set<ProfileResponse> index() {
      return ProfileResponse.fromDomainToList(findProfileAdapterPort.getAllProfiles());
     }
 

@@ -48,7 +48,7 @@ public class UpdateUserUseCaseTest {
         var userOld =  new UserFakeBuilder().getFake();
         var profile = new ProfileFakeBuilder();
         userNew.setPassword(PASSWORD);
-        doNothing().when(updateUserAdapter).update(userNew);
+        doNothing().when(updateUserAdapter).update(any(User.class));
         when(findUserAdapterPort.findById(anyLong()))
                 .thenReturn(userOld);
         when(findProfileAdapterPort.findProfileBydId(anyLong()))

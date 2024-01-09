@@ -1,11 +1,12 @@
 package br.com.somar.app.unit.users.builders.domain;
 
+import br.com.somar.app.common.fakerutils.FakerBuilderList;
 import br.com.somar.app.users.application.core.domain.User;
 import net.datafaker.Faker;
 
 import java.util.Locale;
 
-public class UserFakeBuilder {
+public class UserFakeBuilder  extends FakerBuilderList {
 
 
     public User getFake() {

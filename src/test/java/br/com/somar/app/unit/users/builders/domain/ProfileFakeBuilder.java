@@ -10,7 +10,11 @@ public class ProfileFakeBuilder extends FakerBuilderSet<Profile> {
 
     public  Profile getFake() {
         Faker faker = new Faker(new Locale("pt-BR"));
-        return new Profile(faker.number().randomNumber(), faker.name().title());
+        return Profile
+                .builder()
+                .id(faker.number().randomNumber())
+                .name(faker.name().title())
+                .build();
     }
 
 

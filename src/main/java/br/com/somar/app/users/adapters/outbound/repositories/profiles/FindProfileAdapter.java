@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FindProfileAdapter implements FindProfileAdapterPort {
@@ -31,7 +32,7 @@ public class FindProfileAdapter implements FindProfileAdapterPort {
     }
 
     @Override
-    public List<Profile> getAllProfiles() {
+    public Set<Profile> getAllProfiles() {
         var profiles = Profile.convertListProfileEntityIntoListProfile(profileRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
         return profiles;
     }
