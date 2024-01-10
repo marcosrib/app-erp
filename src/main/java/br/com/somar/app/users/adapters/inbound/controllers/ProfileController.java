@@ -1,5 +1,6 @@
 package br.com.somar.app.users.adapters.inbound.controllers;
 
+import br.com.somar.app.users.adapters.inbound.controllers.swagger.api.PerfilApi;
 import br.com.somar.app.users.application.ports.in.profiles.CreateProfileUseCasePort;
 import br.com.somar.app.users.application.ports.out.profiles.FindProfileAdapterPort;
 import br.com.somar.app.users.adapters.inbound.controllers.requests.ProfileWithAbilitiesRequest;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/profile")
-public class ProfileController {
+public class ProfileController implements PerfilApi {
     private final CreateProfileUseCasePort createProfileUseCasePort;
     private final FindProfileAdapterPort findProfileAdapterPort;
 
