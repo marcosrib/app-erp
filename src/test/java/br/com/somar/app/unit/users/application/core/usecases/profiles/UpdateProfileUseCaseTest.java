@@ -28,7 +28,7 @@ public class UpdateProfileUseCaseTest {
 
     @DisplayName("should successfully update profile")
     @Test
-    void create() {
+    void update() {
         var profile = new ProfileFakeBuilder().getFake();
         var profileNew = new ProfileFakeBuilder().getFake();
         var abilities = new AbilityFakeBuilder().getFake(5);

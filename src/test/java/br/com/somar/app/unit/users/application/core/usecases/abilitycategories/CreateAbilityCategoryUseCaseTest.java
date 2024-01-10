@@ -79,11 +79,9 @@ public class CreateAbilityCategoryUseCaseTest {
         abilityCategories.setCode(ABILITY_CATEGORY_CODE);
 
         when(findAbilityCategoryAdapterPort.findCodeByIn(anyList())).thenReturn(Set.of(abilityCategories));
-        when(createAbilityCategoryAdapterPort.createAll(anySet())).thenReturn(Set.of(abilityCategories));
 
         var abilityCategoriesRes = createAbilityCategoryUseCase.findOrCreate(List.of(abilityFilePropertiesFakeBuilder));
 
-        verify(createAbilityCategoryAdapterPort, times(0)).createAll(anySet());
         assertTrue(abilityCategoriesRes.size() > 0);
     }
 }

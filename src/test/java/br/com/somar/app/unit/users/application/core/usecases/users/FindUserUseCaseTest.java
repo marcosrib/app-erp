@@ -22,7 +22,7 @@ public class FindUserUseCaseTest {
 
     @Test
     @DisplayName("should successfully get user by id")
-    void getUsersWithPagination() {
+    void findUserById() {
         var user = new UserFakeBuilder().getFake();
 
         when(findUserAdapterPort.findById(anyLong()))

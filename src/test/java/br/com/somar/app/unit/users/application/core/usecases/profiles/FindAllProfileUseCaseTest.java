@@ -21,7 +21,7 @@ public class FindAllProfileUseCaseTest {
     private FindProfileAdapterPort findProfileAdapterPort;
     @Test
     @DisplayName("should successfully get all profile")
-    void getUsersWithPagination() {
+    void getAllProfiles() {
         var profiles = new ProfileFakeBuilder().getFake(5);
 
         when(findProfileAdapterPort.getAllProfiles())
