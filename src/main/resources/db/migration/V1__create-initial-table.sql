@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  id BIGSERIAL PRIMARY KEY,
   name VARCHAR(100),
   email VARCHAR(50) UNIQUE,
   password VARCHAR(255),
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS profiles (
-   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+   id BIGSERIAL PRIMARY KEY,
    name VARCHAR(45) NOT NULL,
    description VARCHAR(500),
    created_at TIMESTAMP NULL,
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 CREATE INDEX fk_user_id_profile_id_idx ON user_profiles (user_id, profile_id);
 
 CREATE TABLE IF NOT EXISTS ability_groups (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     code VARCHAR(100) NOT NULL,
     created_at TIMESTAMP NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS ability_groups (
 );
 
 CREATE TABLE IF NOT EXISTS ability_categories (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  id BIGSERIAL PRIMARY KEY,
   code VARCHAR(100) NOT NULL,
   name VARCHAR(100) NOT NULL,
   created_at TIMESTAMP NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS ability_categories (
 );
 
 CREATE TABLE IF NOT EXISTS abilities (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  id BIGSERIAL PRIMARY KEY,
   ability_category_id BIGINT,
   ability_group_id BIGINT,
   CONSTRAINT fk_ability_category_id
@@ -79,3 +79,61 @@ CREATE TABLE IF NOT EXISTS profile_abilities (
 
 CREATE INDEX fk_profile_abilities_id_idx ON profile_abilities (ability_id, profile_id);
 
+CREATE TABLE IF NOT EXISTS state (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200),
+  code VARCHAR(2),
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS address (
+  id BIGSERIAL PRIMARY KEY,
+  address VARCHAR(200),
+  number VARCHAR(10),
+  cep VARCHAR(10),
+  complement VARCHAR(50),
+  city VARCHAR(150),
+  state_id INTEGER,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  CONSTRAINT fk_state_id
+    FOREIGN KEY (state_id)
+    REFERENCES state(id)
+);
+
+CREATE TABLE IF NOT EXISTS service_providers (
+  id BIGSERIAL PRIMARY KEY,
+  fantasy_name VARCHAR(150),
+  company_name VARCHAR(255),
+  email VARCHAR(50) UNIQUE,
+  cell_phone VARCHAR(9),
+  phone VARCHAR(9),
+  cpf_cnpj VARCHAR(14),
+  type VARCHAR(2),
+  address_id INTEGER,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  deleted_at TIMESTAMP,
+  CONSTRAINT fk_service_provider_address_id
+    FOREIGN KEY (address_id)
+    REFERENCES address(id)
+);
+
+CREATE TABLE IF NOT EXISTS suppliers(
+  id BIGSERIAL PRIMARY KEY,
+  fantasy_name VARCHAR(150),
+  company_name VARCHAR(255),
+  email VARCHAR(50) UNIQUE,
+  cell_phone VARCHAR(9),
+  phone VARCHAR(9),
+  cpf_cnpj VARCHAR(14),
+  type VARCHAR(2),
+  address_id INTEGER,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  deleted_at TIMESTAMP,
+  CONSTRAINT fk_supplier_address_id
+    FOREIGN KEY (address_id)
+    REFERENCES address(id)
+);
