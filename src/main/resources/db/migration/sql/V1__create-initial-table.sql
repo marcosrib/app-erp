@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS profile_abilities (
 
 CREATE INDEX fk_profile_abilities_id_idx ON profile_abilities (ability_id, profile_id);
 
-CREATE TABLE IF NOT EXISTS state (
+CREATE TABLE IF NOT EXISTS states (
   id SERIAL PRIMARY KEY,
   name VARCHAR(200),
   code VARCHAR(2),
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS state (
   updated_at TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS address (
+CREATE TABLE IF NOT EXISTS addresses (
   id BIGSERIAL PRIMARY KEY,
   address VARCHAR(200),
   number VARCHAR(10),
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS address (
   updated_at TIMESTAMP,
   CONSTRAINT fk_state_id
     FOREIGN KEY (state_id)
-    REFERENCES state(id)
+    REFERENCES states(id)
 );
 
 CREATE TABLE IF NOT EXISTS service_providers (
@@ -111,13 +111,13 @@ CREATE TABLE IF NOT EXISTS service_providers (
   phone VARCHAR(9),
   cpf_cnpj VARCHAR(14),
   type VARCHAR(2),
-  address_id INTEGER,
+  address_id BIGINT,
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
   deleted_at TIMESTAMP,
   CONSTRAINT fk_service_provider_address_id
     FOREIGN KEY (address_id)
-    REFERENCES address(id)
+    REFERENCES addresses(id)
 );
 
 CREATE TABLE IF NOT EXISTS suppliers(
@@ -129,11 +129,11 @@ CREATE TABLE IF NOT EXISTS suppliers(
   phone VARCHAR(9),
   cpf_cnpj VARCHAR(14),
   type VARCHAR(2),
-  address_id INTEGER,
+  address_id BIGINT,
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
   deleted_at TIMESTAMP,
   CONSTRAINT fk_supplier_address_id
     FOREIGN KEY (address_id)
-    REFERENCES address(id)
+    REFERENCES addresses(id)
 );
