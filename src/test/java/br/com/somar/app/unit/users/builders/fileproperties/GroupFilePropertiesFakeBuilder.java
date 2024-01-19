@@ -1,12 +1,12 @@
-package br.com.somar.app.unit.users.builders.fileproperties;
+package br.com.erp.app.unit.users.builders.fileproperties;
 
-import br.com.somar.app.common.fakerutils.FakerBuilderList;
-import br.com.somar.app.users.adapters.outbound.fileproperties.GroupFileProperties;
+import br.com.erp.app.common.fakerutils.FakerBuilderList;
+import br.com.erp.app.users.adapters.outbound.fileproperties.GroupFileProperties;
 import net.datafaker.Faker;
 
 import java.util.Locale;
 
-public class GroupFilePropertiesFakeBuilder  extends FakerBuilderList {
+public class GroupFilePropertiesFakeBuilder extends FakerBuilderList {
     public GroupFileProperties getFake() {
         Faker faker = new Faker(new Locale("pt-BR"));
         var groupFileProperties = new GroupFileProperties();

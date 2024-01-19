@@ -1,14 +1,11 @@
-package br.com.somar.app.unit.users.application.core.usecases.auth;
+package br.com.erp.app.unit.users.application.core.usecases.auth;
 
-import br.com.somar.app.common.exceptions.UnauthorizedException;
-import br.com.somar.app.unit.users.builders.domain.AuthFakeBuilder;
-import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
-import br.com.somar.app.users.adapters.outbound.jwt.JwtAdapter;
-import br.com.somar.app.users.application.core.domain.Auth;
-import br.com.somar.app.users.application.core.usecases.Auth.AuthenticationUseCase;
-import br.com.somar.app.users.application.core.usecases.Auth.RefreshTokenUseCase;
-import br.com.somar.app.users.application.ports.out.auth.AuthenticationAdapterPort;
-import br.com.somar.app.users.application.ports.out.users.FindUserAdapterPort;
+import br.com.erp.app.common.exceptions.UnauthorizedException;
+import br.com.erp.app.unit.users.builders.domain.UserFakeBuilder;
+import br.com.erp.app.users.adapters.outbound.jwt.JwtAdapter;
+import br.com.erp.app.users.application.core.domain.Auth;
+import br.com.erp.app.users.application.core.usecases.Auth.RefreshTokenUseCase;
+import br.com.erp.app.users.application.ports.out.users.FindUserAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +30,7 @@ public class RefreshTokenUseCaseTest {
     void refreshToken() {
         String token = "rifnjnkeurcheojcreckbjejvrekv";
         String email = "teste@gmail.com";
-        var user = new  UserFakeBuilder().getFake();
+        var user = new UserFakeBuilder().getFake();
         when(jwtAdapter.validateToken(token)).thenReturn(email);
         when(findUserAdapterPort.findByEmail(email)).thenReturn(user);
         refreshTokenUseCase.refreshToken(token);

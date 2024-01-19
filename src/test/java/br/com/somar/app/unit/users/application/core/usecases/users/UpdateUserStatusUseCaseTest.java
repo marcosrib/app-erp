@@ -1,10 +1,10 @@
-package br.com.somar.app.unit.users.application.core.usecases.users;
+package br.com.erp.app.unit.users.application.core.usecases.users;
 
-import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
-import br.com.somar.app.users.application.core.domain.User;
-import br.com.somar.app.users.application.core.usecases.users.UpdateUserStatusUseCase;
-import br.com.somar.app.users.application.ports.out.users.FindUserAdapterPort;
-import br.com.somar.app.users.application.ports.out.users.UpdateUserStatusAdapterPort;
+import br.com.erp.app.unit.users.builders.domain.UserFakeBuilder;
+import br.com.erp.app.users.application.core.domain.User;
+import br.com.erp.app.users.application.core.usecases.users.UpdateUserStatusUseCase;
+import br.com.erp.app.users.application.ports.out.users.FindUserAdapterPort;
+import br.com.erp.app.users.application.ports.out.users.UpdateUserStatusAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +36,7 @@ public class UpdateUserStatusUseCaseTest {
         doNothing().when(updateUserStatusAdapterPort).updateStatus(user);
         updateUserStatusUseCase.updateStatus(anyLong(), true);
 
-        var captor =  ArgumentCaptor.forClass(User.class);
+        var captor = ArgumentCaptor.forClass(User.class);
         verify(findUserAdapterPort, times(1)).findById(anyLong());
 
         verify(updateUserStatusAdapterPort, times(1)).updateStatus(captor.capture());

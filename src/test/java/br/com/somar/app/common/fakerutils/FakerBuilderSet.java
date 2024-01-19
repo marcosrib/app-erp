@@ -1,8 +1,7 @@
-package br.com.somar.app.common.fakerutils;
+package br.com.erp.app.common.fakerutils;
 
-import net.datafaker.Faker;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class FakerBuilderSet<T> {
 

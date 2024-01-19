@@ -1,13 +1,13 @@
-package br.com.somar.app.unit.users.adpters.outbound.repositories.users;
+package br.com.erp.app.unit.users.adpters.outbound.repositories.users;
 
-import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
-import br.com.somar.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
-import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
-import br.com.somar.app.users.adapters.outbound.repositories.users.FindPaginationUserAdapter;
-import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
-import br.com.somar.app.users.application.core.domain.PageDomain;
-import br.com.somar.app.users.application.core.domain.PageableRequestDomain;
-import br.com.somar.app.users.application.core.domain.User;
+import br.com.erp.app.unit.users.builders.domain.UserFakeBuilder;
+import br.com.erp.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
+import br.com.erp.app.users.adapters.outbound.repositories.entity.UserEntity;
+import br.com.erp.app.users.adapters.outbound.repositories.users.FindPaginationUserAdapter;
+import br.com.erp.app.users.adapters.outbound.repositories.users.UserRepository;
+import br.com.erp.app.users.application.core.domain.PageDomain;
+import br.com.erp.app.users.application.core.domain.PageableRequestDomain;
+import br.com.erp.app.users.application.core.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,16 +1,16 @@
-package br.com.somar.app.unit.users.application.core.usecases.abilities;
+package br.com.erp.app.unit.users.application.core.usecases.abilities;
 
-import br.com.somar.app.unit.users.builders.domain.AbilityCategoryFakeBuilder;
-import br.com.somar.app.unit.users.builders.domain.AbilityFakeBuilder;
-import br.com.somar.app.unit.users.builders.domain.AbilityGroupFakeBuilder;
-import br.com.somar.app.unit.users.builders.fileproperties.AbilityFilePropertiesFakeBuilder;
-import br.com.somar.app.unit.users.builders.fileproperties.GroupFilePropertiesFakeBuilder;
-import br.com.somar.app.users.adapters.outbound.fileproperties.GetAbilitiesIntoPropertiesFile;
-import br.com.somar.app.users.application.core.usecases.abilities.CreateAbilityUseCase;
-import br.com.somar.app.users.application.ports.in.abilitycategories.CreateAbilityCategoryUseCasePort;
-import br.com.somar.app.users.application.ports.in.abilitygroups.CreateAbilityGroupUseCasePort;
-import br.com.somar.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
-import br.com.somar.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
+import br.com.erp.app.unit.users.builders.domain.AbilityCategoryFakeBuilder;
+import br.com.erp.app.unit.users.builders.domain.AbilityFakeBuilder;
+import br.com.erp.app.unit.users.builders.domain.AbilityGroupFakeBuilder;
+import br.com.erp.app.unit.users.builders.fileproperties.AbilityFilePropertiesFakeBuilder;
+import br.com.erp.app.unit.users.builders.fileproperties.GroupFilePropertiesFakeBuilder;
+import br.com.erp.app.users.adapters.outbound.fileproperties.GetAbilitiesIntoPropertiesFile;
+import br.com.erp.app.users.application.core.usecases.abilities.CreateAbilityUseCase;
+import br.com.erp.app.users.application.ports.in.abilitycategories.CreateAbilityCategoryUseCasePort;
+import br.com.erp.app.users.application.ports.in.abilitygroups.CreateAbilityGroupUseCasePort;
+import br.com.erp.app.users.application.ports.out.abilities.CreateAbilityAdapterPort;
+import br.com.erp.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -86,6 +86,7 @@ public class CreateAbilityUseCaseTest {
         verify(createAbilityGroupUseCasePort, times(1)).findOrCreate(any());
         verify(createAbilityAdapterPort, atLeastOnce()).create(anySet());
     }
+
     @DisplayName("should create successfully if the ability exists and is different from the one being registered")
     @Test
     void createExistingAndEqualAbility() {

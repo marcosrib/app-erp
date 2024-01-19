@@ -1,6 +1,6 @@
-package br.com.somar.app.unit.users.builders.domain;
+package br.com.erp.app.unit.users.builders.domain;
 
-import br.com.somar.app.users.application.core.domain.AbilityGroup;
+import br.com.erp.app.users.application.core.domain.AbilityGroup;
 import net.datafaker.Faker;
 
 import java.util.Locale;

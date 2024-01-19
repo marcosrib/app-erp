@@ -1,12 +1,12 @@
-package br.com.somar.app.unit.users.application.core.usecases.abilitycategories;
+package br.com.erp.app.unit.users.application.core.usecases.abilitycategories;
 
-import br.com.somar.app.unit.users.builders.domain.AbilityCategoryFakeBuilder;
-import br.com.somar.app.unit.users.builders.fileproperties.AbilityFilePropertiesFakeBuilder;
-import br.com.somar.app.users.adapters.outbound.fileproperties.AbilityFileProperties;
-import br.com.somar.app.users.application.core.domain.AbilityCategory;
-import br.com.somar.app.users.application.core.usecases.abilitycategories.CreateAbilityCategoryUseCase;
-import br.com.somar.app.users.application.ports.out.abilitycategories.CreateAbilityCategoryAdapterPort;
-import br.com.somar.app.users.application.ports.out.abilitycategories.FindAbilityCategoryAdapterPort;
+import br.com.erp.app.unit.users.builders.domain.AbilityCategoryFakeBuilder;
+import br.com.erp.app.unit.users.builders.fileproperties.AbilityFilePropertiesFakeBuilder;
+import br.com.erp.app.users.adapters.outbound.fileproperties.AbilityFileProperties;
+import br.com.erp.app.users.application.core.domain.AbilityCategory;
+import br.com.erp.app.users.application.core.usecases.abilitycategories.CreateAbilityCategoryUseCase;
+import br.com.erp.app.users.application.ports.out.abilitycategories.CreateAbilityCategoryAdapterPort;
+import br.com.erp.app.users.application.ports.out.abilitycategories.FindAbilityCategoryAdapterPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,17 +26,15 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CreateAbilityCategoryUseCaseTest {
+    private final String ABILITY_CATEGORY_CODE = "CODE";
     @InjectMocks
     private CreateAbilityCategoryUseCase createAbilityCategoryUseCase;
     @Mock
     private FindAbilityCategoryAdapterPort findAbilityCategoryAdapterPort;
     @Mock
     private CreateAbilityCategoryAdapterPort createAbilityCategoryAdapterPort;
-
     private List<AbilityFileProperties> abilityFilePropertiesFakeBuilder;
-
     private Set<AbilityCategory> abilityCategories;
-    private final String ABILITY_CATEGORY_CODE = "CODE";
 
     @BeforeEach
     void setup() {

@@ -1,14 +1,14 @@
-package br.com.somar.app.unit.users.builders.domain;
+package br.com.erp.app.unit.users.builders.domain;
 
-import br.com.somar.app.common.fakerutils.FakerBuilderSet;
-import br.com.somar.app.users.application.core.domain.Profile;
+import br.com.erp.app.common.fakerutils.FakerBuilderSet;
+import br.com.erp.app.users.application.core.domain.Profile;
 import net.datafaker.Faker;
 
 import java.util.Locale;
 
 public class ProfileFakeBuilder extends FakerBuilderSet<Profile> {
 
-    public  Profile getFake() {
+    public Profile getFake() {
         Faker faker = new Faker(new Locale("pt-BR"));
         return Profile
                 .builder()

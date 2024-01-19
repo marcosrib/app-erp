@@ -1,0 +1,21 @@
+package br.com.erp.app.users.application.core.usecases.profiles;
+
+import br.com.erp.app.users.application.core.domain.Profile;
+import br.com.erp.app.users.application.ports.in.profiles.FindAllProfileUseCasePort;
+import br.com.erp.app.users.application.ports.out.profiles.FindProfileAdapterPort;
+
+import java.util.Set;
+
+public class FindAllProfileUseCase implements FindAllProfileUseCasePort {
+
+    private final FindProfileAdapterPort findProfileAdapterPort;
+
+    public FindAllProfileUseCase(FindProfileAdapterPort findProfileAdapterPort) {
+        this.findProfileAdapterPort = findProfileAdapterPort;
+    }
+
+    @Override
+    public Set<Profile> getAllProfiles() {
+        return findProfileAdapterPort.getAllProfiles();
+    }
+}

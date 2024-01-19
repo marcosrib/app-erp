@@ -1,10 +1,10 @@
-package br.com.somar.app.unit.users.adpters.outbound.repositories.users;
+package br.com.erp.app.unit.users.adpters.outbound.repositories.users;
 
-import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
-import br.com.somar.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
-import br.com.somar.app.users.adapters.outbound.repositories.entity.UserEntity;
-import br.com.somar.app.users.adapters.outbound.repositories.users.CreateUserAdapter;
-import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
+import br.com.erp.app.unit.users.builders.domain.UserFakeBuilder;
+import br.com.erp.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
+import br.com.erp.app.users.adapters.outbound.repositories.entity.UserEntity;
+import br.com.erp.app.users.adapters.outbound.repositories.users.CreateUserAdapter;
+import br.com.erp.app.users.adapters.outbound.repositories.users.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class CreateUserAdapterTest {
 
@@ -26,6 +27,7 @@ public class CreateUserAdapterTest {
 
     @Mock
     private UserRepository userRepository;
+
     @Test
     @DisplayName("should successfully create user")
     public void testShouldCreateUser() {
@@ -33,7 +35,7 @@ public class CreateUserAdapterTest {
         var userFake = new UserFakeBuilder().getFake();
 
         when(userRepository.save(any(UserEntity.class))).thenReturn(userFakeEntity);
-        var captor =  ArgumentCaptor.forClass(UserEntity.class);
+        var captor = ArgumentCaptor.forClass(UserEntity.class);
         createUserAdapter.create(userFake);
         verify(userRepository, Mockito.times(1)).save(captor.capture());
 

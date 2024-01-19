@@ -1,7 +1,7 @@
-package br.com.somar.app.unit.users.builders.fileproperties;
+package br.com.erp.app.unit.users.builders.fileproperties;
 
-import br.com.somar.app.common.fakerutils.FakerBuilderList;
-import br.com.somar.app.users.adapters.outbound.fileproperties.AbilityFileProperties;
+import br.com.erp.app.common.fakerutils.FakerBuilderList;
+import br.com.erp.app.users.adapters.outbound.fileproperties.AbilityFileProperties;
 import net.datafaker.Faker;
 
 import java.util.Locale;

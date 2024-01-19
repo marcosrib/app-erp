@@ -1,4 +1,4 @@
-package br.com.somar.app.common.fakerutils;
+package br.com.erp.app.common.fakerutils;
 
 import java.util.ArrayList;
 import java.util.List;

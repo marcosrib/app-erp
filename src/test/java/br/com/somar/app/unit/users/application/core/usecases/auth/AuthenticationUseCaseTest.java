@@ -1,8 +1,8 @@
-package br.com.somar.app.unit.users.application.core.usecases.auth;
+package br.com.erp.app.unit.users.application.core.usecases.auth;
 
-import br.com.somar.app.unit.users.builders.domain.AuthFakeBuilder;
-import br.com.somar.app.users.application.core.usecases.Auth.AuthenticationUseCase;
-import br.com.somar.app.users.application.ports.out.auth.AuthenticationAdapterPort;
+import br.com.erp.app.unit.users.builders.domain.AuthFakeBuilder;
+import br.com.erp.app.users.application.core.usecases.Auth.AuthenticationUseCase;
+import br.com.erp.app.users.application.ports.out.auth.AuthenticationAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,12 +18,13 @@ public class AuthenticationUseCaseTest {
     private AuthenticationUseCase authenticationUseCase;
     @Mock
     private AuthenticationAdapterPort authenticationAdapterPort;
+
     @DisplayName("should successfully authentication")
     @Test
     void authenticate() {
-       var auth = new AuthFakeBuilder().getFake();
-       when(authenticationAdapterPort.authenticate(auth)).thenReturn(auth);
-       authenticationUseCase.auth(auth);
-       verify(authenticationAdapterPort, times(1)).authenticate(auth);
+        var auth = new AuthFakeBuilder().getFake();
+        when(authenticationAdapterPort.authenticate(auth)).thenReturn(auth);
+        authenticationUseCase.auth(auth);
+        verify(authenticationAdapterPort, times(1)).authenticate(auth);
     }
 }

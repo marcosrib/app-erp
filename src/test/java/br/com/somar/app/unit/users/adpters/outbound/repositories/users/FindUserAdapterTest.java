@@ -1,10 +1,10 @@
-package br.com.somar.app.unit.users.adpters.outbound.repositories.users;
+package br.com.erp.app.unit.users.adpters.outbound.repositories.users;
 
-import br.com.somar.app.common.exceptions.ResourceNotFoundException;
-import br.com.somar.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
-import br.com.somar.app.users.adapters.outbound.repositories.users.FindUserAdapter;
-import br.com.somar.app.users.adapters.outbound.repositories.users.UserRepository;
-import br.com.somar.app.users.application.core.domain.User;
+import br.com.erp.app.common.exceptions.ResourceNotFoundException;
+import br.com.erp.app.unit.users.builders.repositories.entities.UserEntityFakeBuilder;
+import br.com.erp.app.users.adapters.outbound.repositories.users.FindUserAdapter;
+import br.com.erp.app.users.adapters.outbound.repositories.users.UserRepository;
+import br.com.erp.app.users.application.core.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +27,7 @@ public class FindUserAdapterTest {
     private FindUserAdapter findUserAdapter;
     @Mock
     private UserRepository userRepository;
+
     @Test
     @DisplayName("should successfully find user by id")
     public void testFindUserById() {
@@ -41,7 +42,8 @@ public class FindUserAdapterTest {
     @Test
     @DisplayName("should find user by id not found exception")
     public void testFindUserByIdNotFoundException() {
-        when(userRepository.findById(anyLong())).thenReturn(Optional.empty());;
+        when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
+        ;
 
         assertThrows(ResourceNotFoundException.class, () -> {
             findUserAdapter.findById(anyLong());

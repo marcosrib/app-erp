@@ -1,0 +1,31 @@
+package br.com.erp.app.users.adapters.outbound.repositories.abilities;
+
+import br.com.erp.app.users.application.core.domain.Ability;
+import br.com.erp.app.users.application.ports.out.abilities.FindAbilityAdapterPort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
+
+@Service
+public class FindAbilityAdapter implements FindAbilityAdapterPort {
+    @Autowired
+    private AbilityRepository abilityRepository;
+
+    @Override
+    public Set<Ability> findAbilityNotInIds(List<Long> ids) {
+        return Ability.convertListAbilityEntityToListAbility(abilityRepository.findByIdNotIn(ids));
+    }
+
+    @Override
+    public Set<Ability> findAbilityByGroupId(Long id) {
+        return Ability.convertListAbilityEntityToListAbility(abilityRepository.findByAbilityGroupId(id));
+    }
+
+    @Override
+    public Set<Ability> findAllAbilities() {
+        return Ability.convertListAbilityEntityToListAbility(Set.copyOf(abilityRepository.findAll()));
+    }
+
+}

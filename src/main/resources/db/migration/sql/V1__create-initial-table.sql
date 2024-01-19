@@ -129,11 +129,6 @@ CREATE TABLE IF NOT EXISTS suppliers(
   phone VARCHAR(9),
   cpf_cnpj VARCHAR(14),
   type VARCHAR(2),
-  address_id BIGINT,
   created_at TIMESTAMP,
-  updated_at TIMESTAMP,
-  deleted_at TIMESTAMP,
-  CONSTRAINT fk_supplier_address_id
-    FOREIGN KEY (address_id)
-    REFERENCES addresses(id)
+  updated_at TIMESTAMP
 );

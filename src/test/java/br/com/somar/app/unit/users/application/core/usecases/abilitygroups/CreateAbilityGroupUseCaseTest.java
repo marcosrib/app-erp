@@ -1,11 +1,11 @@
-package br.com.somar.app.unit.users.application.core.usecases.abilitygroups;
+package br.com.erp.app.unit.users.application.core.usecases.abilitygroups;
 
-import br.com.somar.app.unit.users.builders.domain.AbilityGroupFakeBuilder;
-import br.com.somar.app.unit.users.builders.fileproperties.GroupFilePropertiesFakeBuilder;
-import br.com.somar.app.users.application.core.domain.AbilityGroup;
-import br.com.somar.app.users.application.core.usecases.abilitygroups.CreateAbilityGroupUseCase;
-import br.com.somar.app.users.application.ports.out.abilitygroups.CreateAbilityGroupAdapterPort;
-import br.com.somar.app.users.application.ports.out.abilitygroups.FindAbilityGroupAdapterPort;
+import br.com.erp.app.unit.users.builders.domain.AbilityGroupFakeBuilder;
+import br.com.erp.app.unit.users.builders.fileproperties.GroupFilePropertiesFakeBuilder;
+import br.com.erp.app.users.application.core.domain.AbilityGroup;
+import br.com.erp.app.users.application.core.usecases.abilitygroups.CreateAbilityGroupUseCase;
+import br.com.erp.app.users.application.ports.out.abilitygroups.CreateAbilityGroupAdapterPort;
+import br.com.erp.app.users.application.ports.out.abilitygroups.FindAbilityGroupAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

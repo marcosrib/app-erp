@@ -1,18 +1,17 @@
-package br.com.somar.app.unit.users.application.core.usecases.users;
+package br.com.erp.app.unit.users.application.core.usecases.users;
 
-import br.com.somar.app.unit.users.builders.domain.UserFakeBuilder;
-import br.com.somar.app.users.application.core.domain.PageDomain;
-import br.com.somar.app.users.application.core.domain.PageableRequestDomain;
-import br.com.somar.app.users.application.core.domain.User;
-import br.com.somar.app.users.application.core.usecases.users.FindPaginationUserUseCase;
-import br.com.somar.app.users.application.ports.out.users.FindPaginationUserAdapterPort;
+import br.com.erp.app.unit.users.builders.domain.UserFakeBuilder;
+import br.com.erp.app.users.application.core.domain.PageDomain;
+import br.com.erp.app.users.application.core.domain.PageableRequestDomain;
+import br.com.erp.app.users.application.core.domain.User;
+import br.com.erp.app.users.application.core.usecases.users.FindPaginationUserUseCase;
+import br.com.erp.app.users.application.ports.out.users.FindPaginationUserAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

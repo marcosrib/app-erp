@@ -1,8 +1,8 @@
-package br.com.somar.app.unit.users.application.core.usecases.profiles;
+package br.com.erp.app.unit.users.application.core.usecases.profiles;
 
-import br.com.somar.app.unit.users.builders.domain.ProfileFakeBuilder;
-import br.com.somar.app.users.application.core.usecases.profiles.CreateProfileUseCase;
-import br.com.somar.app.users.application.ports.out.profiles.CreateProfileAdapterPort;
+import br.com.erp.app.unit.users.builders.domain.ProfileFakeBuilder;
+import br.com.erp.app.users.application.core.usecases.profiles.CreateProfileUseCase;
+import br.com.erp.app.users.application.ports.out.profiles.CreateProfileAdapterPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,7 +1,7 @@
-package br.com.somar.app.unit.users.builders.repositories.entities;
+package br.com.erp.app.unit.users.builders.repositories.entities;
 
-import br.com.somar.app.common.fakerutils.FakerBuilderSet;
-import br.com.somar.app.users.adapters.outbound.repositories.entity.ProfileEntity;
+import br.com.erp.app.common.fakerutils.FakerBuilderSet;
+import br.com.erp.app.users.adapters.outbound.repositories.entity.ProfileEntity;
 import net.datafaker.Faker;
 
 import java.util.Locale;
