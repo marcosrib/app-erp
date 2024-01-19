@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Data
 public class CreateUserRequest {
 
-    @NotEmpty(message = "{name.not.empty}")
-    @NotNull(message = "{name.not.empty}")
+    @NotEmpty(message = "Nome {name.not.empty}")
+    @NotNull(message = "Nome {name.not.empty}")
     private String name;
 
     @Email(message = "{email.invalid}")

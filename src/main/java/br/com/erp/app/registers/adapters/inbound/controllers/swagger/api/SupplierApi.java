@@ -16,6 +16,15 @@ public interface SupplierApi {
     @Operation(summary = "Cadastra fornecedor")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201"),
+            @ApiResponse(responseCode = "422", description = "Unprocessable entity",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class),
+                            examples = @ExampleObject(value = "{ \"message\": \"Validation Error\", \"status\": 422, \"error_code\": \"UNPROCESSABLE_ENTITY\", \"errors\": [ { \"message\": \"invalid field\" } ], \"timestamp\": \"2024-01-19T12:15:03Z\" }"))),
+            @ApiResponse(responseCode = "409", description = "Resource already exists.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class),
+                            examples = @ExampleObject(value = "{\"message\":\"Resource already exists.\",\"status\":409,\"error_code\":\"CONFLICT\",\"timestamp\":\"2023-09-27T21:44:33Z\"}"))),
+
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class),
