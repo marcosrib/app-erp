@@ -4,7 +4,6 @@ import br.com.erp.app.common.exceptions.ResourceAlreadyExistsException;
 import br.com.erp.app.registers.application.core.domain.Supplier;
 import br.com.erp.app.registers.application.ports.in.suppliers.CreateSupplierUseCasePort;
 import br.com.erp.app.registers.application.ports.out.suppliers.CreateSupplierAdapterPort;
-import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 
 public class CreateSupplierUseCase implements CreateSupplierUseCasePort {
@@ -16,7 +15,6 @@ public class CreateSupplierUseCase implements CreateSupplierUseCasePort {
     }
 
     @Override
-    @Transactional
     public void create(Supplier supplier) {
         try {
             createSupplierAdapterPort.create(supplier);

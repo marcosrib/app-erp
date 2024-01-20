@@ -101,34 +101,28 @@ CREATE TABLE IF NOT EXISTS addresses (
     FOREIGN KEY (state_id)
     REFERENCES states(id)
 );
-
-CREATE TABLE IF NOT EXISTS service_providers (
-  id BIGSERIAL PRIMARY KEY,
-  fantasy_name VARCHAR(150),
-  company_name VARCHAR(255),
-  email VARCHAR(50) UNIQUE,
-  cell_phone VARCHAR(9),
-  phone VARCHAR(9),
-  cpf_cnpj VARCHAR(14),
-  type VARCHAR(2),
-  address_id BIGINT,
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP,
-  deleted_at TIMESTAMP,
-  CONSTRAINT fk_service_provider_address_id
-    FOREIGN KEY (address_id)
-    REFERENCES addresses(id)
+CREATE TABLE supplier_categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    delete_at TIMESTAMP
 );
-
 CREATE TABLE IF NOT EXISTS suppliers(
   id BIGSERIAL PRIMARY KEY,
   fantasy_name VARCHAR(150),
   company_name VARCHAR(255),
   email VARCHAR(50) UNIQUE,
-  cell_phone VARCHAR(9),
-  phone VARCHAR(9),
+  cell_phone_number VARCHAR(9),
+  phone_number VARCHAR(9),
   cpf_cnpj VARCHAR(14),
   type VARCHAR(2),
+  supplier_category_id INTEGER NOT NULL,
+  address_id BIGINT,
   created_at TIMESTAMP,
-  updated_at TIMESTAMP
+  updated_at TIMESTAMP,
+  delete_at TIMESTAMP,
+  CONSTRAINT fk_supplier_categories_id
+     FOREIGN KEY (supplier_category_id)
+     REFERENCES supplier_categories(id)
 );

@@ -27,10 +27,10 @@ public record SupplierRequest(
         return Supplier
                 .builder()
                 .companyName(companyName)
-                .cellPhone(cellPhone)
+                .cellPhoneNumber(cellPhone)
                 .cpfCnpj(cpfCnpj)
                 .fantasyName(fantasyName)
-                .phone(phone)
+                .phoneNumber(phone)
                 .email(email)
                 .type(type)
                 .build();

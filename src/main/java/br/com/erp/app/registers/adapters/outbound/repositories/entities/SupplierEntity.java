@@ -26,11 +26,11 @@ public class SupplierEntity {
     @Column(name = "email", length = 50, unique = true)
     private String email;
 
-    @Column(name = "cell_phone", length = 9)
-    private String cellPhone;
+    @Column(name = "cell_phone_number", length = 9)
+    private String cellPhoneNumber;
 
-    @Column(name = "phone", length = 9)
-    private String phone;
+    @Column(name = "phone_number", length = 9)
+    private String phoneNumber;
 
     @Column(name = "cpf_cnpj", length = 14)
     private String cpfCnpj;

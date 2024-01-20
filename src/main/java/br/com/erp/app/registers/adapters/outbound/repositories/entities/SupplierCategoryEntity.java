@@ -10,36 +10,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "service_providers")
-public class ServiceProviderEntity {
+
+public class SupplierCategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fantasy_name", length = 150)
-    private String fantasyName;
-
-    @Column(name = "company_name", length = 255)
-    private String companyName;
-
-    @Column(name = "email", length = 50, unique = true)
-    private String email;
-
-    @Column(name = "cell_phone", length = 9)
-    private String cellPhone;
-
-    @Column(name = "phone", length = 9)
-    private String phone;
-
-    @Column(name = "cpf_cnpj", length = 14)
-    private String cpfCnpj;
-
-    @Column(name = "type", length = 2)
-    private String type;
-
+    @Column(name = "name", length = 50)
+    private String name;
     @OneToOne
+
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 

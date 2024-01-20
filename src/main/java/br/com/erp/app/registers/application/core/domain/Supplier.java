@@ -1,5 +1,6 @@
 package br.com.erp.app.registers.application.core.domain;
 
+import br.com.erp.app.registers.adapters.outbound.repositories.entities.SupplierEntity;
 import br.com.erp.app.registers.application.core.domain.builders.SupplierBuilder;
 import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeEnum;
 
@@ -8,10 +9,25 @@ public class Supplier {
     private String fantasyName;
     private String companyName;
     private String email;
-    private String cellPhone;
-    private String phone;
+    private String cellPhoneNumber;
+    private String phoneNumber;
     private String cpfCnpj;
     private SupplierTypeEnum type;
+
+
+    public static Supplier convertsupplierEntityToSupplier(SupplierEntity supplierEntity) {
+        return Supplier
+                .builder()
+                .companyName(supplierEntity.getCompanyName())
+                .fantasyName(supplierEntity.getFantasyName())
+                .cpfCnpj(supplierEntity.getCpfCnpj())
+                .phoneNumber(supplierEntity.getPhoneNumber())
+                .cellPhoneNumber(supplierEntity.getCellPhoneNumber())
+                .type(supplierEntity.getType())
+                .email(supplierEntity.getEmail())
+                .build();
+    }
+
 
     public static SupplierBuilder builder() {
         return new SupplierBuilder();
@@ -49,19 +65,19 @@ public class Supplier {
     }
 
     public String getCellPhone() {
-        return cellPhone;
+        return cellPhoneNumber;
     }
 
-    public void setCellPhone(String cellPhone) {
-        this.cellPhone = cellPhone;
+    public void setCellPhoneNumber(String cellPhoneNumber) {
+        this.cellPhoneNumber = cellPhoneNumber;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getCpfCnpj() {

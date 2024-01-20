@@ -4,15 +4,15 @@ import br.com.erp.app.registers.adapters.outbound.repositories.entities.Supplier
 import br.com.erp.app.registers.application.core.domain.Supplier;
 
 public class SupplierEntityMapper {
-    public static SupplierEntity convertListProfileToListEntity(Supplier supplier) {
+    public static SupplierEntity convertSupplierToSupplierEntity(Supplier supplier) {
         return  SupplierEntity
                 .builder()
                 .email(supplier.getEmail())
                 .companyName(supplier.getCompanyName())
-                .phone(supplier.getPhone())
+                .phoneNumber(supplier.getPhoneNumber())
                 .type(supplier.getType())
                 .cpfCnpj(supplier.getCpfCnpj())
-                .cellPhone(supplier.getCellPhone())
+                .cellPhoneNumber(supplier.getCellPhone())
                 .fantasyName(supplier.getFantasyName())
                 .build();
     }

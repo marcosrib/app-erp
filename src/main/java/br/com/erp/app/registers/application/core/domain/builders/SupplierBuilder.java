@@ -8,8 +8,8 @@ public class SupplierBuilder {
     private String fantasyName;
     private String companyName;
     private String email;
-    private String cellPhone;
-    private String phone;
+    private String cellPhoneNumber;
+    private String phoneNumber;
     private String cpfCnpj;
     private SupplierTypeEnum type;
 
@@ -33,13 +33,13 @@ public class SupplierBuilder {
         return this;
     }
 
-    public SupplierBuilder cellPhone(String cellPhone) {
-        this.cellPhone = cellPhone;
+    public SupplierBuilder cellPhoneNumber(String cellPhoneNumber) {
+        this.cellPhoneNumber = cellPhoneNumber;
         return this;
     }
 
-    public SupplierBuilder phone(String phone) {
-        this.phone = phone;
+    public SupplierBuilder phoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
@@ -59,9 +59,9 @@ public class SupplierBuilder {
         supplier.setCompanyName(companyName);
         supplier.setFantasyName(fantasyName);
         supplier.setEmail(email);
-        supplier.setPhone(phone);
+        supplier.setPhoneNumber(phoneNumber);
         supplier.setType(type);
-        supplier.setCellPhone(cellPhone);
+        supplier.setCellPhoneNumber(cellPhoneNumber);
         supplier.setCpfCnpj(cpfCnpj);
         return supplier;
     }
