@@ -101,28 +101,61 @@ CREATE TABLE IF NOT EXISTS addresses (
     FOREIGN KEY (state_id)
     REFERENCES states(id)
 );
-CREATE TABLE supplier_categories (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    delete_at TIMESTAMP
-);
+
 CREATE TABLE IF NOT EXISTS suppliers(
-  id BIGSERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   fantasy_name VARCHAR(150),
   company_name VARCHAR(255),
   email VARCHAR(50) UNIQUE,
   cell_phone_number VARCHAR(9),
   phone_number VARCHAR(9),
   cpf_cnpj VARCHAR(14),
-  type VARCHAR(2),
-  supplier_category_id INTEGER NOT NULL,
+  type_of_person VARCHAR(2),
+  type_supplier varchar(20),
   address_id BIGINT,
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
-  delete_at TIMESTAMP,
-  CONSTRAINT fk_supplier_categories_id
-     FOREIGN KEY (supplier_category_id)
-     REFERENCES supplier_categories(id)
+  delete_at TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS cost_centers (
+  id SERIAL PRIMARY KEY,
+  name varchar(150),
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS bills_to_pays (
+  id BIGSERIAL PRIMARY KEY,
+  value DECIMAL(10,2),
+  status varchar(20),
+  supplier_id  INTEGER,
+  cost_center_id INTEGER,
+  payment_date TIMESTAMP,
+  due_date TIMESTAMP,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  CONSTRAINT fk_bills_to_pay_supplier_id
+    FOREIGN KEY (supplier_id)
+    REFERENCES suppliers(id),
+  CONSTRAINT fk_bills_to_pay_cost_center_id
+    FOREIGN KEY (cost_center_id)
+    REFERENCES cost_centers(id)
+);
+
+CREATE TABLE IF NOT EXISTS  service_order(
+  id BIGSERIAL PRIMARY KEY,
+  value DECIMAL(10,2),
+  status varchar(20),
+  due_date TIMESTAMP,
+  supplier_id  INTEGER,
+  cost_center_id INTEGER,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  CONSTRAINT fk_service_order_supplier_id
+    FOREIGN KEY (supplier_id)
+    REFERENCES suppliers(id),
+  CONSTRAINT fk_service_order_cost_center_id
+    FOREIGN KEY (cost_center_id)
+    REFERENCES cost_centers(id)
 );

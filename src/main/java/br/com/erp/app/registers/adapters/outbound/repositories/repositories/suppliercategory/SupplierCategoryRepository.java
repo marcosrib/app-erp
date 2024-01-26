@@ -3,5 +3,5 @@ package br.com.erp.app.registers.adapters.outbound.repositories.repositories.sup
 import br.com.erp.app.registers.adapters.outbound.repositories.entities.SupplierEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SupplierCategoryRepository extends JpaRepository<Supplier, Integer> {
+public interface SupplierCategoryRepository extends JpaRepository<SupplierEntity, Integer> {
 }
