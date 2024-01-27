@@ -1,4 +1,4 @@
-INSERT INTO states (name, code, created_at, updated_at) VALUES
+INSERT INTO "STATES" ("NAME", "CODE", "CREATED_AT", "UPDATED_AT") VALUES
 ('Acre', 'AC', CURRENT_TIMESTAMP, NULL),
 ('Alagoas', 'AL', CURRENT_TIMESTAMP, NULL),
 ('Amapá', 'AP', CURRENT_TIMESTAMP, NULL),

@@ -11,38 +11,38 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "suppliers")
+@Table(name = "SUPPLIERS")
 public class SupplierEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fantasy_name", length = 150)
+    @Column(name = "FANTASY_NAME", length = 150)
     private String fantasyName;
 
-    @Column(name = "company_name", length = 255)
+    @Column(name = "COMPANY_NAME", length = 255)
     private String companyName;
 
-    @Column(name = "email", length = 50, unique = true)
+    @Column(name = "EMAIL", length = 50, unique = true)
     private String email;
 
-    @Column(name = "cell_phone_number", length = 9)
+    @Column(name = "CELL_PHONE_NUMBER", length = 9)
     private String cellPhoneNumber;
 
-    @Column(name = "phone_number", length = 9)
+    @Column(name = "PHONE_NUMBER", length = 9)
     private String phoneNumber;
 
-    @Column(name = "cpf_cnpj", length = 14)
+    @Column(name = "CPF_CNPJ", length = 14)
     private String cpfCnpj;
 
-    @Column(name = "type", length = 2)
+    @Column(name = "TYPE_OF_PERSON", length = 2)
     @Enumerated(EnumType.STRING)
     private SupplierTypeEnum type;
 
-    @Column(name = "created_at")
+    @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
     @PrePersist

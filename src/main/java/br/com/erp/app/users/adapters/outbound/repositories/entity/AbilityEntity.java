@@ -9,17 +9,17 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "abilities")
+@Table(name = "ABILITIES")
 public class AbilityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ability_category_id")
+    @JoinColumn(name = "ABILITY_CATEGORY_ID")
     private AbilityCategoryEntity abilityCategory;
 
     @ManyToOne
-    @JoinColumn(name = "ability_group_id")
+    @JoinColumn(name = "ABILITY_GROUP_ID")
     private AbilityGroupEntity abilityGroup;
 }

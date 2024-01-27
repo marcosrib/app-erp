@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "profiles")
+@Table(name = "PROFILES")
 public class ProfileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +22,16 @@ public class ProfileEntity {
 
     private String description;
 
-    @Column(name = "created_at")
+    @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "profile_abilities",
-            joinColumns = @JoinColumn(name = "profile_id"),
-            inverseJoinColumns = @JoinColumn(name = "ability_id"))
+    @JoinTable(name = "PROFILE_ABILITIES",
+            joinColumns = @JoinColumn(name = "PROFILE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ABILITY_ID"))
     private Set<AbilityEntity> abilities;
 
     @PrePersist

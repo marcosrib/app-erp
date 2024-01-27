@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "ability_categories")
+@Table(name = "ABILITY_CATEGORIES")
 public class AbilityCategoryEntity {
 
     @Id
@@ -20,10 +20,10 @@ public class AbilityCategoryEntity {
     private String code;
     private String name;
 
-    @Column(name = "created_at")
+    @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
     @PrePersist

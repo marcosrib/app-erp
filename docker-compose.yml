@@ -10,6 +10,8 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
       - POSTGRES_DB=erp_db
+      - OPTIONS=-c standard_conforming_strings=on
+      - OPTIONS=-c lower_case_table_names=off
     networks:
       - my-network
 networks:
