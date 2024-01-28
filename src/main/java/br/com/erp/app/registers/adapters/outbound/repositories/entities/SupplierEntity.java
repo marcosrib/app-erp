@@ -1,6 +1,6 @@
 package br.com.erp.app.registers.adapters.outbound.repositories.entities;
 
-import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeEnum;
+import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeOfPersonEnum;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,7 +37,7 @@ public class SupplierEntity {
 
     @Column(name = "TYPE_OF_PERSON", length = 2)
     @Enumerated(EnumType.STRING)
-    private SupplierTypeEnum type;
+    private SupplierTypeOfPersonEnum type;
 
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;

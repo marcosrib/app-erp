@@ -2,7 +2,7 @@ package br.com.erp.app.registers.application.core.domain;
 
 import br.com.erp.app.registers.adapters.outbound.repositories.entities.SupplierEntity;
 import br.com.erp.app.registers.application.core.domain.builders.SupplierBuilder;
-import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeEnum;
+import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeOfPersonEnum;
 
 public class Supplier {
     private Long id;
@@ -12,7 +12,7 @@ public class Supplier {
     private String cellPhoneNumber;
     private String phoneNumber;
     private String cpfCnpj;
-    private SupplierTypeEnum type;
+    private SupplierTypeOfPersonEnum typeOfPerson;
 
 
     public static Supplier convertsupplierEntityToSupplier(SupplierEntity supplierEntity) {
@@ -23,7 +23,7 @@ public class Supplier {
                 .cpfCnpj(supplierEntity.getCpfCnpj())
                 .phoneNumber(supplierEntity.getPhoneNumber())
                 .cellPhoneNumber(supplierEntity.getCellPhoneNumber())
-                .type(supplierEntity.getType())
+                .typeOfPerson(supplierEntity.getType())
                 .email(supplierEntity.getEmail())
                 .build();
     }
@@ -88,11 +88,11 @@ public class Supplier {
         this.cpfCnpj = cpfCnpj;
     }
 
-    public SupplierTypeEnum getType() {
-        return type;
+    public SupplierTypeOfPersonEnum getTypeOfPerson() {
+        return typeOfPerson;
     }
 
-    public void setType(SupplierTypeEnum type) {
-        this.type = type;
+    public void setTypeOfPerson(SupplierTypeOfPersonEnum typeOfPerson) {
+        this.typeOfPerson = typeOfPerson;
     }
 }

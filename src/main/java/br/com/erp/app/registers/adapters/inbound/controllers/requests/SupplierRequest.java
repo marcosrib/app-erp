@@ -2,7 +2,7 @@ package br.com.erp.app.registers.adapters.inbound.controllers.requests;
 
 import br.com.erp.app.common.annotationcustom.CpfCnpj;
 import br.com.erp.app.registers.application.core.domain.Supplier;
-import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeEnum;
+import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeOfPersonEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,7 +21,7 @@ public record SupplierRequest(
         String phone,
         @CpfCnpj
         String cpfCnpj,
-        SupplierTypeEnum type
+        SupplierTypeOfPersonEnum type
 ) {
     public Supplier toSupplierDomain() {
         return Supplier
@@ -32,7 +32,7 @@ public record SupplierRequest(
                 .fantasyName(fantasyName)
                 .phoneNumber(phone)
                 .email(email)
-                .type(type)
+                .typeOfPerson(type)
                 .build();
     }
 }

@@ -10,7 +10,7 @@ public class SupplierEntityMapper {
                 .email(supplier.getEmail())
                 .companyName(supplier.getCompanyName())
                 .phoneNumber(supplier.getPhoneNumber())
-                .type(supplier.getType())
+                .type(supplier.getTypeOfPerson())
                 .cpfCnpj(supplier.getCpfCnpj())
                 .cellPhoneNumber(supplier.getCellPhone())
                 .fantasyName(supplier.getFantasyName())

@@ -1,8 +1,10 @@
 package br.com.erp.app.registers.config.beans;
 
 import br.com.erp.app.registers.application.core.usecases.suppliers.CreateSupplierUseCase;
+import br.com.erp.app.registers.application.core.usecases.suppliers.FindSupplierUseCase;
 import br.com.erp.app.registers.application.core.usecases.suppliers.UpdateSupplierUseCase;
 import br.com.erp.app.registers.application.ports.in.suppliers.CreateSupplierUseCasePort;
+import br.com.erp.app.registers.application.ports.in.suppliers.FindSupplierUseCasePort;
 import br.com.erp.app.registers.application.ports.in.suppliers.UpdateSupplierUseCasePort;
 import br.com.erp.app.registers.application.ports.out.suppliers.CreateSupplierAdapterPort;
 import br.com.erp.app.registers.application.ports.out.suppliers.FindSupplierAdapterPort;
@@ -20,4 +22,11 @@ public class SupplierBeanConfig {
     public UpdateSupplierUseCasePort updateSupplierUseCasePort(UpdateSupplierAdapterPort updateSupplierAdapterPort, FindSupplierAdapterPort findSupplierAdapterPort) {
         return new UpdateSupplierUseCase(updateSupplierAdapterPort, findSupplierAdapterPort);
     }
+
+    @Bean
+    public FindSupplierUseCasePort findSupplierAdapterPort(FindSupplierAdapterPort findSupplierAdapterPort) {
+        return new FindSupplierUseCase(findSupplierAdapterPort);
+    }
+
+
 }

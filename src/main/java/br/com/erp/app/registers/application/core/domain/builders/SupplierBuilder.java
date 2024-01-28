@@ -1,7 +1,7 @@
 package br.com.erp.app.registers.application.core.domain.builders;
 
 import br.com.erp.app.registers.application.core.domain.Supplier;
-import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeEnum;
+import br.com.erp.app.registers.application.core.domain.enums.SupplierTypeOfPersonEnum;
 
 public class SupplierBuilder {
     private Long id;
@@ -11,7 +11,7 @@ public class SupplierBuilder {
     private String cellPhoneNumber;
     private String phoneNumber;
     private String cpfCnpj;
-    private SupplierTypeEnum type;
+    private SupplierTypeOfPersonEnum typeOfPerson;
 
     public SupplierBuilder id(Long id) {
         this.id = id;
@@ -48,8 +48,8 @@ public class SupplierBuilder {
         return this;
     }
 
-    public SupplierBuilder type(SupplierTypeEnum type) {
-        this.type = type;
+    public SupplierBuilder typeOfPerson(SupplierTypeOfPersonEnum typeOfPerson) {
+        this.typeOfPerson = typeOfPerson;
         return this;
     }
 
@@ -60,7 +60,7 @@ public class SupplierBuilder {
         supplier.setFantasyName(fantasyName);
         supplier.setEmail(email);
         supplier.setPhoneNumber(phoneNumber);
-        supplier.setType(type);
+        supplier.setTypeOfPerson(typeOfPerson);
         supplier.setCellPhoneNumber(cellPhoneNumber);
         supplier.setCpfCnpj(cpfCnpj);
         return supplier;
