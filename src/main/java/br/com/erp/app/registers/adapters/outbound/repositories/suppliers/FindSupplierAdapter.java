@@ -1,4 +1,4 @@
-package br.com.erp.app.registers.adapters.outbound.repositories.repositories.suppliers;
+package br.com.erp.app.registers.adapters.outbound.repositories.suppliers;
 
 import br.com.erp.app.common.exceptions.ResourceNotFoundException;
 import br.com.erp.app.registers.adapters.outbound.repositories.entities.SupplierEntity;
