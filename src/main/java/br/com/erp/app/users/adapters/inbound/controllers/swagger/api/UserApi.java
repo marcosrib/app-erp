@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserApi {
     @Operation(summary = "Listar usuários")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201"),
+            @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class),
@@ -33,7 +33,7 @@ public interface UserApi {
 
     @Operation(summary = "Cadastra usuário")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "201"),
             @ApiResponse(responseCode = "409", description = "Email já está cadastrado",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class),
@@ -47,7 +47,7 @@ public interface UserApi {
 
     @Operation(summary = "Atualiza usuário")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "204"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class),
@@ -61,7 +61,7 @@ public interface UserApi {
 
     @Operation(summary = "Atualiza status do usuário")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201"),
+            @ApiResponse(responseCode = "204"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class),

@@ -1,11 +1,17 @@
 package br.com.erp.app.financial.adapters.outbound.repositories.costCenters;
 
 import br.com.erp.app.common.exceptions.ResourceNotFoundException;
+import br.com.erp.app.financial.adapters.outbound.repositories.entities.CostCenterEntity;
 import br.com.erp.app.financial.application.core.domain.CostCenter;
+import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;
+import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
 import br.com.erp.app.financial.application.ports.out.costcenters.FindCostCenterAdapterPort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.util.ObjectUtils;
 @Service
 public class FindCostCenterAdapter implements FindCostCenterAdapterPort {
     private final CostCenterRepository costCenterRepository;
@@ -13,10 +19,25 @@ public class FindCostCenterAdapter implements FindCostCenterAdapterPort {
     public FindCostCenterAdapter(CostCenterRepository costCenterRepository) {
         this.costCenterRepository = costCenterRepository;
     }
-
     @Override
-    public List<CostCenter> findAll() {
-        return null;
+    public PageableFinancialDomain<CostCenter> findAllPagination(CostCenter filter, PageableFinancialRequestDomain pageable) {
+
+        Specification<CostCenterEntity> spec = Specification.where(null);
+
+        if (!ObjectUtils.isEmpty(filter.getName())) {
+            spec = spec.and((root, query, builder) ->
+                    builder.like(root.get("name"), "%" + filter.getName() + "%"));
+        }
+        Page<CostCenterEntity> costCenterEntityPage  =  costCenterRepository.findAll(spec, PageRequest.of(pageable.page(), pageable.size(), Sort.by(Sort.Direction.DESC, "id")));
+        var costCenters = CostCenter.convertPageCostCenterEntityToListCostCenter(costCenterEntityPage.getContent());
+        return PageableFinancialDomain
+                .builder()
+                .data(costCenters)
+                .totalPages(costCenterEntityPage.getTotalPages())
+                .totalElements(costCenterEntityPage.getTotalElements())
+                .currentPage(costCenterEntityPage.getNumber())
+                .nextPage()
+                .previousPage();
     }
 
     @Override

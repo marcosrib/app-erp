@@ -4,6 +4,8 @@ import br.com.erp.app.financial.adapters.outbound.repositories.entities.CostCent
 import br.com.erp.app.financial.application.core.domain.builders.CostCenterBuilder;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CostCenter {
     private Integer id;
@@ -17,7 +19,15 @@ public class CostCenter {
              .builder()
              .id(costCenterEntity.getId())
              .name(costCenterEntity.getName())
+             .createdAt(costCenterEntity.getCreatedAt())
+             .updatedAt(costCenterEntity.getUpdatedAt())
              .build();
+    }
+
+    public static List<CostCenter> convertPageCostCenterEntityToListCostCenter(List<CostCenterEntity> costCenterEntities) {
+        return costCenterEntities
+                .stream().map(CostCenter::convertCostCenterEntityToCostCenter)
+                .collect(Collectors.toList());
     }
 
     public static CostCenterBuilder builder() {

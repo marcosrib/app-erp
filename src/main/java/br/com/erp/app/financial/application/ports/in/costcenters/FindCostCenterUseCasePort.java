@@ -1,9 +1,9 @@
 package br.com.erp.app.financial.application.ports.in.costcenters;
 
 import br.com.erp.app.financial.application.core.domain.CostCenter;
-
-import java.util.List;
+import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;
+import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
 
 public interface FindCostCenterUseCasePort {
-    List<CostCenter> findAll();
+    PageableFinancialDomain<CostCenter> getCostCentersWithPaginationAndFilter(CostCenter costCenter, PageableFinancialRequestDomain pageable);
 }

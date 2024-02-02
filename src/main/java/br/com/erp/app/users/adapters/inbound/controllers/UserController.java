@@ -71,7 +71,7 @@ public class UserController implements UserApi {
     }
 
     @PatchMapping("/{userId}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateStatus(@RequestBody UpdateUserStatusRequest UpdateUserStatusRequest, @PathVariable Long userId) {
         updateUserStatusUseCasePort.updateStatus(userId, UpdateUserStatusRequest.status());
     }
