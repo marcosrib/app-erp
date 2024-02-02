@@ -6,6 +6,8 @@ import br.com.erp.app.financial.application.core.domain.PageableFinancialRequest
 import br.com.erp.app.financial.application.ports.in.costcenters.FindCostCenterUseCasePort;
 import br.com.erp.app.financial.application.ports.out.costcenters.FindCostCenterAdapterPort;
 
+import java.util.List;
+
 public class FindCostCenterUseCase implements FindCostCenterUseCasePort {
 
     private final FindCostCenterAdapterPort findCostCenterAdapterPort;
@@ -14,7 +16,14 @@ public class FindCostCenterUseCase implements FindCostCenterUseCasePort {
         this.findCostCenterAdapterPort = findCostCenterAdapterPort;
     }
     @Override
-    public PageableFinancialDomain<CostCenter> getCostCentersWithPaginationAndFilter(CostCenter costCenter, PageableFinancialRequestDomain pageable) {
-        return findCostCenterAdapterPort.findAllPagination(costCenter, pageable);
+    public PageableFinancialDomain<CostCenter> getCostCentersWithPaginationAndFilter(String name, PageableFinancialRequestDomain pageable) {
+        return findCostCenterAdapterPort.findAllPagination(name, pageable);
     }
+
+    @Override
+    public List<CostCenter> findAllCostCenter() {
+        return findCostCenterAdapterPort.findAllCostCenter();
+    }
+
+
 }

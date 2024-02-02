@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/cost-center")
 public class CostCenterController implements CostCenterApi {
@@ -26,11 +28,11 @@ public class CostCenterController implements CostCenterApi {
         this.findCostCenterUseCasePort = findCostCenterUseCasePort;
     }
 
-    @GetMapping("/")
+    @GetMapping("/pagination")
     @ResponseStatus(HttpStatus.OK)
-    public PageFinancialResponse<CostCenterResponse> index(CostCenterRequest filter, Pageable pageable) {
+    public PageFinancialResponse<CostCenterResponse> findPagination(@RequestParam(required = false) String name, Pageable pageable) {
         var pageableRequestDomain = new PageableFinancialRequestDomain(pageable.getPageNumber(), pageable.getPageSize());
-        var costCenters = findCostCenterUseCasePort.getCostCentersWithPaginationAndFilter(filter.toCostCenterDomain(), pageableRequestDomain);
+        var costCenters = findCostCenterUseCasePort.getCostCentersWithPaginationAndFilter(name, pageableRequestDomain);
         var costCenterResponseList = CostCenterResponse.fromDomainToList(costCenters.getData());
         return new PageFinancialResponse<CostCenterResponse>(
                 costCenterResponseList,
@@ -48,11 +50,19 @@ public class CostCenterController implements CostCenterApi {
     public void create(@RequestBody CostCenterRequest costCenterRequest) {
         createCostCenterUseCasePort.create(costCenterRequest.toCostCenterDomain());
     }
-    @PutMapping
+
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
     public void update(@RequestBody CostCenterRequest costCenterRequest, @PathVariable Integer id) {
         updateCostCenterUseCasePort.update(costCenterRequest.toCostCenterDomain(), id);
+    }
+
+    @GetMapping
+    @Override
+    public List<CostCenterResponse> index() {
+        var costCenters = findCostCenterUseCasePort.findAllCostCenter();
+        return CostCenterResponse.fromDomainToList(costCenters);
     }
 
 

@@ -12,6 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
+
 @Service
 public class FindCostCenterAdapter implements FindCostCenterAdapterPort {
     private final CostCenterRepository costCenterRepository;
@@ -19,16 +22,17 @@ public class FindCostCenterAdapter implements FindCostCenterAdapterPort {
     public FindCostCenterAdapter(CostCenterRepository costCenterRepository) {
         this.costCenterRepository = costCenterRepository;
     }
+
     @Override
-    public PageableFinancialDomain<CostCenter> findAllPagination(CostCenter filter, PageableFinancialRequestDomain pageable) {
+    public PageableFinancialDomain<CostCenter> findAllPagination(String name, PageableFinancialRequestDomain pageable) {
 
         Specification<CostCenterEntity> spec = Specification.where(null);
 
-        if (!ObjectUtils.isEmpty(filter.getName())) {
+        if (!ObjectUtils.isEmpty(name)) {
             spec = spec.and((root, query, builder) ->
-                    builder.like(root.get("name"), "%" + filter.getName() + "%"));
+                    builder.like(root.get("name"), "%" + name + "%"));
         }
-        Page<CostCenterEntity> costCenterEntityPage  =  costCenterRepository.findAll(spec, PageRequest.of(pageable.page(), pageable.size(), Sort.by(Sort.Direction.DESC, "id")));
+        Page<CostCenterEntity> costCenterEntityPage = costCenterRepository.findAll(spec, PageRequest.of(pageable.page(), pageable.size(), Sort.by(Sort.Direction.DESC, "id")));
         var costCenters = CostCenter.convertPageCostCenterEntityToListCostCenter(costCenterEntityPage.getContent());
         return PageableFinancialDomain
                 .builder()
@@ -42,8 +46,14 @@ public class FindCostCenterAdapter implements FindCostCenterAdapterPort {
 
     @Override
     public CostCenter findById(Integer id) {
-       var costCenter =  costCenterRepository.findById(id)
+        var costCenter = costCenterRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("cost.center.not.found"));
         return CostCenter.convertCostCenterEntityToCostCenter(costCenter);
+    }
+
+    @Override
+    public List<CostCenter> findAllCostCenter() {
+        var costCenterEntities = costCenterRepository.findAll();
+        return CostCenter.convertPageCostCenterEntityToListCostCenter(costCenterEntities);
     }
 }
