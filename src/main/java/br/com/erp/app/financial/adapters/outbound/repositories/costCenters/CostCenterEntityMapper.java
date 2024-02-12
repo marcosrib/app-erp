@@ -8,6 +8,7 @@ public class CostCenterEntityMapper {
     public static CostCenterEntity convertCostCenterToCostCenterEntity(CostCenter costCenter) {
         return  CostCenterEntity
                 .builder()
+                .id(costCenter.getId())
                 .name(costCenter.getName())
                 .build();
     }
