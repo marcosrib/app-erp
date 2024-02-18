@@ -33,14 +33,14 @@ public class CostCenterController implements CostCenterApi {
     public PageFinancialResponse<CostCenterResponse> findPagination(@RequestParam(required = false) String name, Pageable pageable) {
         var pageableRequestDomain = new PageableFinancialRequestDomain(pageable.getPageNumber(), pageable.getPageSize());
         var costCenters = findCostCenterUseCasePort.getCostCentersWithPaginationAndFilter(name, pageableRequestDomain);
-        var costCenterResponseList = CostCenterResponse.fromDomainToList(costCenters.getData());
+        var costCenterResponseList = CostCenterResponse.fromDomainToList(costCenters.data());
         return new PageFinancialResponse<CostCenterResponse>(
                 costCenterResponseList,
-                costCenters.getTotalPages(),
-                costCenters.getTotalElements(),
-                costCenters.getNextPage(),
-                costCenters.getPreviousPage(),
-                costCenters.getCurrentPage()
+                costCenters.totalPages(),
+                costCenters.totalElements(),
+                costCenters.nextPage(),
+                costCenters.previousPage(),
+                costCenters.currentPage()
         );
     }
 

@@ -5,13 +5,12 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "COST_CENTERS")
-public class CostCenterEntity {
+public final class CostCenterEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +26,9 @@ public class CostCenterEntity {
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
+
     @PrePersist
-    public void prePersist() {
-        createdAt = LocalDateTime.now();
-    }
+    public void prePersist() { createdAt = LocalDateTime.now();}
 
     @PreUpdate
     public void preUpdate() {

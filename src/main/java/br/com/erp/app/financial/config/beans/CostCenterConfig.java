@@ -1,6 +1,6 @@
 package br.com.erp.app.financial.config.beans;
 
-import br.com.erp.app.financial.adapters.outbound.repositories.costCenters.FindCostCenterAdapter;
+import br.com.erp.app.financial.adapters.outbound.repositories.costcenters.FindCostCenterAdapter;
 import br.com.erp.app.financial.application.core.usecases.costcenters.CreateCostCenterUseCase;
 import br.com.erp.app.financial.application.core.usecases.costcenters.FindCostCenterUseCase;
 import br.com.erp.app.financial.application.core.usecases.costcenters.UpdateCostCenterUseCase;

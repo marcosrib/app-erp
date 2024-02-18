@@ -1,4 +1,4 @@
-package br.com.erp.app.financial.adapters.outbound.repositories.costCenters;
+package br.com.erp.app.financial.adapters.outbound.repositories.costcenters;
 
 import br.com.erp.app.financial.adapters.outbound.repositories.entities.CostCenterEntity;
 import br.com.erp.app.financial.application.core.domain.CostCenter;
@@ -8,8 +8,8 @@ public class CostCenterEntityMapper {
     public static CostCenterEntity convertCostCenterToCostCenterEntity(CostCenter costCenter) {
         return  CostCenterEntity
                 .builder()
-                .id(costCenter.getId())
-                .name(costCenter.getName())
+                .id(costCenter.id())
+                .name(costCenter.name())
                 .build();
     }
 }

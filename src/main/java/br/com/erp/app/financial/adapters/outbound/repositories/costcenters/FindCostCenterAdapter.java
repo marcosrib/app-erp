@@ -1,4 +1,4 @@
-package br.com.erp.app.financial.adapters.outbound.repositories.costCenters;
+package br.com.erp.app.financial.adapters.outbound.repositories.costcenters;
 
 import br.com.erp.app.common.exceptions.ResourceNotFoundException;
 import br.com.erp.app.financial.adapters.outbound.repositories.entities.CostCenterEntity;
@@ -41,7 +41,8 @@ public class FindCostCenterAdapter implements FindCostCenterAdapterPort {
                 .totalElements(costCenterEntityPage.getTotalElements())
                 .currentPage(costCenterEntityPage.getNumber())
                 .nextPage()
-                .previousPage();
+                .previousPage()
+                .build();
     }
 
     @Override

@@ -9,8 +9,8 @@ public record CostCenterResponse(Integer id, String name) {
 
     public static CostCenterResponse fromDomain(CostCenter costCenter) {
        return new CostCenterResponse(
-               costCenter.getId(),
-               costCenter.getName()
+               costCenter.id(),
+               costCenter.name()
        );
     }
 

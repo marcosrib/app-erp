@@ -1,4 +1,4 @@
-package br.com.erp.app.financial.adapters.outbound.repositories.chartAccountsGroup;
+package br.com.erp.app.financial.adapters.outbound.repositories.chartaccountsgroup;
 
 import br.com.erp.app.common.exceptions.ResourceNotFoundException;
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;

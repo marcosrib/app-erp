@@ -16,8 +16,13 @@ public class UpdateCostCenterUseCase implements UpdateCostCenterUseCasePort {
 
     @Override
     public void update(CostCenter costCenter, Integer id) {
-        CostCenter costCenterResult = findCostCenterAdapterPort.findById(id);
-        costCenterResult.setName(costCenter.getName());
-        costCenterAdapterPort.update(costCenter);
+        CostCenter costCenterActual = findCostCenterAdapterPort.findById(id);
+        CostCenter updatedCostCenter = new CostCenter(
+                costCenterActual.id(),
+                costCenter.name(),
+                costCenterActual.createdAt(),
+                costCenterActual.updatedAt()
+        );
+        costCenterAdapterPort.update(updatedCostCenter);
     }
 }

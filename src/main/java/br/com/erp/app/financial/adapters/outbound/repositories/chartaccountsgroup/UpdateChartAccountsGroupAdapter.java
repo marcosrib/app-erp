@@ -1,19 +1,19 @@
-package br.com.erp.app.financial.adapters.outbound.repositories.chartAccountsGroup;
+package br.com.erp.app.financial.adapters.outbound.repositories.chartaccountsgroup;
 
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.CreateChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.UpdateChartAccountsGroupAdapterPort;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateChartAccountsGroupAdapter implements CreateChartAccountsGroupAdapterPort {
+public class UpdateChartAccountsGroupAdapter implements UpdateChartAccountsGroupAdapterPort {
     private final ChartAccountsGroupRepository chartAccountsGroupRepository;
 
-    public CreateChartAccountsGroupAdapter(ChartAccountsGroupRepository chartAccountsGroupRepository) {
+    public UpdateChartAccountsGroupAdapter(ChartAccountsGroupRepository chartAccountsGroupRepository) {
         this.chartAccountsGroupRepository = chartAccountsGroupRepository;
     }
 
     @Override
-    public void create(ChartAccountsGroup chartAccountsGroup) {
+    public void update(ChartAccountsGroup chartAccountsGroup) {
         var chartAccountsGroupEntity = ChartAccountsGroupEntityMapper.convertChartAccountsGroupToChartAccountsGroupEntity(chartAccountsGroup);
         chartAccountsGroupRepository.save(chartAccountsGroupEntity);
     }

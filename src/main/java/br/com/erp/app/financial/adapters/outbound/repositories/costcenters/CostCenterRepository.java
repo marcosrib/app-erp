@@ -1,4 +1,4 @@
-package br.com.erp.app.financial.adapters.outbound.repositories.costCenters;
+package br.com.erp.app.financial.adapters.outbound.repositories.costcenters;
 
 import br.com.erp.app.financial.adapters.outbound.repositories.entities.CostCenterEntity;
 import org.springframework.data.domain.Page;
