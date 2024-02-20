@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CostCenterRepository extends JpaRepository<CostCenterEntity, Integer> {
 
     Page<CostCenterEntity> findAll(Specification<CostCenterEntity> spec, Pageable pageable);
+
 }
