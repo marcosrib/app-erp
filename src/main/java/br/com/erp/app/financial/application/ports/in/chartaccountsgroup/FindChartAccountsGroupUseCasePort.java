@@ -1,4 +1,4 @@
-package br.com.erp.app.financial.application.ports.in.chartAccountsGroup;
+package br.com.erp.app.financial.application.ports.in.chartaccountsgroup;
 
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;

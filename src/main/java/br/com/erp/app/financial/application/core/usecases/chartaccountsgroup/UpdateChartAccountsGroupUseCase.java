@@ -1,9 +1,9 @@
-package br.com.erp.app.financial.application.core.usecases.chartAccountsGroup;
+package br.com.erp.app.financial.application.core.usecases.chartaccountsgroup;
 
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.UpdateChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.FindChartAccountsGroupAdapterPort;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.UpdateChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.UpdateChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.FindChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.UpdateChartAccountsGroupAdapterPort;
 
 public class UpdateChartAccountsGroupUseCase implements UpdateChartAccountsGroupUseCasePort {
 

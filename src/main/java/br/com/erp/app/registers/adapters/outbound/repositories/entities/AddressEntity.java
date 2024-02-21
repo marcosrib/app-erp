@@ -11,35 +11,35 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "addresses")
+@Table(name = "ADDRESSES")
 public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "address", length = 200)
+    @Column(name = "ADDRESS", length = 200)
     private String address;
 
-    @Column(name = "number", length = 10)
+    @Column(name = "NUMBER", length = 10)
     private String number;
 
-    @Column(name = "cep", length = 10)
+    @Column(name = "CEP", length = 10)
     private String cep;
 
-    @Column(name = "complement", length = 50)
+    @Column(name = "COMPLEMENT", length = 50)
     private String complement;
 
-    @Column(name = "city", length = 150)
+    @Column(name = "CITY", length = 150)
     private String city;
 
     @ManyToOne
-    @JoinColumn(name = "state_id")
+    @JoinColumn(name = "STATE_ID")
     private StateEntity state;
 
-    @Column(name = "created_at")
+    @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
     @PrePersist

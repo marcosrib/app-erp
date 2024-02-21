@@ -1,19 +1,19 @@
 package br.com.erp.app.financial.config.beans;
 
-import br.com.erp.app.financial.application.core.usecases.chartAccountsGroup.CreateChartAccountsGroupUseCase;
-import br.com.erp.app.financial.application.core.usecases.chartAccountsGroup.FindChartAccountsGroupUseCase;
-import br.com.erp.app.financial.application.core.usecases.chartAccountsGroup.UpdateChartAccountsGroupUseCase;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.CreateChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.FindChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.UpdateChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.CreateChartAccountsGroupAdapterPort;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.FindChartAccountsGroupAdapterPort;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.UpdateChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.core.usecases.chartaccountsgroup.CreateChartAccountsGroupUseCase;
+import br.com.erp.app.financial.application.core.usecases.chartaccountsgroup.FindChartAccountsGroupUseCase;
+import br.com.erp.app.financial.application.core.usecases.chartaccountsgroup.UpdateChartAccountsGroupUseCase;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.CreateChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.FindChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.UpdateChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.CreateChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.FindChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.UpdateChartAccountsGroupAdapterPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class chartAccountsGroupConfig {
+public class ChartAccountsGroupConfig {
 
     @Bean
     public CreateChartAccountsGroupUseCasePort createChartAccountsGroupUseCasePort(CreateChartAccountsGroupAdapterPort createChartAccountsGroupAdapterPort) {

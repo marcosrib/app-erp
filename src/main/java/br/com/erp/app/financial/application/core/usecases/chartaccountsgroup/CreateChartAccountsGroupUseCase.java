@@ -1,8 +1,8 @@
-package br.com.erp.app.financial.application.core.usecases.chartAccountsGroup;
+package br.com.erp.app.financial.application.core.usecases.chartaccountsgroup;
 
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.CreateChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.CreateChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.CreateChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.CreateChartAccountsGroupAdapterPort;
 
 public class CreateChartAccountsGroupUseCase implements CreateChartAccountsGroupUseCasePort {
 

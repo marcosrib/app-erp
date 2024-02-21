@@ -1,10 +1,10 @@
-package br.com.erp.app.financial.application.core.usecases.chartAccountsGroup;
+package br.com.erp.app.financial.application.core.usecases.chartaccountsgroup;
 
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.FindChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.FindChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.FindChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.FindChartAccountsGroupAdapterPort;
 
 import java.util.List;
 

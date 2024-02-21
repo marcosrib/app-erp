@@ -2,13 +2,12 @@ package br.com.erp.app.financial.adapters.inbound.controllers;
 
 import br.com.erp.app.financial.adapters.inbound.controllers.requests.ChartAccountsGroupRequest;
 import br.com.erp.app.financial.adapters.inbound.controllers.responses.ChartAccountsGroupResponse;
-import br.com.erp.app.financial.adapters.inbound.controllers.responses.CostCenterResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.responses.PageFinancialResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.swagger.api.ChartAccountsGroupApi;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.CreateChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.FindChartAccountsGroupUseCasePort;
-import br.com.erp.app.financial.application.ports.in.chartAccountsGroup.UpdateChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.CreateChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.FindChartAccountsGroupUseCasePort;
+import br.com.erp.app.financial.application.ports.in.chartaccountsgroup.UpdateChartAccountsGroupUseCasePort;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

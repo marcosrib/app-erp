@@ -1,7 +1,7 @@
 package br.com.erp.app.financial.adapters.outbound.repositories.chartaccountsgroup;
 
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.UpdateChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.UpdateChartAccountsGroupAdapterPort;
 import org.springframework.stereotype.Service;
 
 @Service

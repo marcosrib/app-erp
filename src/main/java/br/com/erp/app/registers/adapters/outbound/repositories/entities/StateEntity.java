@@ -5,22 +5,23 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "states")
+@Table(name = "STATES")
 public class StateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "name", length = 200)
+    @Column(name = "NAME", length = 200)
     private String name;
 
-    @Column(name = "code", length = 2)
+    @Column(name = "CODE", length = 2)
     private String code;
 
-    @Column(name = "created_at")
+    @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
     @PrePersist

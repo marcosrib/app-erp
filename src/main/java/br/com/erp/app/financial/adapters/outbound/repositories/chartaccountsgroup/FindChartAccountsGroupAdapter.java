@@ -2,12 +2,10 @@ package br.com.erp.app.financial.adapters.outbound.repositories.chartaccountsgro
 
 import br.com.erp.app.common.exceptions.ResourceNotFoundException;
 import br.com.erp.app.financial.adapters.outbound.repositories.entities.ChartAccountsGroupEntity;
-import br.com.erp.app.financial.adapters.outbound.repositories.entities.CostCenterEntity;
 import br.com.erp.app.financial.application.core.domain.ChartAccountsGroup;
-import br.com.erp.app.financial.application.core.domain.CostCenter;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
-import br.com.erp.app.financial.application.ports.out.chartAccountsGroup.FindChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.FindChartAccountsGroupAdapterPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
