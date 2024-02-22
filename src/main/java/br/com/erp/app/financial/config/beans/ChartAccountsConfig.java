@@ -7,20 +7,25 @@ import br.com.erp.app.financial.application.ports.in.chartaccounts.UpdateChartAc
 import br.com.erp.app.financial.application.ports.out.chartaccounts.CreateChartAccountAdapterPort;
 import br.com.erp.app.financial.application.ports.out.chartaccounts.FindChartAccountAdapterPort;
 import br.com.erp.app.financial.application.ports.out.chartaccounts.UpdateChartAccountAdapterPort;
+import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.FindChartAccountsGroupAdapterPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ChartAccountsConfig {
     @Bean
-    public CreateChartAccountUseCasePort createChartAccountUseCasePort(CreateChartAccountAdapterPort createChartAccountAdapterPort) {
-        return new CreateChartAccountUseCase(createChartAccountAdapterPort);
+    public CreateChartAccountUseCasePort createChartAccountUseCasePort(
+            CreateChartAccountAdapterPort createChartAccountAdapterPort,
+            FindChartAccountsGroupAdapterPort findChartAccountsGroupAdapterPort
+    ) {
+        return new CreateChartAccountUseCase(createChartAccountAdapterPort, findChartAccountsGroupAdapterPort);
     }
 
     @Bean
     public UpdateChartAccountUseCasePort updateChartAccountUseCasePort(
             UpdateChartAccountAdapterPort updateChartAccountAdapterPort,
-            FindChartAccountAdapterPort findChartAccountAdapterPort) {
-        return new UpdateChartAccountUseCase(updateChartAccountAdapterPort, findChartAccountAdapterPort);
+            FindChartAccountAdapterPort findChartAccountAdapterPort,
+            FindChartAccountsGroupAdapterPort chartAccountsGroupAdapterPort) {
+        return new UpdateChartAccountUseCase(updateChartAccountAdapterPort, findChartAccountAdapterPort, chartAccountsGroupAdapterPort);
     }
 }

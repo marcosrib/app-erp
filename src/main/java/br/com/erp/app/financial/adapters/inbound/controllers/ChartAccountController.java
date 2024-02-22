@@ -4,6 +4,7 @@ import br.com.erp.app.financial.adapters.inbound.controllers.requests.ChartAccou
 import br.com.erp.app.financial.adapters.inbound.controllers.swagger.api.ChartAccountApi;
 import br.com.erp.app.financial.application.ports.in.chartaccounts.CreateChartAccountUseCasePort;
 import br.com.erp.app.financial.application.ports.in.chartaccounts.UpdateChartAccountUseCasePort;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,14 +24,14 @@ public class ChartAccountController implements ChartAccountApi {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Override
-    public void create(@RequestBody ChartAccountRequest chartAccountRequest) {
+    public void create(@Valid @RequestBody ChartAccountRequest chartAccountRequest) {
         createChartAccountUseCasePort.create(chartAccountRequest.toChartAccountDomain());
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
-    public void update(@RequestBody ChartAccountRequest chartAccountRequest, @PathVariable Integer id) {
+    public void update(@Valid @RequestBody ChartAccountRequest chartAccountRequest, @PathVariable Integer id) {
         updateChartAccountUseCasePort.update(chartAccountRequest.toChartAccountDomain(), id);
     }
 }

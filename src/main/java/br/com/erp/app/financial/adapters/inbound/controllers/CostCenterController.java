@@ -8,6 +8,7 @@ import br.com.erp.app.financial.application.core.domain.PageableFinancialRequest
 import br.com.erp.app.financial.application.ports.in.costcenters.CreateCostCenterUseCasePort;
 import br.com.erp.app.financial.application.ports.in.costcenters.FindCostCenterUseCasePort;
 import br.com.erp.app.financial.application.ports.in.costcenters.UpdateCostCenterUseCasePort;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -47,14 +48,14 @@ public class CostCenterController implements CostCenterApi {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Override
-    public void create(@RequestBody CostCenterRequest costCenterRequest) {
+    public void create(@Valid @RequestBody CostCenterRequest costCenterRequest) {
         createCostCenterUseCasePort.create(costCenterRequest.toCostCenterDomain());
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
-    public void update(@RequestBody CostCenterRequest costCenterRequest, @PathVariable Integer id) {
+    public void update(@Valid @RequestBody CostCenterRequest costCenterRequest, @PathVariable Integer id) {
         updateCostCenterUseCasePort.update(costCenterRequest.toCostCenterDomain(), id);
     }
 
