@@ -13,6 +13,11 @@ public record ChartAccountsGroupResponse(
         LocalDateTime updatedAt
 ) {
 
+
+    public ChartAccountsGroupResponse(Integer id,  String name) {
+        this(id, name, null, null);
+    }
+
     public static ChartAccountsGroupResponse fromDomain(ChartAccountsGroup chartAccountsGroup) {
         return new ChartAccountsGroupResponse(
                 chartAccountsGroup.getId(),

@@ -4,6 +4,8 @@ import br.com.erp.app.financial.adapters.outbound.repositories.entities.ChartAcc
 import br.com.erp.app.financial.application.core.domain.enums.CharAccountTypeEnum;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public record ChartAccount(
         Integer id,
@@ -28,5 +30,11 @@ public record ChartAccount(
                 chartAccountEntity.getCreatedAt(),
                 chartAccountEntity.getUpdatedAt()
         );
+    }
+    public static List<ChartAccount> convertChartAccountEntityListToChartAccountList(List<ChartAccountEntity> chartAccountEntities) {
+        return chartAccountEntities
+                .stream()
+                .map(ChartAccount::convertChartAccountEntityToChartAccount)
+                .collect(Collectors.toList());
     }
 }

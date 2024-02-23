@@ -9,10 +9,9 @@ import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.FindCha
 public class UpdateChartAccountUseCase implements UpdateChartAccountUseCasePort {
 
     private final UpdateChartAccountAdapterPort updateChartAccountAdapterPort;
-
     private final FindChartAccountAdapterPort findChartAccountAdapterPort;
-
     private final FindChartAccountsGroupAdapterPort chartAccountsGroupAdapterPort;
+
     public UpdateChartAccountUseCase(UpdateChartAccountAdapterPort updateChartAccountAdapterPort, FindChartAccountAdapterPort findChartAccountAdapterPort, FindChartAccountsGroupAdapterPort chartAccountsGroupAdapterPort) {
         this.updateChartAccountAdapterPort = updateChartAccountAdapterPort;
         this.findChartAccountAdapterPort = findChartAccountAdapterPort;
