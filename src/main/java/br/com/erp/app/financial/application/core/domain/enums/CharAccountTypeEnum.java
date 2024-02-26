@@ -1,7 +1,7 @@
 package br.com.erp.app.financial.application.core.domain.enums;
 
 public enum CharAccountTypeEnum {
-    EXPENSES("Despesa"),
+    EXPENSE("Despesa"),
     REVENUE("Receita");
 
     private String description;

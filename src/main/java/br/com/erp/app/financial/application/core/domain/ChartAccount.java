@@ -5,7 +5,6 @@ import br.com.erp.app.financial.application.core.domain.enums.CharAccountTypeEnu
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public record ChartAccount(
         Integer id,
@@ -18,6 +17,9 @@ public record ChartAccount(
 
     public ChartAccount(String name, CharAccountTypeEnum type, ChartAccountsGroup chartAccountsGroup) {
         this(null,name,type, chartAccountsGroup,null, null);
+    }
+    public ChartAccount(Integer id) {
+        this(id,null, null, null,null, null);
     }
 
     public static ChartAccount convertChartAccountEntityToChartAccount(ChartAccountEntity chartAccountEntity) {
@@ -35,6 +37,6 @@ public record ChartAccount(
         return chartAccountEntities
                 .stream()
                 .map(ChartAccount::convertChartAccountEntityToChartAccount)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

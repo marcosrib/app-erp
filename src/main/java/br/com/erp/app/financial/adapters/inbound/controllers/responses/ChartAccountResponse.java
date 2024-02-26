@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 public record ChartAccountResponse(
         Integer id,
         String name,
-        String type,
-        ChartAccountsGroupResponse chartAccountsGroupResponse,
+        ChartAccountTypeEnumResponse type,
+        ChartAccountsGroupResponse chartAccountsGroup,
         LocalDateTime createdAt,
         LocalDateTime updatedAt) {
 
@@ -18,7 +18,7 @@ public record ChartAccountResponse(
         return new ChartAccountResponse(
                 chartAccount.id(),
                 chartAccount.name(),
-                chartAccount.type().getDescription(),
+                new ChartAccountTypeEnumResponse(chartAccount.type().toString(), chartAccount.type().getDescription()),
                 new ChartAccountsGroupResponse(
                         chartAccount.chartAccountsGroup().getId(),
                         chartAccount.chartAccountsGroup().getName()),

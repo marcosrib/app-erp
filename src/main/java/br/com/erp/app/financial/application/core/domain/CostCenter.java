@@ -17,6 +17,10 @@ public record CostCenter(
         this(null,name,null, null);
     }
 
+    public CostCenter(Integer id) {
+        this(id,null,null, null);
+    }
+
     public static CostCenter convertCostCenterEntityToCostCenter(CostCenterEntity costCenterEntity) {
         return new CostCenter(
                 costCenterEntity.getId(),
