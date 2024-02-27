@@ -1,13 +1,12 @@
 package br.com.erp.app.financial.config.beans;
 
-import br.com.erp.app.financial.adapters.outbound.repositories.accountspayable.CreateAccountPayableAdapter;
 import br.com.erp.app.financial.application.core.usecases.accountspayable.CreateAccountPayableUseCase;
-import br.com.erp.app.financial.application.core.usecases.chartaccounts.CreateChartAccountUseCase;
+import br.com.erp.app.financial.application.core.usecases.accountspayable.UpdateAccountPayableUseCase;
 import br.com.erp.app.financial.application.ports.in.accountspayable.CreateAccountPayableUseCasePort;
-import br.com.erp.app.financial.application.ports.in.chartaccounts.CreateChartAccountUseCasePort;
+import br.com.erp.app.financial.application.ports.in.accountspayable.UpdateAccountPayableUseCasePort;
 import br.com.erp.app.financial.application.ports.out.accountspayable.CreateAccountPayableAdapterPort;
-import br.com.erp.app.financial.application.ports.out.chartaccounts.CreateChartAccountAdapterPort;
-import br.com.erp.app.financial.application.ports.out.chartaccountsgroup.FindChartAccountsGroupAdapterPort;
+import br.com.erp.app.financial.application.ports.out.accountspayable.FindAccountPayableAdapterPort;
+import br.com.erp.app.financial.application.ports.out.accountspayable.UpdateAccountPayableAdapterPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,4 +18,13 @@ public class AccountPayableConfig {
     ) {
         return new CreateAccountPayableUseCase(createAccountPayableAdapterPort);
     }
+
+    @Bean
+    public UpdateAccountPayableUseCasePort updateAccountPayableUseCasePort(
+            UpdateAccountPayableAdapterPort updateAccountPayableAdapterPort,
+            FindAccountPayableAdapterPort findAccountPayableAdapterPort
+    ) {
+        return new UpdateAccountPayableUseCase(updateAccountPayableAdapterPort, findAccountPayableAdapterPort);
+    }
 }
+
