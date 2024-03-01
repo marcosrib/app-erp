@@ -2,6 +2,7 @@ package br.com.erp.app.financial.adapters.inbound.controllers.swagger.api;
 
 import br.com.erp.app.common.exceptions.handler.ErrorResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.requests.ChartAccountRequest;
+import br.com.erp.app.financial.adapters.inbound.controllers.responses.ChartAccountResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.responses.PageFinancialResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,7 +32,7 @@ public interface ChartAccountApi {
                             schema = @Schema(implementation = ErrorResponse.class),
                             examples = @ExampleObject(value = "{\"message\":\"Internal server error\",\"status\":500,\"error_code\":\"INTERNAL_ERROR\",\"timestamp\":\"2023-09-27T21:44:33Z\"}"))),
     })
-    PageFinancialResponse findPagination(@Parameter(description = "Name chart account", required = false) @RequestParam(required = false) String name, Pageable pageable);
+    PageFinancialResponse<ChartAccountResponse> findPagination(@Parameter(description = "Name chart account", required = false) @RequestParam(required = false) String name, Pageable pageable);
 
 
     @Operation(summary = "Cadastra plano de contas")

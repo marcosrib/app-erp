@@ -7,6 +7,7 @@ import br.com.erp.app.registers.application.core.domain.Supplier;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record AccountPayable(
         Long id,
@@ -42,5 +43,12 @@ public record AccountPayable(
                 accountPayableEntity.getCreatedAt(),
                 accountPayableEntity.getUpdatedAt()
         );
+    }
+
+    public static List<AccountPayable> convertAccountPayableEntityListToAccountPayableList(List<AccountPayableEntity> accountPayableEntities) {
+        return accountPayableEntities
+                .stream()
+                .map(AccountPayable::convertAccountPayableEntityToAccountPayable)
+                .toList();
     }
 }

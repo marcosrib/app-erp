@@ -14,6 +14,9 @@ public record ChartAccountResponse(
         LocalDateTime createdAt,
         LocalDateTime updatedAt) {
 
+    public ChartAccountResponse(Integer id, String name) {
+        this(id, name, null, null,null, null);
+    }
     public static ChartAccountResponse fromDomain(ChartAccount chartAccount) {
         return new ChartAccountResponse(
                 chartAccount.id(),
