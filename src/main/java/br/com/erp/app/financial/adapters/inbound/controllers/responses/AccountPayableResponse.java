@@ -3,17 +3,18 @@ package br.com.erp.app.financial.adapters.inbound.controllers.responses;
 import br.com.erp.app.financial.application.core.domain.AccountPayable;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public record AccountPayableResponse(
         Long id,
         BigDecimal value,
-        String status,
-        ChartAccountResponseForAccountPayableResponse chartAccountResponse,
-        CostCenterResponse costCenterResponse,
+        AccountPayableStatusEnumResponse status,
+        ChartAccountResponseForAccountPayableResponse chartAccount,
+        CostCenterResponse costCenter,
         LocalDateTime paymentDate,
-        LocalDateTime dueDate,
+        LocalDate dueDate,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 
@@ -23,7 +24,7 @@ public record AccountPayableResponse(
         return new AccountPayableResponse(
                 accountPayable.id(),
                 accountPayable.value(),
-                accountPayable.status(),
+                new AccountPayableStatusEnumResponse(accountPayable.status().name(), accountPayable.status().getDescription()),
                 new ChartAccountResponseForAccountPayableResponse(
                         accountPayable.chartAccount().id(),
                         accountPayable.chartAccount().name()),

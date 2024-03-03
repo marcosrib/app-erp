@@ -6,6 +6,7 @@ import br.com.erp.app.financial.adapters.inbound.controllers.responses.PageFinan
 import br.com.erp.app.financial.adapters.inbound.controllers.swagger.api.AccountPayableApi;
 import br.com.erp.app.financial.application.core.domain.AccountPayable;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
+import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
 import br.com.erp.app.financial.application.ports.in.accountspayable.CreateAccountPayableUseCasePort;
 import br.com.erp.app.financial.application.ports.in.accountspayable.FindAccountPayableUseCasePort;
 import br.com.erp.app.financial.application.ports.in.accountspayable.UpdateAccountPayableUseCasePort;
@@ -37,7 +38,7 @@ public class AccountPayableController implements AccountPayableApi {
         var pageableRequestDomain = new PageableFinancialRequestDomain(pageable.getPageNumber(), pageable.getPageSize());
         var filter = AccountPayable
                 .builder()
-                .status(status)
+                .status(AccountPayableStatusEnum.from(status))
                 .build();
         var accountsPayable = findAccountPayableUseCasePort.getAccountPayableWithPaginationAndFilter(filter, pageableRequestDomain);
         var accountPayableResponses = AccountPayableResponse.fromDomainToList(accountsPayable.data());

@@ -3,21 +3,23 @@ package br.com.erp.app.financial.application.core.domain.builders;
 import br.com.erp.app.financial.application.core.domain.AccountPayable;
 import br.com.erp.app.financial.application.core.domain.ChartAccount;
 import br.com.erp.app.financial.application.core.domain.CostCenter;
+import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
 import br.com.erp.app.registers.application.core.domain.Supplier;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AccountPayableBuilder {
 
     private Long id;
     private BigDecimal value;
-    private String status;
+    private AccountPayableStatusEnum status;
     private ChartAccount chartAccount;
     private Supplier supplier;
     private CostCenter costCenter;
     private LocalDateTime paymentDate;
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -31,7 +33,7 @@ public class AccountPayableBuilder {
         return this;
     }
 
-    public AccountPayableBuilder status(String status) {
+    public AccountPayableBuilder status(AccountPayableStatusEnum status) {
         this.status = status;
         return this;
     }
@@ -54,7 +56,7 @@ public class AccountPayableBuilder {
         this.paymentDate = paymentDate;
         return this;
     }
-    public AccountPayableBuilder dueDate(LocalDateTime dueDate) {
+    public AccountPayableBuilder dueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
         return this;
     }

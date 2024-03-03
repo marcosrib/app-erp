@@ -1,5 +1,6 @@
 package br.com.erp.app.financial.adapters.outbound.repositories.entities;
 
+import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
 import br.com.erp.app.registers.adapters.outbound.repositories.entities.SupplierEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Builder
 @Getter
@@ -24,8 +26,9 @@ public final class AccountPayableEntity {
     @Column(name = "VALUE")
     private BigDecimal value;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
-    private String status;
+    private AccountPayableStatusEnum status;
 
     @ManyToOne
     @JoinColumn(name = "CHART_ACCOUNT_ID")
@@ -43,7 +46,7 @@ public final class AccountPayableEntity {
     private LocalDateTime paymentDate;
 
     @Column(name = "DUE_DATE")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;

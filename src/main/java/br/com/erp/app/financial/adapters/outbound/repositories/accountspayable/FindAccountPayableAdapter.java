@@ -5,17 +5,17 @@ import br.com.erp.app.financial.adapters.outbound.repositories.entities.AccountP
 import br.com.erp.app.financial.application.core.domain.AccountPayable;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
+import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
 import br.com.erp.app.financial.application.ports.out.accountspayable.FindAccountPayableAdapterPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 @Service
 public class FindAccountPayableAdapter implements FindAccountPayableAdapterPort {
-  private  final AccountPayableRepository accountPayableRepository;
+    private final AccountPayableRepository accountPayableRepository;
 
     public FindAccountPayableAdapter(AccountPayableRepository accountPayableRepository) {
         this.accountPayableRepository = accountPayableRepository;
@@ -23,7 +23,7 @@ public class FindAccountPayableAdapter implements FindAccountPayableAdapterPort 
 
     @Override
     public AccountPayable findById(Long id) {
-        var accountPayable  = accountPayableRepository.findById(id)
+        var accountPayable = accountPayableRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("account.payable.not.found"));
 
         return AccountPayable.convertAccountPayableEntityToAccountPayable(accountPayable);
@@ -33,9 +33,16 @@ public class FindAccountPayableAdapter implements FindAccountPayableAdapterPort 
     public PageableFinancialDomain<AccountPayable> findAllPagination(AccountPayable filter, PageableFinancialRequestDomain pageable) {
         Specification<AccountPayableEntity> spec = Specification.where(null);
 
-        if (!ObjectUtils.isEmpty(filter.status())) {
+        if (filter.status().equals(AccountPayableStatusEnum.NONE)) {
             spec = spec.and((root, query, builder) ->
-                    builder.equal(root.get("status"),  filter.status()));
+                    builder.in(root.get("status"))
+                            .value(AccountPayableStatusEnum.PAID)
+                            .value(AccountPayableStatusEnum.PENDING));
+        }
+
+        if (!filter.status().equals(AccountPayableStatusEnum.NONE)) {
+            spec = spec.and((root, query, builder) ->
+                    builder.equal(root.get("status"), filter.status()));
         }
         Page<AccountPayableEntity> accountPayableEntityPage = accountPayableRepository.findAll(spec, PageRequest.of(pageable.page(), pageable.size(), Sort.by(Sort.Direction.DESC, "id")));
         var accountsPayable = AccountPayable.convertAccountPayableEntityListToAccountPayableList(accountPayableEntityPage.getContent());

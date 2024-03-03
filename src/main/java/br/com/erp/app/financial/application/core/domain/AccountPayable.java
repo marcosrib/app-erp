@@ -2,22 +2,24 @@ package br.com.erp.app.financial.application.core.domain;
 
 import br.com.erp.app.financial.adapters.outbound.repositories.entities.AccountPayableEntity;
 import br.com.erp.app.financial.application.core.domain.builders.AccountPayableBuilder;
+import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
 import br.com.erp.app.registers.application.core.domain.Supplier;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public record AccountPayable(
         Long id,
         BigDecimal value,
-        String status,
+        AccountPayableStatusEnum status,
         ChartAccount chartAccount,
         Supplier supplier,
         CostCenter costCenter,
         LocalDateTime paymentDate,
-        LocalDateTime dueDate,
+        LocalDate dueDate,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 
