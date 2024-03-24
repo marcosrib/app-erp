@@ -16,6 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+
 @Tag(name = "Contas a pagar API")
 public interface AccountPayableApi {
 
@@ -31,7 +34,11 @@ public interface AccountPayableApi {
                             schema = @Schema(implementation = ErrorResponse.class),
                             examples = @ExampleObject(value = "{\"message\":\"Internal server error\",\"status\":500,\"error_code\":\"INTERNAL_ERROR\",\"timestamp\":\"2023-09-27T21:44:33Z\"}"))),
     })
-    PageFinancialResponse<AccountPayableResponse> findPagination(@RequestParam(required = false) String status, Pageable pageable);
+    PageFinancialResponse<AccountPayableResponse> findPagination(@RequestParam(required = false) String status,
+                                                                 @RequestParam(required = false) Integer costCenterId,
+                                                                 @Parameter(description = "Date due initial - 'yyyy-mm-dd' ")   @RequestParam(required = false) LocalDate dateDueInitial,
+                                                                 @Parameter(description = "Date due final - 'yyyy-mm-dd' ")  @RequestParam(required = false) LocalDate dateDueFinal, Pageable pageable);
+
     @Operation(summary = "Cadastra contas a pagar")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201"),
@@ -62,5 +69,5 @@ public interface AccountPayableApi {
                             schema = @Schema(implementation = ErrorResponse.class),
                             examples = @ExampleObject(value = "{\"message\":\"Internal server error\",\"status\":500,\"error_code\":\"INTERNAL_ERROR\",\"timestamp\":\"2023-09-27T21:44:33Z\"}"))),
     })
-    void update(@RequestBody AccountPayableRequest accountPayableRequest, @Parameter(description = "Id account payable")  @PathVariable Long id);
+    void update(@RequestBody AccountPayableRequest accountPayableRequest, @Parameter(description = "Id account payable") @PathVariable Long id);
 }

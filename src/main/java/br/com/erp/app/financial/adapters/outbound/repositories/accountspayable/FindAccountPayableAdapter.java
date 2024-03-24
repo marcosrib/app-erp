@@ -6,12 +6,15 @@ import br.com.erp.app.financial.application.core.domain.AccountPayable;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
 import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
+import br.com.erp.app.financial.application.core.domain.filters.AccountPayableFilter;
 import br.com.erp.app.financial.application.ports.out.accountspayable.FindAccountPayableAdapterPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class FindAccountPayableAdapter implements FindAccountPayableAdapterPort {
@@ -30,20 +33,9 @@ public class FindAccountPayableAdapter implements FindAccountPayableAdapterPort 
     }
 
     @Override
-    public PageableFinancialDomain<AccountPayable> findAllPagination(AccountPayable filter, PageableFinancialRequestDomain pageable) {
-        Specification<AccountPayableEntity> spec = Specification.where(null);
+    public PageableFinancialDomain<AccountPayable> findAllPagination(AccountPayableFilter filter, PageableFinancialRequestDomain pageable) {
+        Specification<AccountPayableEntity> spec = filters(filter);
 
-        if (filter.status().equals(AccountPayableStatusEnum.NONE)) {
-            spec = spec.and((root, query, builder) ->
-                    builder.in(root.get("status"))
-                            .value(AccountPayableStatusEnum.PAID)
-                            .value(AccountPayableStatusEnum.PENDING));
-        }
-
-        if (!filter.status().equals(AccountPayableStatusEnum.NONE)) {
-            spec = spec.and((root, query, builder) ->
-                    builder.equal(root.get("status"), filter.status()));
-        }
         Page<AccountPayableEntity> accountPayableEntityPage = accountPayableRepository.findAll(spec, PageRequest.of(pageable.page(), pageable.size(), Sort.by(Sort.Direction.DESC, "id")));
         var accountsPayable = AccountPayable.convertAccountPayableEntityListToAccountPayableList(accountPayableEntityPage.getContent());
         return PageableFinancialDomain
@@ -57,4 +49,42 @@ public class FindAccountPayableAdapter implements FindAccountPayableAdapterPort 
                 .build();
 
     }
+
+    private Specification<AccountPayableEntity> filters(AccountPayableFilter filter) {
+        return Specification.<AccountPayableEntity>where(null)
+                .and(statusIs(filter.status()))
+                .and(costCenterIdEquals(filter.costCenterId()))
+                .and(dateDueBetween(filter.dateDueInitial(), filter.dateDueFinal()));
+    }
+
+    private Specification<AccountPayableEntity> statusIs(AccountPayableStatusEnum status) {
+        if (status.equals(AccountPayableStatusEnum.NONE)) {
+            return (root, query, builder) ->
+                    builder.in(root.get("status"))
+                            .value(AccountPayableStatusEnum.PAID)
+                            .value(AccountPayableStatusEnum.PENDING);
+        }
+
+        return (root, query, builder) ->
+                builder.equal(root.get("status"), status);
+
+    }
+
+    private Specification<AccountPayableEntity> costCenterIdEquals(Integer costCenterId) {
+        if (costCenterId == null) {
+            return null;
+        }
+        return (root, query, builder) ->
+                builder.equal(root.get("costCenterEntity").get("id"), costCenterId);
+    }
+
+    private Specification<AccountPayableEntity> dateDueBetween(LocalDate dateDueInitial, LocalDate dateDueFinal) {
+        if (dateDueInitial == null || dateDueFinal == null) {
+            return null;
+        }
+        return (root, query, builder) ->
+                builder.between(root.get("dueDate"), dateDueInitial, dateDueFinal);
+    }
+
 }
+

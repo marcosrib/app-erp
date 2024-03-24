@@ -20,6 +20,9 @@ public enum AccountPayableStatusEnum {
     }
 
     public static AccountPayableStatusEnum from(String text) {
+        if("".equals(text)){
+           text = null;
+        }
         return Optional.ofNullable(text)
                 .map(String::toUpperCase)
                 .map(AccountPayableStatusEnum::valueOf)

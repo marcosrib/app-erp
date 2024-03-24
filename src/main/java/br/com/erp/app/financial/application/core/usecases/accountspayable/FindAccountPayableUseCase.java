@@ -3,6 +3,7 @@ package br.com.erp.app.financial.application.core.usecases.accountspayable;
 import br.com.erp.app.financial.application.core.domain.AccountPayable;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialDomain;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
+import br.com.erp.app.financial.application.core.domain.filters.AccountPayableFilter;
 import br.com.erp.app.financial.application.ports.in.accountspayable.FindAccountPayableUseCasePort;
 import br.com.erp.app.financial.application.ports.out.accountspayable.FindAccountPayableAdapterPort;
 
@@ -15,7 +16,7 @@ public class FindAccountPayableUseCase  implements FindAccountPayableUseCasePort
     }
 
     @Override
-    public PageableFinancialDomain<AccountPayable> getAccountPayableWithPaginationAndFilter(AccountPayable filter, PageableFinancialRequestDomain pageable) {
+    public PageableFinancialDomain<AccountPayable> getAccountPayableWithPaginationAndFilter(AccountPayableFilter filter, PageableFinancialRequestDomain pageable) {
         return findAccountPayableAdapterPort.findAllPagination(filter, pageable);
     }
 }
