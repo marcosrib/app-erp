@@ -13,6 +13,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
+
 @Service
 public class FindChartAccountAdapter implements FindChartAccountAdapterPort {
 
@@ -49,5 +51,11 @@ public class FindChartAccountAdapter implements FindChartAccountAdapterPort {
                 .previousPage()
                 .build();
 
+    }
+
+    @Override
+    public List<ChartAccount> findAllChartAccount() {
+        var chartAccountEntities = chartAccountRepository.findAll();
+        return ChartAccount.convertChartAccountEntityListToChartAccountList(chartAccountEntities);
     }
 }

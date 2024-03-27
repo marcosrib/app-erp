@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/chart-account")
 public class ChartAccountController implements ChartAccountApi {
@@ -22,10 +24,18 @@ public class ChartAccountController implements ChartAccountApi {
     private final CreateChartAccountUseCasePort createChartAccountUseCasePort;
 
     private final FindChartAccountUseCasePort findChartAccountUseCasePort;
+
     public ChartAccountController(UpdateChartAccountUseCasePort updateChartAccountUseCasePort, CreateChartAccountUseCasePort createChartAccountUseCasePort, FindChartAccountUseCasePort findChartAccountUseCasePort) {
         this.updateChartAccountUseCasePort = updateChartAccountUseCasePort;
         this.createChartAccountUseCasePort = createChartAccountUseCasePort;
         this.findChartAccountUseCasePort = findChartAccountUseCasePort;
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<ChartAccountResponse> index() {
+        var chartAccounts = findChartAccountUseCasePort.getChartAccounts();
+        return ChartAccountResponse.fromDomainToList(chartAccounts);
     }
 
     @GetMapping("/pagination")
@@ -34,7 +44,7 @@ public class ChartAccountController implements ChartAccountApi {
         var pageableRequestDomain = new PageableFinancialRequestDomain(pageable.getPageNumber(), pageable.getPageSize());
         var chartAccounts = findChartAccountUseCasePort.getChartAccountWithPaginationAndFilter(name, pageableRequestDomain);
         var chartAccountsGroupsList = ChartAccountResponse.fromDomainToList(chartAccounts.data());
-        return  new PageFinancialResponse<ChartAccountResponse>(
+        return new PageFinancialResponse<ChartAccountResponse>(
                 chartAccountsGroupsList,
                 chartAccounts.totalPages(),
                 chartAccounts.totalElements(),
@@ -43,6 +53,7 @@ public class ChartAccountController implements ChartAccountApi {
                 chartAccounts.currentPage()
         );
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Override
@@ -56,4 +67,5 @@ public class ChartAccountController implements ChartAccountApi {
     public void update(@Valid @RequestBody ChartAccountRequest chartAccountRequest, @PathVariable Integer id) {
         updateChartAccountUseCasePort.update(chartAccountRequest.toChartAccountDomain(), id);
     }
+
 }

@@ -4,8 +4,6 @@ import br.com.erp.app.financial.adapters.inbound.controllers.requests.AccountPay
 import br.com.erp.app.financial.adapters.inbound.controllers.responses.AccountPayableResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.responses.PageFinancialResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.swagger.api.AccountPayableApi;
-import br.com.erp.app.financial.application.core.domain.AccountPayable;
-import br.com.erp.app.financial.application.core.domain.CostCenter;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
 import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
 import br.com.erp.app.financial.application.core.domain.filters.AccountPayableFilter;
