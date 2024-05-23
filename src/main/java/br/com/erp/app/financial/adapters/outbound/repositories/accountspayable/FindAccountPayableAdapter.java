@@ -58,7 +58,7 @@ public class FindAccountPayableAdapter implements FindAccountPayableAdapterPort 
     }
 
     private Specification<AccountPayableEntity> statusIs(AccountPayableStatusEnum status) {
-        if (status.equals(AccountPayableStatusEnum.NONE)) {
+        if (status.equals(AccountPayableStatusEnum.ALL)) {
             return (root, query, builder) ->
                     builder.in(root.get("status"))
                             .value(AccountPayableStatusEnum.PAID)

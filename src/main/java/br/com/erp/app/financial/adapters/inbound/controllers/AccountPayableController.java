@@ -1,20 +1,18 @@
 package br.com.erp.app.financial.adapters.inbound.controllers;
 
+import br.com.erp.app.financial.adapters.inbound.controllers.requests.AccountPayableParameterPaginationRequest;
 import br.com.erp.app.financial.adapters.inbound.controllers.requests.AccountPayableRequest;
 import br.com.erp.app.financial.adapters.inbound.controllers.responses.AccountPayableResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.responses.PageFinancialResponse;
 import br.com.erp.app.financial.adapters.inbound.controllers.swagger.api.AccountPayableApi;
 import br.com.erp.app.financial.application.core.domain.PageableFinancialRequestDomain;
-import br.com.erp.app.financial.application.core.domain.enums.AccountPayableStatusEnum;
-import br.com.erp.app.financial.application.core.domain.filters.AccountPayableFilter;
 import br.com.erp.app.financial.application.ports.in.accountspayable.CreateAccountPayableUseCasePort;
 import br.com.erp.app.financial.application.ports.in.accountspayable.FindAccountPayableUseCasePort;
 import br.com.erp.app.financial.application.ports.in.accountspayable.UpdateAccountPayableUseCasePort;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/account-payable")
@@ -37,14 +35,10 @@ public class AccountPayableController implements AccountPayableApi {
     @GetMapping("/pagination")
     @ResponseStatus(HttpStatus.OK)
     public PageFinancialResponse<AccountPayableResponse> findPagination(
-            @RequestParam(required = false) String status,
-            @RequestParam(required = false) Integer costCenterId,
-            @RequestParam(required = false) LocalDate dateDueInitial,
-            @RequestParam(required = false) LocalDate dateDueFinal,
+            @Valid AccountPayableParameterPaginationRequest params,
             Pageable pageable) {
         var pageableRequestDomain = new PageableFinancialRequestDomain(pageable.getPageNumber(), pageable.getPageSize());
-        var filter = new AccountPayableFilter(AccountPayableStatusEnum.from(status), costCenterId, dateDueInitial, dateDueFinal);
-        var accountsPayable = findAccountPayableUseCasePort.getAccountPayableWithPaginationAndFilter(filter, pageableRequestDomain);
+        var accountsPayable = findAccountPayableUseCasePort.getAccountPayableWithPaginationAndFilter(params.toAccountPayableFilterDomain(), pageableRequestDomain);
         var accountPayableResponses = AccountPayableResponse.fromDomainToList(accountsPayable.data());
         return new PageFinancialResponse<>(
                 accountPayableResponses,
@@ -59,7 +53,7 @@ public class AccountPayableController implements AccountPayableApi {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Override
-    public void create(@RequestBody AccountPayableRequest accountPayableRequest) {
+    public void create(@Valid @RequestBody AccountPayableRequest accountPayableRequest) {
         createAccountPayableUseCasePort.create(accountPayableRequest.toAccountPayableDomain());
     }
 

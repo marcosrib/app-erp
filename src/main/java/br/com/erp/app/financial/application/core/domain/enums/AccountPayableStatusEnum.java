@@ -6,9 +6,7 @@ public enum AccountPayableStatusEnum {
 
     PAID("Pago"),
     PENDING("Pendente"),
-
-    NONE("Todos");
-
+    ALL("Todos");
     private String description;
 
     AccountPayableStatusEnum(String description) {
@@ -26,6 +24,6 @@ public enum AccountPayableStatusEnum {
         return Optional.ofNullable(text)
                 .map(String::toUpperCase)
                 .map(AccountPayableStatusEnum::valueOf)
-                .orElse(NONE);
+                .orElse(ALL);
     }
 }
